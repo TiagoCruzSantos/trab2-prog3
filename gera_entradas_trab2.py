@@ -3,10 +3,6 @@ import string
 import pandas as pd
 from faker import Faker
 
-fake = Faker('pt_BR')
-fakezada = Faker('en_US')
-path = "entradas_autorais/python"
-
 
 def gera_docentes(nDocentes):
     with open(f"{path}/docentes_python.csv", "w+", encoding="utf8") as file:
@@ -26,8 +22,10 @@ def gera_docentes(nDocentes):
             dataNascimento = fake.date(pattern="%d/%m/%Y", end_datetime=None)
             dataIngresso = fake.date(pattern="%d/%m/%Y", end_datetime=None)
             while (int(dataIngresso.split("/")[2]) - int(dataNascimento.split("/")[2])) < 20:
-                dataNascimento = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-                dataIngresso = fake.date(pattern="%d/%m/%Y", end_datetime=None)
+                dataNascimento = fake.date(
+                    pattern="%d/%m/%Y", end_datetime=None)
+                dataIngresso = fake.date(
+                    pattern="%d/%m/%Y", end_datetime=None)
 
             file.write(f"{cod};{nome};{dataNascimento};{dataIngresso};")
             if (len(cods) == randCoordenador):
@@ -84,17 +82,19 @@ def gera_qualis(arquivoVeiculos):
 
 def gera_regras():
     with open(f"{path}/regras_python.csv", "w+", encoding="utf8") as file:
-        file.write("Início Vigência;Fim Vigência;Qualis;Pontos;Multiplicador;Anos;Mínimo Pontos\n")
+        file.write(
+            "Início Vigência;Fim Vigência;Qualis;Pontos;Multiplicador;Anos;Mínimo Pontos\n")
 
         inicio = fake.date(pattern="%d/%m/%Y", end_datetime=None)
         fim = fake.date(pattern="%d/%m/%Y", end_datetime=None)
         while (int(inicio.split("/")[2]) < 2010) or (int(fim.split("/")[2]) - int(inicio.split("/")[2]) < 1):
-                inicio = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-                fim = fake.date(pattern="%d/%m/%Y", end_datetime=None)
+            inicio = fake.date(pattern="%d/%m/%Y", end_datetime=None)
+            fim = fake.date(pattern="%d/%m/%Y", end_datetime=None)
         file.write(f"{inicio};{fim};")
 
         qualisPossivel = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
-        qualisEscolhidas = sorted(random.sample(qualisPossivel, random.randint(1, 6)))
+        qualisEscolhidas = sorted(random.sample(
+            qualisPossivel, random.randint(1, 6)))
         for qualis in qualisEscolhidas:
             if qualis != qualisEscolhidas[-1]:
                 file.write(f"{qualis},")
@@ -118,9 +118,9 @@ def gera_regras():
 def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
     docentesCSV = pd.read_csv(f"{path}/{arquivoDocentes}", sep=';')
     docentesCSV = docentesCSV["Código"].tolist()
-
     with open(f"{path}/publicacoes_python.csv", "w+", encoding="utf8") as file:
-        file.write("Ano;Veículo;Título;Autores;Número;Volume;Local;Página Inicial;Página Final\n")
+        file.write(
+            "Ano;Veículo;Título;Autores;Número;Volume;Local;Página Inicial;Página Final\n")
         for i in range(nPublicacoes):
             ano = random.randint(2010, 2019)
 
@@ -157,17 +157,23 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
                     file.write(f"{autor}, ")
                 else:
                     file.write(f"{autor};")
-            file.write(f"{numero};{volume};{local};{paginaInicial};{paginaFinal}\n")
+            file.write(
+                f"{numero};{volume};{local};{paginaInicial};{paginaFinal}\n")
 
 
 if __name__ == "__main__":
+    fake = Faker('pt_BR')
+    fakezada = Faker('en_US')
+    path = "entradas_autorais/python"
+
     # Editar valores aqui
     nDocentes = 200
     nVeiculos = 100
     nPublicacoes = 500
 
-    # gera_docentes(200)
-    # gera_veiculos(nVeiculos)
-    # gera_qualis("veiculos_python.csv")
-    # gera_regras()
-    gera_publicacoes("veiculos_python.csv", "docentes_python.csv", nPublicacoes)
+    gera_docentes(nDocentes)
+    gera_veiculos(nVeiculos)
+    gera_qualis("veiculos_python.csv")
+    gera_regras()
+    gera_publicacoes("veiculos_python.csv",
+                     "docentes_python.csv", nPublicacoes)
