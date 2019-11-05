@@ -31,10 +31,9 @@ def gera_docentes(nDocentes):
 
             file.write(f"{cod};{nome};{dataNascimento};{dataIngresso};")
             if (len(cods) == randCoordenador):
-                file.write("X\n");
+                file.write("X\n")
             else:
-                file.write("\n");
-    pass
+                file.write("\n")
 
 
 def gera_veiculos(nVeiculos):
@@ -47,12 +46,9 @@ def gera_veiculos(nVeiculos):
         for i in range(nVeiculos):
             sigla = ''
             nome = fakezada.company()
-            while sigla in siglasUtilizadas or nome in siglasUtilizadas:
+            while sigla in siglasUtilizadas or nome in siglasUtilizadas or len(sigla) is 0:
                 sigla = ''
                 nome = fakezada.company()
-                for palavra in nome.split(' '):
-                    sigla += palavra[0]
-            if len(sigla) is 0:
                 for palavra in nome.split(' '):
                     sigla += palavra[0]
 
@@ -60,7 +56,7 @@ def gera_veiculos(nVeiculos):
             if tipo == 'P':
                 issn = f"{fake.bban()[7:11]}-{fake.bban()[6:2:-1]}"
             else:
-                issn = ''
+                issn = ''  # ?
 
             if random.randint(1, 3) == 1:
                 impacto = round(abs(random.gauss(10, 10)), 3)
@@ -70,7 +66,6 @@ def gera_veiculos(nVeiculos):
             file.write(f"{sigla};{nome};{tipo};{impacto};{issn}\n")
             siglasUtilizadas.append(sigla)
             nomesUtilizados.append(nome)
-        pass
 
 
 def gera_qualis(arquivoVeiculos):
@@ -82,10 +77,9 @@ def gera_qualis(arquivoVeiculos):
 
             sigla = veiculo
 
-            qualisPossivel = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
-            qualis = random.choice(qualisPossivel)
+            qualisPossiveis = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
+            qualis = random.choice(qualisPossiveis)
             file.write(f"{ano};{sigla};{qualis}\n")
-    pass
 
 
 def gera_regras():
@@ -119,10 +113,12 @@ def gera_regras():
                 file.write(f"{ponto};")
 
         file.write(f"{multiplicador},0;{anos};{minimoPontos}")
-    pass
 
 
-def gera_publicacoes(arquivoVeiculos, nPublicacoes):
+def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
+    docentesCSV = pd.read_csv(f"{path}/{arquivoDocentes}", sep=';')
+    docentesCSV = docentesCSV["Código"].tolist()
+
     with open(f"{path}/publicacoes_python.csv", "w+", encoding="utf8") as file:
         file.write("Ano;Veículo;Título;Autores;Número;Volume;Local;Página Inicial;Página Final\n")
         for i in range(nPublicacoes):
@@ -134,10 +130,13 @@ def gera_publicacoes(arquivoVeiculos, nPublicacoes):
 
             titulo = fakezada.catch_phrase()
 
+            nAutores = random.randint(1, 3)
+            autores = random.sample(docentesCSV, nAutores)
+
             numero = random.randint(1, 50)
 
-            veiculo = veiculosCSV[(veiculosCSV["Sigla"] == sigla)]
-            tipoVeiculo = veiculosCSV["Sigla"].values[4]
+            veiculo = veiculosCSV[veiculosCSV['Sigla'] == sigla]
+            tipoVeiculo = veiculo['Tipo'].values
 
             if tipoVeiculo == 'P':
                 volume = random.randint(1, 50)
@@ -152,17 +151,23 @@ def gera_publicacoes(arquivoVeiculos, nPublicacoes):
                 paginaInicial = random.randint(1, 1000)
                 paginaFinal = random.randint(1, 1000)
 
-            file.write(f"{ano};{sigla};{titulo};WIP;{numero};{volume};{local};{paginaInicial};{paginaFinal}\n")
-    pass
+            file.write(f"{ano};{sigla};{titulo};")
+            for autor in autores:
+                if autor != autores[-1]:
+                    file.write(f"{autor}, ")
+                else:
+                    file.write(f"{autor};")
+            file.write(f"{numero};{volume};{local};{paginaInicial};{paginaFinal}\n")
 
 
-# Editar valores aqui
-nDocentes = 200
-nVeiculos = 100
-nPublicacoes = 500
+if __name__ == "__main__":
+    # Editar valores aqui
+    nDocentes = 200
+    nVeiculos = 100
+    nPublicacoes = 500
 
-gera_docentes(200)
-gera_veiculos(nVeiculos)
-gera_qualis("veiculos_python.csv")
-gera_regras()
-gera_publicacoes("veiculos_python.csv", nPublicacoes)
+    # gera_docentes(200)
+    # gera_veiculos(nVeiculos)
+    # gera_qualis("veiculos_python.csv")
+    # gera_regras()
+    gera_publicacoes("veiculos_python.csv", "docentes_python.csv", nPublicacoes)
