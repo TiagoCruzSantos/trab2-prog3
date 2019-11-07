@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"meupacote","l":"Conferencia"},{"p":"meupacote","l":"Docente"},{"p":"meupacote","l":"MinhaClassePrincipal"},{"p":"meupacote","l":"Periodico"},{"p":"meupacote","l":"Publicacao"},{"p":"meupacote","l":"Qualis"},{"p":"meupacote","l":"Regra"},{"p":"meupacote","l":"Sistema"},{"p":"meupacote","l":"Veiculo"}]
