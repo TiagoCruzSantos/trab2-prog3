@@ -31,6 +31,7 @@ public class Sistema {
 	public void cadastrarDocente(Docente docente) {
 		this.docentesCadastrados.add(docente);
 	}
+	
 	@Override
 	public String toString() {
 		return "Sistema [docentesCadastrados=" + docentesCadastrados + ", publicacoes=" + publicacoes + ", veiculos="
