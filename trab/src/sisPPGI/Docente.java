@@ -1,7 +1,7 @@
 package sisPPGI;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 /**
  * Classe de representação de docente
  * 
@@ -10,14 +10,14 @@ import java.util.Date;
  */
 public class Docente {
 
-	private int codigo;
+	private long codigo;
 	private String nome;
-	private Date dataNascimento;
-	private Date dataIngresso;
+	private GregorianCalendar dataNascimento;
+	private GregorianCalendar dataIngresso;
 	private boolean coordenador;
 	private ArrayList<Publicacao> publicacoes;
 	
-	public Docente(int codigo, String nome, Date dataNascimento, Date dataIngresso, boolean coordenador) {
+	public Docente(long codigo, String nome, GregorianCalendar dataNascimento, GregorianCalendar dataIngresso, boolean coordenador) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -29,14 +29,14 @@ public class Docente {
 	/**
 	 * @return Codigo do docente
 	 */
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	
 	/**
 	 * @param codigo Codigo inteiro para armazenar
 	 */
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -57,28 +57,28 @@ public class Docente {
 	/**
 	 * @return Data de nascimento do docente
 	 */
-	public Date getDataNascimento() {
+	public GregorianCalendar getDataNascimento() {
 		return dataNascimento;
 	}
 
 	/**
 	 * @param dataNascimento Data de nascimente para armazenar
 	 */
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(GregorianCalendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
 	/**
 	 * @return Data de ingresso do docente no sistema
 	 */
-	public Date getDataIngresso() {
+	public GregorianCalendar getDataIngresso() {
 		return dataIngresso;
 	}
 
 	/**
 	 * @param dataIngresso Data de ingresso do docente no sistema para armazenar
 	 */
-	public void setDataIngresso(Date dataIngresso) {
+	public void setDataIngresso(GregorianCalendar dataIngresso) {
 		this.dataIngresso = dataIngresso;
 	}
 
