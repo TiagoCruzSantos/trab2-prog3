@@ -23,4 +23,17 @@ public class Sistema {
 		this.regras = new ArrayList<Regra>();
 		this.qualificacoes = new ArrayList<Qualis>();
 	}
+	/**
+	 * Cadastra um docente no sistema
+	 * 
+	 * @param docente Docente pre-existente
+	 */
+	public void cadastrarDocente(Docente docente) {
+		this.docentesCadastrados.add(docente);
+	}
+	@Override
+	public String toString() {
+		return "Sistema [docentesCadastrados=" + docentesCadastrados + ", publicacoes=" + publicacoes + ", veiculos="
+				+ veiculos + ", regras=" + regras + ", qualificacoes=" + qualificacoes + "]";
+	}
 }
