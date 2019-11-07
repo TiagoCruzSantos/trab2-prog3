@@ -3,6 +3,7 @@
 	<!-- Propriedades do build. -->
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
+	<property name="doc" location="doc" />
 	<property name="mainClass" value="meupacote.MinhaClassePrincipal" />
 	<!-- Inicialização. -->
 	<target name="init" description="Inicializa as estruturas necessárias.">
@@ -12,6 +13,10 @@
 	<!-- Compilação. -->
 	<target name="compile" depends="init" description="Compila o códigofonte.">
 		<javac includeantruntime="false" srcdir="${src}" destdir="${bin}" />
+	</target>
+	<target name="document" depends="compile" description="Gera a documentação">
+		<javadoc sourcepath="${src}" destdir="${doc}">
+		</javadoc>
 	</target>
 	<!-- Execução normal. -->
 	<target name="run" depends="compile" description="Executa o programa
@@ -70,6 +75,7 @@ programa principal, em modo somente escrita.">
 	<target name="clean" description="Limpa o projeto, deixando apenas o
 código-fonte.">
 		<delete dir="${bin}" />
+		<delete dir="${doc}" />
 		<delete>
 			<fileset dir="." includes="*.txt" />
 		</delete>
