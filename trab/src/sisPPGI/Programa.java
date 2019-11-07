@@ -1,8 +1,8 @@
-package meupacote;
+package sisPPGI;
 
 import java.util.Date;
 
-public class MinhaClassePrincipal {
+public class Programa {
 	
 	
 	public static void main(String[] args) {

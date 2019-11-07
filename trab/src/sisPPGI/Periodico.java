@@ -1,4 +1,4 @@
-package meupacote;
+package sisPPGI;
 /**
  * Classe de representação de um veiculo periodico
  * 

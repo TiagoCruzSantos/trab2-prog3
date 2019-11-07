@@ -4,7 +4,7 @@
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
 	<property name="doc" location="doc" />
-	<property name="mainClass" value="meupacote.MinhaClassePrincipal" />
+	<property name="mainClass" value="sisPPGI.Programa" />
 	<!-- Inicialização. -->
 	<target name="init" description="Inicializa as estruturas necessárias.">
 		<tstamp />
@@ -14,7 +14,8 @@
 	<target name="compile" depends="init" description="Compila o códigofonte.">
 		<javac includeantruntime="false" srcdir="${src}" destdir="${bin}" />
 	</target>
-	<target name="document" depends="compile" description="Gera a documentação">
+	<!-- Documentação. -->
+	<target name="document" depends="compile" description="Gera a documentação.">
 		<javadoc sourcepath="${src}" destdir="${doc}">
 		</javadoc>
 	</target>

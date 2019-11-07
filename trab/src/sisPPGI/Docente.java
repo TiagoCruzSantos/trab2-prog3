@@ -1,4 +1,4 @@
-package meupacote;
+package sisPPGI;
 
 import java.util.ArrayList;
 import java.util.Date;
