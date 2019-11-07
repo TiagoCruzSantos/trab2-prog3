@@ -71,11 +71,4 @@ public abstract class Veiculo {
 		this.publicacoes = publicacoes;
 	}
 	
-	@Override
-	public String toString() {
-		return "Veiculo [sigla=" + sigla + ", nome=" + nome + ", impacto=" + impacto + ", qualis=" + qualis
-				+ ", publicacoes=" + publicacoes + "]";
-	}
-	
-	
 }

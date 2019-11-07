@@ -42,4 +42,10 @@ public class Periodico extends Veiculo {
 	public void setIssn(String issn) {
 		this.issn = issn;
 	}
+
+	@Override
+	public String toString() {
+		return "Periodico [multiplicador=" + multiplicador + ", issn=" + issn + ", sigla=" + sigla + ", nome=" + nome
+				+ ", impacto=" + impacto + ", qualis=" + qualis + ", publicacoes=" + publicacoes + "]";
+	}
 }

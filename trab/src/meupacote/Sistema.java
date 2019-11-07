@@ -18,5 +18,9 @@ public class Sistema {
 	
 	public Sistema() {
 		this.docentesCadastrados = new ArrayList<Docente>();
+		this.publicacoes = new ArrayList<Publicacao>();
+		this.veiculos = new ArrayList<Veiculo>();
+		this.regras = new ArrayList<Regra>();
+		this.qualificacoes = new ArrayList<Qualis>();
 	}
 }
