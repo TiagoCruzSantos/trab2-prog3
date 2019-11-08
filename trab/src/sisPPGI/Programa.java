@@ -2,6 +2,8 @@ package sisPPGI;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Programa {
@@ -84,6 +86,31 @@ public class Programa {
 		}
 		ppgi.carregaDocentes(docentes);
 		System.out.println(ppgi);
+		FileWriter a = null;
+		FileWriter b = null;
+		FileWriter c = null;
+		try {
+			a = new FileWriter("1-recredenciamento.csv");
+			b = new FileWriter("2-publicacoes.csv");
+			c = new FileWriter("3-estatisticas.csv");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			a.append("SADSADFYGUA");
+			b.append("SSSSSS");
+			c.append("AAAAAAA");
+			a.flush();
+			b.flush();
+			c.flush();
+			a.close();
+			b.close();
+			c.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
