@@ -1,5 +1,6 @@
 package sisPPGI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import java.util.Scanner;
  * @author Atilio
  *
  */
-public class Sistema {
+public class Sistema implements Serializable{
 	private ArrayList<Docente> docentesCadastrados;
 	private ArrayList<Publicacao> publicacoes;
 	private ArrayList<Veiculo> veiculos;
@@ -32,7 +33,11 @@ public class Sistema {
 	public void cadastrarDocente(Docente docente) {
 		this.docentesCadastrados.add(docente);
 	}
-	
+	/**
+	 * Carrega os docentes de um arquivo para o sistema
+	 * 
+	 * @param infile Scanner com o arquivo de docentes aberto
+	 */
 	public void carregaDocentes(Scanner infile) {
 		infile.nextLine();
 		infile.useDelimiter(";");

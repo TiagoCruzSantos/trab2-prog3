@@ -1,5 +1,6 @@
 package sisPPGI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author Tiago
  * @author Atilio
  */
-public class Publicacao {
+public class Publicacao implements Serializable{
 	private int ano;
 	private String titulo;
 	private int numero;

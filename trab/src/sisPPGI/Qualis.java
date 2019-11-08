@@ -1,11 +1,14 @@
 package sisPPGI;
+
+import java.io.Serializable;
+
 /**
  * Classe de representação do Qualis
  * 
  * @author Tiago
  * @author Atilio
  */
-public class Qualis {
+public class Qualis implements Serializable{
 	private String nivel;
 	private double pontuacao;
 	

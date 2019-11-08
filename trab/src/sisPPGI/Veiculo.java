@@ -1,5 +1,6 @@
 package sisPPGI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * Classe base para representação de Veiculo
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author Tiago
  * @author Atilio
  */
-public abstract class Veiculo {
+public abstract class Veiculo implements Serializable{
 	protected String sigla;
 	protected String nome;
 	protected double impacto;

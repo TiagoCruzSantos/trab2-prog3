@@ -1,5 +1,6 @@
 package sisPPGI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -9,7 +10,7 @@ import java.util.GregorianCalendar;
  * @author Tiago
  * @author Atilio
  */
-public class Docente {
+public class Docente implements Serializable{
 
 	private long codigo;
 	private String nome;

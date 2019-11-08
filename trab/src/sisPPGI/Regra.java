@@ -1,5 +1,6 @@
 package sisPPGI;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @author Tiago
  * @author Atilio
  */
-public class Regra {
+public class Regra implements Serializable{
 	private Date dataIni;
 	private Date dataFim;
 	private double pontoMinimo;
