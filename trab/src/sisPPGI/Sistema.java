@@ -1,6 +1,5 @@
 package sisPPGI;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -45,7 +44,7 @@ public class Sistema {
 		String[] dataIngSplit;
 		boolean boolCoord;
 		while(infile.hasNext()) {
-			codigo = Long.parseLong(infile.next());
+			codigo = infile.nextLong();
 			System.out.print("[" + codigo + "]");
 			nome = infile.next();
 			System.out.print("[" + nome + "]");
@@ -55,17 +54,15 @@ public class Sistema {
 			System.out.print("[" + dataIng + "]");
 			dataNasSplit = dataNas.split("/");
 			dataIngSplit = dataIng.split("/");
-			if(infile.hasNext("X")) {
+			if(infile.hasNext("(X\n)\\w*")) {
 				boolCoord = true;
-				System.out.print("Foi");
 				infile.nextLine();
 			}else {
 				boolCoord = false;
 				infile.nextLine();
-				System.out.print("N Foi");
 			}
 			System.out.println("[" + boolCoord + "]");
-			this.cadastrarDocente(new Docente(codigo, nome, new GregorianCalendar(Integer.parseInt(dataNasSplit[0]) + 1900, Integer.parseInt(dataNasSplit[1]), Integer.parseInt(dataNasSplit[2])), new GregorianCalendar(Integer.parseInt(dataIngSplit[0]) + 1900, Integer.parseInt(dataIngSplit[1]), Integer.parseInt(dataIngSplit[2])), boolCoord));
+			this.cadastrarDocente(new Docente(codigo, nome, new GregorianCalendar(Integer.parseInt(dataNasSplit[2]), Integer.parseInt(dataNasSplit[1]), Integer.parseInt(dataNasSplit[0])), new GregorianCalendar(Integer.parseInt(dataIngSplit[2]), Integer.parseInt(dataIngSplit[1]), Integer.parseInt(dataIngSplit[0])), boolCoord));
 		}
 	}
 	

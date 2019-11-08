@@ -1,6 +1,7 @@
 package sisPPGI;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 /**
  * Classe de representação de docente
@@ -112,8 +113,8 @@ public class Docente {
 	
 	@Override
 	public String toString() {
-		return "Docente [codigo=" + codigo + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", dataIngresso="
-				+ dataIngresso + ", coordenador=" + coordenador + ", publicacoes=" + publicacoes + "]";
+		return "Docente [codigo=" + codigo + ", nome=" + nome + ", dataNascimento=" + this.dataNascimento.get(Calendar.DATE) + "/" + this.dataNascimento.get(Calendar.MONTH) + "/" + this.dataNascimento.get(Calendar.YEAR)  + ", dataIngresso="
+				+ this.dataIngresso.get(Calendar.DATE) + "/" + this.dataIngresso.get(Calendar.MONTH) + "/" + this.dataIngresso.get(Calendar.YEAR) + ", coordenador=" + coordenador + ", publicacoes=" + publicacoes + "]";
 	}
 	
 }
