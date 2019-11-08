@@ -21,6 +21,7 @@ public class Programa {
 		int ano;
 		boolean readOnly = false;
 		boolean writeOnly = false;
+		boolean excecao = false;
 		for(int i = 0; i < args.length; i++) {
 			String argAtual = args[i];
 			switch(argAtual) {
@@ -31,6 +32,7 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de docentes não foi encontrado");
+						excecao = true;
 						break;
 					}
 				case "-r":
@@ -40,6 +42,7 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de regras não foi encontrado");
+						excecao = true;
 						break;
 					}
 				case "-q":
@@ -49,6 +52,7 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de qualis não foi encontrado");
+						excecao = true;
 						break;
 					}
 				case "-v":
@@ -58,6 +62,7 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de veiculos não foi encontrado");
+						excecao = true;
 						break;
 					}
 				case "-p":
@@ -67,6 +72,7 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de publicações não foi encontrado");
+						excecao = true;
 						break;
 					}
 				case "-a":
@@ -83,11 +89,11 @@ public class Programa {
 		}
 		try {
 			ppgi.carregaDocentes(docentes);
+			ppgi.carregaVeiculos(veiculos);
 		} catch (CodigoRepetidoDocente e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println(e1.getMessage());
 		}
-		System.out.println(ppgi);
+		//System.out.println(ppgi);
 		FileWriter a = null;
 		FileWriter b = null;
 		FileWriter c = null;
@@ -96,7 +102,6 @@ public class Programa {
 			b = new FileWriter("2-publicacoes.csv");
 			c = new FileWriter("3-estatisticas.csv");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -110,7 +115,6 @@ public class Programa {
 			b.close();
 			c.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

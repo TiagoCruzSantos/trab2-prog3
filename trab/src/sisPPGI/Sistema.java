@@ -41,7 +41,7 @@ public class Sistema implements Serializable{
 	 * Carrega os docentes de um arquivo para o sistema
 	 * 
 	 * @param infile Scanner com o arquivo de docentes aberto
-	 * @throws CodigoRepetidoDocente 
+	 * @throws CodigoRepetidoDocente se um codigo de um docente lido ja estiver cadastrado
 	 */
 	public void carregaDocentes(Scanner infile) throws CodigoRepetidoDocente {
 		infile.nextLine();
@@ -75,9 +75,47 @@ public class Sistema implements Serializable{
 		}
 	}
 	
+	/**
+	 * Cadastra u, veiculo no sistema
+	 * 
+	 * @param veiculo Veículo pré-existente
+	 */
+	public void cadastraVeiculo(Veiculo veiculo) {
+		this.veiculos.add(veiculo);
+	}
+	
+	/**
+	 * Carrega os veiculos a partir de um arquivo csv
+	 * 
+	 * @param infile Scanner com o arquivo de veiculos aberto
+	 */
+	public void carregaVeiculos(Scanner infile) {
+		infile.nextLine();
+		infile.useDelimiter(";");
+		String sigla;
+		String nome;
+		String issn = null;
+		String tipo;
+		String impactoStr;
+		double impacto;
+		while(infile.hasNext()) {
+			sigla = infile.next();
+			nome = infile.next();
+			tipo = infile.next();
+			impactoStr = infile.next();
+			impacto = Double.parseDouble(impactoStr.replace(',','.'));
+			if(tipo.compareTo("P") == 0) {
+				issn = infile.nextLine();
+			}else {
+				infile.nextLine();
+			}
+			System.out.println("[ " + sigla + "][" + nome + "][" + tipo + "][" + impacto + "][" + issn + ']');
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Sistema [docentesCadastrados=" + this.docentesCadastrados + ", publicacoes=" + this.publicacoes + ", veiculos="
-				+ veiculos + ", regras=" + this.regras + ", qualificacoes=" + this.qualificacoes + "]";
+				+ this.veiculos + ", regras=" + this.regras + ", qualificacoes=" + this.qualificacoes + "]";
 	}
 }
