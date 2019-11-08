@@ -19,6 +19,16 @@ public class Docente implements Serializable{
 	private boolean coordenador;
 	private ArrayList<Publicacao> publicacoes;
 	
+	/**
+	 * Define um novo docente
+	 * 
+	 * @param codigo Codigo de identificação do docente
+	 * @param nome Nome do docente
+	 * @param dataNascimento Data de nacimento usando GragorianCalendar
+	 * @param dataIngresso Data de ingresso usando GregorianCalendar
+	 * @param coordenador Valor boleano para verificar se docente é coordenador ou não
+	 * @deprecated Use {@link #Docente(long, String, String, String, boolean)} ao inves desse
+	 */
 	public Docente(long codigo, String nome, GregorianCalendar dataNascimento, GregorianCalendar dataIngresso, boolean coordenador) {
 		this.codigo = codigo;
 		this.nome = nome;
@@ -27,7 +37,26 @@ public class Docente implements Serializable{
 		this.coordenador = coordenador;
 		this.publicacoes = new ArrayList<Publicacao>();
 	}
-
+	
+	/**
+	 * Define um novo docente
+	 * 
+	 * @param codigo Codigo de identificação do docente
+	 * @param nome Nome do docente
+	 * @param dataNascimento Data de nacimento no formato "dd/mm/aaaa"
+	 * @param dataIngresso Data de ingresso no formato "dd/mm/aaaa"
+	 * @param coordenador Valor boleano para verificar se docente é coordenador ou não
+	 */
+	public Docente(long codigo, String nome, String dataNascimento, String dataIngresso, boolean coordenador) {
+		this.codigo = codigo;
+		this.nome = nome;
+		String[] dataNascimentoSplit = dataNascimento.split("/");
+		String[] dataIngressoSplit = dataIngresso.split("/");
+		this.dataNascimento = new GregorianCalendar(Integer.parseInt(dataNascimentoSplit[2]),Integer.parseInt(dataNascimentoSplit[1]),Integer.parseInt(dataNascimentoSplit[0]));
+		this.dataIngresso = new GregorianCalendar(Integer.parseInt(dataIngressoSplit[2]),Integer.parseInt(dataIngressoSplit[1]),Integer.parseInt(dataIngressoSplit[0]));;
+		this.coordenador = coordenador;
+		this.publicacoes = new ArrayList<Publicacao>();
+	}
 	/**
 	 * @return Codigo do docente
 	 */

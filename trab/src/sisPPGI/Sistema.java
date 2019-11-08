@@ -44,9 +44,7 @@ public class Sistema implements Serializable{
 		long codigo;
 		String dataNas;
 		String nome;
-		String[] dataNasSplit;
 		String dataIng;
-		String[] dataIngSplit;
 		boolean boolCoord;
 		while(infile.hasNext()) {
 			codigo = infile.nextLong();
@@ -57,8 +55,6 @@ public class Sistema implements Serializable{
 			System.out.print("[" + dataNas + "]");
 			dataIng = infile.next();
 			System.out.print("[" + dataIng + "]");
-			dataNasSplit = dataNas.split("/");
-			dataIngSplit = dataIng.split("/");
 			if(infile.hasNext("(X\n)\\w*")) {
 				boolCoord = true;
 				infile.nextLine();
@@ -67,7 +63,7 @@ public class Sistema implements Serializable{
 				infile.nextLine();
 			}
 			System.out.println("[" + boolCoord + "]");
-			this.cadastrarDocente(new Docente(codigo, nome, new GregorianCalendar(Integer.parseInt(dataNasSplit[2]), Integer.parseInt(dataNasSplit[1]), Integer.parseInt(dataNasSplit[0])), new GregorianCalendar(Integer.parseInt(dataIngSplit[2]), Integer.parseInt(dataIngSplit[1]), Integer.parseInt(dataIngSplit[0])), boolCoord));
+			this.cadastrarDocente(new Docente(codigo, nome, dataNas, dataIng, boolCoord));
 		}
 	}
 	
