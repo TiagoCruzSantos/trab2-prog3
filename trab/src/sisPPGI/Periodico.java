@@ -45,7 +45,7 @@ public class Periodico extends Veiculo {
 
 	@Override
 	public String toString() {
-		return "Periodico [multiplicador=" + multiplicador + ", issn=" + issn + ", sigla=" + sigla + ", nome=" + nome
-				+ ", impacto=" + impacto + ", qualis=" + qualis + ", publicacoes=" + publicacoes + "]";
+		return "Periodico [multiplicador=" + this.multiplicador + ", issn=" + this.issn + ", sigla=" + this.sigla + ", nome=" + this.nome
+				+ ", impacto=" + this.impacto + ", qualis=" + this.qualis + ", publicacoes=" + this.publicacoes + "]";
 	}
 }

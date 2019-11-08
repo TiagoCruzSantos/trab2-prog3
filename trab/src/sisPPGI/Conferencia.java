@@ -14,8 +14,8 @@ public class Conferencia extends Veiculo {
 
 	@Override
 	public String toString() {
-		return "Conferencia [sigla=" + sigla + ", nome=" + nome + ", impacto=" + impacto + ", qualis=" + qualis
-				+ ", publicacoes=" + publicacoes + "]";
+		return "Conferencia [sigla=" + this.sigla + ", nome=" + this.nome + ", impacto=" + this.impacto + ", qualis=" + this.qualis
+				+ ", publicacoes=" + this.publicacoes + "]";
 	}
 	
 }

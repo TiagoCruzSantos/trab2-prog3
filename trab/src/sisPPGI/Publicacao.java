@@ -129,8 +129,8 @@ public class Publicacao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Publicacao [ano=" + ano + ", titulo=" + titulo + ", numero=" + numero + ", local=" + local
-				+ ", paginaIni=" + paginaIni + ", paginaFim=" + paginaFim + ", autores=" + autores + "]";
+		return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local=" + this.local
+				+ ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores=" + this.autores + "]";
 	}
 	
 }

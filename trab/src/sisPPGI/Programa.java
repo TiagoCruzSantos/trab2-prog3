@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import sisPPGI.excecoes.CodigoRepetidoDocente;
+
 public class Programa {
 	
 	
@@ -29,7 +31,6 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de docentes não foi encontrado");
-						System.exit(1);
 						break;
 					}
 				case "-r":
@@ -39,7 +40,6 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de regras não foi encontrado");
-						System.exit(1);
 						break;
 					}
 				case "-q":
@@ -49,7 +49,6 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de qualis não foi encontrado");
-						System.exit(1);
 						break;
 					}
 				case "-v":
@@ -59,7 +58,6 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de veiculos não foi encontrado");
-						System.exit(1);
 						break;
 					}
 				case "-p":
@@ -69,7 +67,6 @@ public class Programa {
 						break;
 					} catch (FileNotFoundException e) {
 						System.out.println("Arquivo de publicações não foi encontrado");
-						System.exit(1);
 						break;
 					}
 				case "-a":
@@ -84,7 +81,12 @@ public class Programa {
 					break;
 			}
 		}
-		ppgi.carregaDocentes(docentes);
+		try {
+			ppgi.carregaDocentes(docentes);
+		} catch (CodigoRepetidoDocente e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		System.out.println(ppgi);
 		FileWriter a = null;
 		FileWriter b = null;

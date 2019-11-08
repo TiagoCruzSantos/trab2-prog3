@@ -143,8 +143,8 @@ public class Docente implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Docente [codigo=" + codigo + ", nome=" + nome + ", dataNascimento=" + this.dataNascimento.get(Calendar.DATE) + "/" + this.dataNascimento.get(Calendar.MONTH) + "/" + this.dataNascimento.get(Calendar.YEAR)  + ", dataIngresso="
-				+ this.dataIngresso.get(Calendar.DATE) + "/" + this.dataIngresso.get(Calendar.MONTH) + "/" + this.dataIngresso.get(Calendar.YEAR) + ", coordenador=" + coordenador + ", publicacoes=" + publicacoes + "]";
+		return "Docente [codigo=" + this.codigo + ", nome=" + this.nome + ", dataNascimento=" + this.dataNascimento.get(Calendar.DATE) + "/" + this.dataNascimento.get(Calendar.MONTH) + "/" + this.dataNascimento.get(Calendar.YEAR)  + ", dataIngresso="
+				+ this.dataIngresso.get(Calendar.DATE) + "/" + this.dataIngresso.get(Calendar.MONTH) + "/" + this.dataIngresso.get(Calendar.YEAR) + ", coordenador=" + this.coordenador + ", publicacoes=" + this.publicacoes + "]\n";
 	}
 	
 }

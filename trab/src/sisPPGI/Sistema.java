@@ -2,8 +2,10 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Scanner;
+
+import sisPPGI.excecoes.CodigoRepetidoDocente;
 /**
  * Classe principal do PPGI
  * 
@@ -12,14 +14,15 @@ import java.util.Scanner;
  *
  */
 public class Sistema implements Serializable{
-	private ArrayList<Docente> docentesCadastrados;
+	//private ArrayList<Docente> docentesCadastrados;
+	private HashMap<Long, Docente> docentesCadastrados;
 	private ArrayList<Publicacao> publicacoes;
 	private ArrayList<Veiculo> veiculos;
 	private ArrayList<Regra> regras;
 	private ArrayList<Qualis> qualificacoes;
 	
 	public Sistema() {
-		this.docentesCadastrados = new ArrayList<Docente>();
+		this.docentesCadastrados = new HashMap<Long, Docente>();
 		this.publicacoes = new ArrayList<Publicacao>();
 		this.veiculos = new ArrayList<Veiculo>();
 		this.regras = new ArrayList<Regra>();
@@ -29,16 +32,18 @@ public class Sistema implements Serializable{
 	 * Cadastra um docente no sistema
 	 * 
 	 * @param docente Docente pre-existente
+	 * @param cod Codigo do docente para mapear
 	 */
-	public void cadastrarDocente(Docente docente) {
-		this.docentesCadastrados.add(docente);
+	public void cadastrarDocente(Long cod, Docente docente) {
+		this.docentesCadastrados.put(cod, docente);
 	}
 	/**
 	 * Carrega os docentes de um arquivo para o sistema
 	 * 
 	 * @param infile Scanner com o arquivo de docentes aberto
+	 * @throws CodigoRepetidoDocente 
 	 */
-	public void carregaDocentes(Scanner infile) {
+	public void carregaDocentes(Scanner infile) throws CodigoRepetidoDocente {
 		infile.nextLine();
 		infile.useDelimiter(";");
 		long codigo;
@@ -48,13 +53,16 @@ public class Sistema implements Serializable{
 		boolean boolCoord;
 		while(infile.hasNext()) {
 			codigo = infile.nextLong();
-			System.out.print("[" + codigo + "]");
+			//System.out.print("[" + codigo + "]");
+			if(this.docentesCadastrados.containsKey(codigo)) {
+				throw new CodigoRepetidoDocente(codigo);
+			}
 			nome = infile.next();
-			System.out.print("[" + nome + "]");
+			//System.out.print("[" + nome + "]");
 			dataNas = infile.next();
-			System.out.print("[" + dataNas + "]");
+			//System.out.print("[" + dataNas + "]");
 			dataIng = infile.next();
-			System.out.print("[" + dataIng + "]");
+			//System.out.print("[" + dataIng + "]");
 			if(infile.hasNext("(X\n)\\w*")) {
 				boolCoord = true;
 				infile.nextLine();
@@ -62,14 +70,14 @@ public class Sistema implements Serializable{
 				boolCoord = false;
 				infile.nextLine();
 			}
-			System.out.println("[" + boolCoord + "]");
-			this.cadastrarDocente(new Docente(codigo, nome, dataNas, dataIng, boolCoord));
+			//System.out.println("[" + boolCoord + "]");
+			this.cadastrarDocente(codigo, new Docente(codigo, nome, dataNas, dataIng, boolCoord));
 		}
 	}
 	
 	@Override
 	public String toString() {
-		return "Sistema [docentesCadastrados=" + docentesCadastrados + ", publicacoes=" + publicacoes + ", veiculos="
-				+ veiculos + ", regras=" + regras + ", qualificacoes=" + qualificacoes + "]";
+		return "Sistema [docentesCadastrados=" + this.docentesCadastrados + ", publicacoes=" + this.publicacoes + ", veiculos="
+				+ veiculos + ", regras=" + this.regras + ", qualificacoes=" + this.qualificacoes + "]";
 	}
 }
