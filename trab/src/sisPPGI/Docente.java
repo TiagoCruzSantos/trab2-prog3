@@ -52,8 +52,8 @@ public class Docente implements Serializable{
 		this.nome = nome;
 		String[] dataNascimentoSplit = dataNascimento.split("/");
 		String[] dataIngressoSplit = dataIngresso.split("/");
-		this.dataNascimento = new GregorianCalendar(Integer.parseInt(dataNascimentoSplit[2]),Integer.parseInt(dataNascimentoSplit[1]),Integer.parseInt(dataNascimentoSplit[0]));
-		this.dataIngresso = new GregorianCalendar(Integer.parseInt(dataIngressoSplit[2]),Integer.parseInt(dataIngressoSplit[1]),Integer.parseInt(dataIngressoSplit[0]));;
+		this.dataNascimento = new GregorianCalendar(Integer.parseInt(dataNascimentoSplit[2]),Integer.parseInt(dataNascimentoSplit[1]) - 1,Integer.parseInt(dataNascimentoSplit[0]));
+		this.dataIngresso = new GregorianCalendar(Integer.parseInt(dataIngressoSplit[2]),Integer.parseInt(dataIngressoSplit[1]) - 1,Integer.parseInt(dataIngressoSplit[0]));;
 		this.coordenador = coordenador;
 		this.publicacoes = new ArrayList<Publicacao>();
 	}
@@ -143,8 +143,8 @@ public class Docente implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Docente [codigo=" + this.codigo + ", nome=" + this.nome + ", dataNascimento=" + this.dataNascimento.get(Calendar.DATE) + "/" + this.dataNascimento.get(Calendar.MONTH) + "/" + this.dataNascimento.get(Calendar.YEAR)  + ", dataIngresso="
-				+ this.dataIngresso.get(Calendar.DATE) + "/" + this.dataIngresso.get(Calendar.MONTH) + "/" + this.dataIngresso.get(Calendar.YEAR) + ", coordenador=" + this.coordenador + ", publicacoes=" + this.publicacoes + "]\n";
+		return "Docente [codigo=" + this.codigo + ", nome=" + this.nome + ", dataNascimento=" + this.dataNascimento.getTime() + ", dataIngresso="
+				+ this.dataIngresso.getTime() +", coordenador=" + this.coordenador + ", publicacoes=" + this.publicacoes + "]\n";
 	}
 	
 }

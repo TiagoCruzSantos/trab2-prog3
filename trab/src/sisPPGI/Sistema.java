@@ -94,7 +94,6 @@ public class Sistema implements Serializable{
 		infile.useDelimiter(";");
 		String sigla;
 		String nome;
-		String issn = null;
 		String tipo;
 		String impactoStr;
 		double impacto;
@@ -104,12 +103,14 @@ public class Sistema implements Serializable{
 			tipo = infile.next();
 			impactoStr = infile.next();
 			impacto = Double.parseDouble(impactoStr.replace(',','.'));
+			String issn = null;
 			if(tipo.compareTo("P") == 0) {
 				issn = infile.nextLine();
+				issn = (issn.split(";"))[1];
 			}else {
 				infile.nextLine();
 			}
-			System.out.println("[ " + sigla + "][" + nome + "][" + tipo + "][" + impacto + "][" + issn + ']');
+			System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto + "][" + issn + ']');
 		}
 	}
 	

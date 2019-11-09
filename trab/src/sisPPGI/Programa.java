@@ -93,7 +93,7 @@ public class Programa {
 		} catch (CodigoRepetidoDocente e1) {
 			System.out.println(e1.getMessage());
 		}
-		//System.out.println(ppgi);
+		System.out.println(ppgi);
 		FileWriter a = null;
 		FileWriter b = null;
 		FileWriter c = null;
