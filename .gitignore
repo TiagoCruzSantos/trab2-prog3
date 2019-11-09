@@ -46,3 +46,4 @@ main
 
 *.csv
 *.txt
+!testes_excecoes.txt

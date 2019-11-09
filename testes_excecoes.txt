@@ -1,0 +1,64 @@
+Erro 1: Erro de I/O (Trivialmente feito)
+"O arquivo especificado não existir ou o programa não ter permissão para ler ou escrever em um arquivo."
+    $(EXECUTABLE) -u entradas/naoexiste.csv -f entradas/favoritos1.csv -g entradas/generos1.csv -m entradas/midias1.csv
+    $(EXECUTABLE) -u entradas/usuarios1.csv -f entradas/naoexiste.csv -g entradas/generos1.csv -m entradas/midias1.csv
+    $(EXECUTABLE) -u entradas/usuarios1.csv -f entradas/favoritos1.csv -g entradas/naoexiste.csv -m entradas/midias1.csv
+    $(EXECUTABLE) -u entradas/usuarios1.csv -f entradas/favoritos1.csv -g entradas/generos1.csv -m entradas/naoexiste.csv
+    4nCr1!!!!
+
+
+Erro 2: Erro de formatação
+"Erro de formatação dos dados nos arquivos, ou seja, um valor formatado de forma incorreta nos arquivos de entrada (ex.: encontrado caractere onde espera-se um número), causando erro de parsing dos dados."
+Detectar erro na leitura de usuários, gêneros, mídias e favoritos
+Ver carregaArquivoUsuarios
+
+    Mídias:
+        Código: não ser número 4
+        Tipo: não ser A/P/U
+        Produtores: não ser número 5
+
+        Duração: não ser "número, número" 6
+        Temporada: não ser número 7
+
+        Código do álbum: não ser número 8
+
+        Publicação: não ser número 9
+
+    Favoritos:
+        Código: não ser número 2
+
+        Mídias: não ser número 3
+
+    Usuários:
+        Código: não ser número 1
+
+    Vale tudo AKA verdadeiro por vacuidade:
+        Mídias:
+            Gênero
+            Nome
+            Álbum
+
+        Gêneros (totalmente trivial):
+            Sigla
+            Nome
+
+
+Erro 3: Inconsistências na entrada
+"Inconsistência nos dados de entrada: por exemplo, uso de Código de gênero ou
+usuário inexistente nos respectivos cadastros, etc."
+    Casos possíveis:
+        usuarios.csv: (na verdade é erro de formatação?)
+            Tipo de usuário sem correspondente (Não é A ou P ou U)
+
+        midias.csv:
+            Mídia sem sigla de gênero correspondente
+            Mídia sem tipo correspondente
+            Mídia sem código de produtor correspondente
+        favoritos.csv:
+            Favorito sem mídia correspondente
+        generos.csv:
+            Vale tudo, neste caso a mídia pode estar inconsistente
+
+
+As mensagens acima devem ser impressas na tela e o programa deve ser terminado em seguida. Quaisquer outras situações de erros possíveis devem ser ignoradas.
+Pode-se assumir que nos testes feitos durante a avaliação dos trabalhos outros tipos de erros diferentes dos listados acima nunca acontecerão.

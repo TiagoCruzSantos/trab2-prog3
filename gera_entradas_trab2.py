@@ -101,8 +101,8 @@ def gera_regras():
             else:
                 file.write(f"{qualis};")
 
-        pontos = random.sample(range(1, 10), 4)
-        multiplicador = random.randint(1, 10)
+        pontos = random.sample(range(1, 10), len(qualisEscolhidas))
+        multiplicador = round(random.uniform(0.5, 2.5), 1)
         anos = random.randint(1, 5)
         minimoPontos = round(abs(random.gauss(30, 10)))
 
@@ -112,7 +112,7 @@ def gera_regras():
             else:
                 file.write(f"{ponto};")
 
-        file.write(f"{multiplicador},0;{anos};{minimoPontos}")
+        file.write(f"{multiplicador};{anos};{minimoPontos}")
 
 
 def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
@@ -143,7 +143,10 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
             else:
                 volume = ''
 
-            local = fakezada.city()
+            if tipoVeiculo == 'C':
+                local = fakezada.city()
+            else:
+                local = ''
 
             paginaInicial = random.randint(1, 1000)
             paginaFinal = random.randint(1, 1000)
@@ -171,9 +174,9 @@ if __name__ == "__main__":
     nVeiculos = 100
     nPublicacoes = 500
 
-    gera_docentes(nDocentes)
-    gera_veiculos(nVeiculos)
-    gera_qualis("veiculos_python.csv")
+    # gera_docentes(nDocentes)
+    # gera_veiculos(nVeiculos)
+    # gera_qualis("veiculos_python.csv")
     gera_regras()
-    gera_publicacoes("veiculos_python.csv",
-                     "docentes_python.csv", nPublicacoes)
+    # gera_publicacoes("veiculos_python.csv",
+                    #  "docentes_python.csv", nPublicacoes)
