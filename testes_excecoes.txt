@@ -44,21 +44,46 @@ Ver carregaArquivoUsuarios
 
 
 Erro 3: Inconsistências na entrada
-"Inconsistência nos dados de entrada: por exemplo, uso de Código de gênero ou
-usuário inexistente nos respectivos cadastros, etc."
-    Casos possíveis:
-        usuarios.csv: (na verdade é erro de formatação?)
-            Tipo de usuário sem correspondente (Não é A ou P ou U)
+Inconsistência nos dados, ou seja, não conformidade com a especificação dos arquivos de entrada da seção 2.1 ou com a descrição do problema na seção 1.
+Seu programa deve tratar apenas as inconsistências elencadas abaixo, exibindo a mensagem associada e terminar sem produzir arquivos de saída:
+Casos possíveis:
+        docentes.csv:
+            O mesmo código foi usado para dois docentes ou veículos diferentes.
+                "Código repetido para <objeto>: <código>."
+            Potencialmente escrito
 
-        midias.csv:
-            Mídia sem sigla de gênero correspondente
-            Mídia sem tipo correspondente
-            Mídia sem código de produtor correspondente
-        favoritos.csv:
-            Favorito sem mídia correspondente
-        generos.csv:
-            Vale tudo, neste caso a mídia pode estar inconsistente
+        publicacoes.csv:
+            Sigla de veículo especificada para uma publicação não foi definida na planilha de veículos.
+                "Sigla de veículo não definida usada na publicação “<título>”: sigla>."
+            Potencialmente escrito
+
+            Código de docente especificado para uma publicação não foi definido na planilha de docentes.
+                "Código de docente não definido usado na publicação “<título>”: <sigla>."
+            Potencialmente escrito
+
+        veiculos.csv:
+            Tipo de um veículo não é nem ‘C’ nem ‘P’.
+                "Tipo de veículo desconhecido para veículo <sigla>: <tipo>."
+            Potencialmente escrito
+            O mesmo código foi usado para dois docentes ou veículos diferentes.
+                "Código repetido para <objeto>: <código>."
+            Potencialmente escrito
+
+        regras.csv:
+            Qualis especificado para uma regra de pontuação não é nenhuma das categorias existentes: A1, A2, B1, B2, B3, B4, B5 ou C
+                "Qualis desconhecido para regras de <data início vigência>: <qualis>"
+            Potencialmente escrito
+
+        qualis.csv:
+            Sigla de veículo especificada para uma qualificação não foi definida na planilha de veículos.
+                "Sigla de veículo não definida usada na qualificação do ano “<ano>”: <sigla>."
+            Potencialmente escrito
+
+            Qualis especificado para uma qualificação de veículo não é nenhuma das categorias existentes: A1, A2, B1, B2, B3, B4, B5 ou C.
+                "Qualis desconhecido para qualificação do veículo <sigla> no ano <ano>: <qualis>."
+            Potencialmente escrito
 
 
-As mensagens acima devem ser impressas na tela e o programa deve ser terminado em seguida. Quaisquer outras situações de erros possíveis devem ser ignoradas.
-Pode-se assumir que nos testes feitos durante a avaliação dos trabalhos outros tipos de erros diferentes dos listados acima nunca acontecerão.
+Apesar de terminar sem produzir arquivos de saída, seu programa não deve ser interrompido abruptamente com uma chamada a System.exit(), mas sim seguir até o final do método main() e terminar normalmente.
+Quaisquer outras situações de erro devem ser ignoradas.
+Pode-se assumir que nos testes feitos durante a avaliação dos trabalhos outros tipos de erros  diferentes dos listados acima nunca acontecerão.

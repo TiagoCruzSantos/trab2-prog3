@@ -5,20 +5,24 @@
 	<property name="bin" location="bin" />
 	<property name="doc" location="doc" />
 	<property name="mainClass" value="sisPPGI.Programa" />
+
 	<!-- Inicialização. -->
 	<target name="init" description="Inicializa as estruturas necessárias.">
 		<tstamp />
 		<mkdir dir="${bin}" />
 	</target>
+
 	<!-- Compilação. -->
 	<target name="compile" depends="init" description="Compila o códigofonte.">
 		<javac includeantruntime="false" srcdir="${src}" destdir="${bin}" />
 	</target>
+
 	<!-- Documentação. -->
 	<target name="document" depends="compile" description="Gera a documentação.">
 		<javadoc sourcepath="${src}" destdir="${doc}">
 		</javadoc>
 	</target>
+
 	<!-- Execução normal. -->
 	<target name="run" depends="compile" description="Executa o programa
 principal, em modo normal.">
@@ -40,6 +44,7 @@ principal, em modo normal.">
 			</classpath>
 		</java>
 	</target>
+
 	<!-- Execução somente leitura. -->
 	<target name="run-read-only" depends="compile" description="Executa o
 programa principal, em modo somente leitura.">
@@ -62,6 +67,7 @@ programa principal, em modo somente leitura.">
 			</classpath>
 		</java>
 	</target>
+
 	<!-- Execução somente escrita. -->
 	<target name="run-write-only" depends="compile" description="Executa o
 programa principal, em modo somente escrita.">
@@ -72,6 +78,7 @@ programa principal, em modo somente escrita.">
 			</classpath>
 		</java>
 	</target>
+
 	<!-- Limpeza. -->
 	<target name="clean" description="Limpa o projeto, deixando apenas o
 código-fonte.">
@@ -86,5 +93,248 @@ código-fonte.">
 		<delete>
 			<fileset dir="." includes="*.dat" />
 		</delete>
+	</target>
+
+    <!-- Execução de testes -->
+    <!-- Erro 1-->
+    <target name="run_e11" depends="compile" description="Roda o programa para a exceção 1.1">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="nao_existe.csv" />
+			<arg value="-v" />
+			<arg value="veiculos.csv" />
+			<arg value="-p" />
+			<arg value="publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="qualis.csv" />
+			<arg value="-r" />
+			<arg value="regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+    <target name="run_e12" depends="compile" description="Roda o programa para a exceção 1.2">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="docentes.csv" />
+			<arg value="-v" />
+			<arg value="nao_existe.csv" />
+			<arg value="-p" />
+			<arg value="publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="qualis.csv" />
+			<arg value="-r" />
+			<arg value="regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+    <target name="run_e13" depends="compile" description="Roda o programa para a exceção 1.3">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="docentes.csv" />
+			<arg value="-v" />
+			<arg value="veiculos.csv" />
+			<arg value="-p" />
+			<arg value="nao_existe.csv" />
+			<arg value="-q" />
+			<arg value="qualis.csv" />
+			<arg value="-r" />
+			<arg value="regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+    <target name="run_e14" depends="compile" description="Roda o programa para a exceção 1.4">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="docentes.csv" />
+			<arg value="-v" />
+			<arg value="veiculos.csv" />
+			<arg value="-p" />
+			<arg value="publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="nao_existe.csv" />
+			<arg value="-r" />
+			<arg value="regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+    <target name="run_e15" depends="compile" description="Roda o programa para a exceção 1.5">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="docentes.csv" />
+			<arg value="-v" />
+			<arg value="veiculos.csv" />
+			<arg value="-p" />
+			<arg value="publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="qualis.csv" />
+			<arg value="-r" />
+			<arg value="nao_existe.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+    <!-- Erro 3 -->
+	<target name="run_e31" depends="compile" description="Roda o programa para a exceção 3.1.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e31.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e32" depends="compile" description="Roda o programa para a exceção 3.2.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e32.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e33" depends="compile" description="Roda o programa para a exceção 3.3.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e33.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e34" depends="compile" description="Roda o programa para a exceção 3.4.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e34.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e35" depends="compile" description="Roda o programa para a exceção 3.5.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e35.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e35.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e36" depends="compile" description="Roda o programa para a exceção 3.6.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e36.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="run_e37" depends="compile" description="Roda o programa para a exceção 3.7.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e37.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
 	</target>
 </project>
