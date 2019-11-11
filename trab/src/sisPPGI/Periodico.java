@@ -10,6 +10,14 @@ public class Periodico extends Veiculo {
 	private double multiplicador;
 	private String issn;
 	
+	/**
+	 * Contrutor de um veículo periódico
+	 * 
+	 * @param sigla Sigla do veículo
+	 * @param nome Nome do veículo
+	 * @param impacto Impacto em {@code double}
+	 * @param issn Issn do periódico
+	 */
 	public Periodico(String sigla, String nome, double impacto, String issn) {
 		super(sigla, nome, impacto);
 		this.issn = issn;
@@ -46,6 +54,6 @@ public class Periodico extends Veiculo {
 	@Override
 	public String toString() {
 		return "Periodico [multiplicador=" + this.multiplicador + ", issn=" + this.issn + ", sigla=" + this.sigla + ", nome=" + this.nome
-				+ ", impacto=" + this.impacto + ", qualis=" + this.qualis + ", publicacoes=" + this.publicacoes + "]";
+				+ ", impacto=" + this.impacto + ", qualis=" + this.qualis + ", publicacoes=" + this.publicacoes + "]\n";
 	}
 }

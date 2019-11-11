@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoRepetidoDocente;
+import sisPPGI.excecoes.SiglaVeiculoRepetido;
 
 public class Programa {
 	
@@ -92,6 +93,8 @@ public class Programa {
 			ppgi.carregaVeiculos(veiculos);
 		} catch (CodigoRepetidoDocente e1) {
 			System.out.println(e1.getMessage());
+		} catch (SiglaVeiculoRepetido e2) {
+			System.out.println(e2.getMessage());
 		}
 		System.out.println(ppgi);
 		FileWriter a = null;

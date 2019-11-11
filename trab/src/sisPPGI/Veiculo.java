@@ -16,7 +16,13 @@ public abstract class Veiculo implements Serializable{
 	protected ArrayList<Publicacao> publicacoes;
 	
 	
-	
+	/**
+	 * Construtor de um veículo para classes herdadas 
+	 * 
+	 * @param sigla Sigla do veículo
+	 * @param nome Nome do veículo
+	 * @param impacto Impacto em {@code double}
+	 */
 	public Veiculo(String sigla, String nome, double impacto) {
 		this.sigla = sigla;
 		this.nome = nome;

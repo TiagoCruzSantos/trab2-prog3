@@ -8,6 +8,13 @@ package sisPPGI;
  */
 public class Conferencia extends Veiculo {
 
+	/**
+	 * Construtor de uma conferência
+	 * 
+	 * @param sigla Sigla do veículo
+	 * @param nome Nome do veículo
+	 * @param impacto Impacto em {@code double}
+	 */
 	public Conferencia(String sigla, String nome, double impacto) {
 		super(sigla, nome, impacto);
 	}
@@ -15,7 +22,7 @@ public class Conferencia extends Veiculo {
 	@Override
 	public String toString() {
 		return "Conferencia [sigla=" + this.sigla + ", nome=" + this.nome + ", impacto=" + this.impacto + ", qualis=" + this.qualis
-				+ ", publicacoes=" + this.publicacoes + "]";
+				+ ", publicacoes=" + this.publicacoes + "]\n";
 	}
 	
 }
