@@ -9,10 +9,10 @@ package sisPPGI.excecoes;
  */
 public class CodigoRepetidoVeiculo extends Exception {
 	public CodigoRepetidoVeiculo(long cod, Throwable cause) {
-		super("Código repetido para veiculo: " + cod, cause);
+		super("Código repetido para veiculo: " + cod + ".", cause);
 	}
 	
 	public CodigoRepetidoVeiculo(long cod) {
-		super("Código repetido para veiculo: " + cod);
+		super("Código repetido para veiculo: " + cod + ".");
 	}
 }

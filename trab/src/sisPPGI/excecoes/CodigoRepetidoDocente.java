@@ -10,10 +10,10 @@ package sisPPGI.excecoes;
 public class CodigoRepetidoDocente extends Exception {
 
 	public CodigoRepetidoDocente(long cod, Throwable cause) {
-		super("Código repetido para docente: " + cod, cause);
+		super("Código repetido para docente: " + cod + ".", cause);
 	}
 	
 	public CodigoRepetidoDocente(long cod) {
-		super("Código repetido para docente: " + cod);
+		super("Código repetido para docente: " + cod + ".");
 	}
 }

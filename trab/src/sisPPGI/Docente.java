@@ -141,6 +141,10 @@ public class Docente implements Serializable{
 		this.publicacoes = publicacoes;
 	}
 	
+	public void adicionarPublicacao(Publicacao pub) {
+		this.publicacoes.add(pub);
+	}
+	
 	@Override
 	public String toString() {
 		return "Docente [codigo=" + this.codigo + ", nome=" + this.nome + ", dataNascimento=" + this.dataNascimento.getTime() + ", dataIngresso="

@@ -15,10 +15,8 @@ import sisPPGI.excecoes.SiglaVeiculoRepetido;
  *
  */
 public class Sistema implements Serializable{
-	//private ArrayList<Docente> docentesCadastrados;
 	private HashMap<Long, Docente> docentesCadastrados;
 	private ArrayList<Publicacao> publicacoes;
-	//private ArrayList<Veiculo> veiculos;
 	private HashMap<String, Veiculo> veiculos;
 	private ArrayList<Regra> regras;
 	private ArrayList<Qualis> qualificacoes;
@@ -78,7 +76,7 @@ public class Sistema implements Serializable{
 	}
 	
 	/**
-	 * Cadastra u, veiculo no sistema
+	 * Cadastra um veiculo no sistema
 	 * 
 	 * @param veiculo Veículo pré-existente
 	 */
@@ -102,6 +100,10 @@ public class Sistema implements Serializable{
 		double impacto;
 		while(infile.hasNext()) {
 			sigla = infile.next();
+			
+			if(sigla.substring(sigla.length() - 1).compareTo(" ") == 0) {
+				sigla = sigla.substring(0, sigla.length()-1);
+			}
 			if(this.veiculos.containsKey(sigla)) {
 				throw new SiglaVeiculoRepetido(sigla);
 			}
@@ -119,6 +121,79 @@ public class Sistema implements Serializable{
 				this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
 			}
 			//System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto + "][" + issn + ']');
+		}
+	}
+	
+	/**
+	 * Carrega as publicações de um arquivo para o sistema e faz as relações entre as publicações, os docentes e os veiculos
+	 * 
+	 * @param infile Arquivo das publicações carregadas em um Scanner
+	 */
+	public void carregaPublicacao(Scanner infile) {
+		infile.useDelimiter(";");
+		infile.nextLine();
+		int ano;
+		String veiculo;
+		String nome;
+		String[] autores;
+		int numero;
+		int volume;
+		String local;
+		int paginaIni;
+		int paginaFim;
+		while(infile.hasNext()) {
+			HashMap<Long, Docente>  autoresObj = new HashMap<Long, Docente>();
+			volume = -1;
+			ano = infile.nextInt();
+			veiculo = infile.next();
+			
+			if(veiculo.substring(veiculo.length() - 1).compareTo(" ") == 0) {
+				veiculo = veiculo.substring(0, veiculo.length()-1);
+			}
+			
+			nome = infile.next();
+			autores = infile.next().split(",");
+			numero = infile.nextInt();
+			if(infile.hasNextInt()) {
+				volume = infile.nextInt();
+			}else {
+				infile.next();
+			}
+			local = infile.next();
+			paginaIni = infile.nextInt();
+			paginaFim = Integer.parseInt(infile.nextLine().split(";")[1]);
+			for(String aut: autores) {
+				long cod = Long.parseLong(aut.replaceAll("\\s+", ""));
+				Docente doc = this.docentesCadastrados.get(cod);
+				autoresObj.put(cod, doc);
+			}
+			Publicacao pub = new Publicacao(ano, nome, numero, volume, local, paginaIni, paginaFim, autoresObj);
+			for(String aut: autores) {
+				long cod = Long.parseLong(aut.replaceAll("\\s+", ""));
+				Docente doc = this.docentesCadastrados.get(cod);
+				doc.adicionarPublicacao(pub);
+			}
+			this.veiculos.get(veiculo).adicionarPublicacao(pub);
+			this.publicacoes.add(pub);
+		}
+	}
+	/**
+	 * Carrega arquivo de qualis e aplica a pontuação nos veículos
+	 * 
+	 * @param infile Arquivo aberto de qualis
+	 */
+	public void carregaQualis(Scanner infile) {
+		infile.useDelimiter(";");
+		infile.nextLine();
+		int ano;
+		String veiculo;
+		String nivel;
+		while(infile.hasNext()) {
+			ano = infile.nextInt();
+			veiculo = infile.next();
+			nivel = infile.nextLine().split(";")[1];
+			Veiculo veic = this.veiculos.get(veiculo);
+			System.out.println("[" + ano + "][" + veiculo + "][" + nivel + "]");
 		}
 	}
 	

@@ -2,6 +2,7 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Classe de representação de Publicação
@@ -16,10 +17,11 @@ public class Publicacao implements Serializable{
 	private String local;
 	private int paginaIni;
 	private int paginaFim;
-	private ArrayList<Docente> autores;
+	private int volume;
+	private HashMap<Long, Docente> autores;
 	
-	public Publicacao(int ano, String titulo, int numero, String local, int paginaIni, int paginaFim,
-			ArrayList<Docente> autores) {
+	public Publicacao(int ano, String titulo, int numero,int volume, String local, int paginaIni, int paginaFim,
+			HashMap<Long, Docente> autores) {
 		this.ano = ano;
 		this.titulo = titulo;
 		this.numero = numero;
@@ -27,6 +29,7 @@ public class Publicacao implements Serializable{
 		this.paginaIni = paginaIni;
 		this.paginaFim = paginaFim;
 		this.autores = autores;
+		this.volume = volume;
 	}
 
 	/**
@@ -116,21 +119,21 @@ public class Publicacao implements Serializable{
 	/**
 	 * @return Lista de autores
 	 */
-	public ArrayList<Docente> getAutores() {
+	public HashMap<Long, Docente> getAutores() {
 		return autores;
 	}
 
 	/**
 	 * @param autores Lista de autores
 	 */
-	public void setAutores(ArrayList<Docente> autores) {
+	public void setAutores(HashMap<Long, Docente> autores) {
 		this.autores = autores;
 	}
 
 	@Override
 	public String toString() {
 		return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local=" + this.local
-				+ ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores=" + this.autores + "]";
+				+ ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores=" + this.autores + "]\n";
 	}
 	
 }

@@ -10,11 +10,12 @@ import java.io.Serializable;
  */
 public class Qualis implements Serializable{
 	private String nivel;
+	private int ano;
 	private double pontuacao;
 	
-	public Qualis(String nivel, double pontuacao) {
+	public Qualis(int ano, String nivel) {
 		this.nivel = nivel;
-		this.pontuacao = pontuacao;
+		this.setAno(ano);
 	}
 
 	/**
@@ -43,5 +44,19 @@ public class Qualis implements Serializable{
 	 */
 	public void setPontuacao(double pontuacao) {
 		this.pontuacao = pontuacao;
+	}
+
+	/**
+	 * @return O ano desse qualis
+	 */
+	public int getAno() {
+		return ano;
+	}
+
+	/**
+	 * @param ano Ano do qualis
+	 */
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 }

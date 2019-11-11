@@ -88,37 +88,45 @@ public class Programa {
 					break;
 			}
 		}
-		try {
-			ppgi.carregaDocentes(docentes);
-			ppgi.carregaVeiculos(veiculos);
-		} catch (CodigoRepetidoDocente e1) {
-			System.out.println(e1.getMessage());
-		} catch (SiglaVeiculoRepetido e2) {
-			System.out.println(e2.getMessage());
-		}
-		System.out.println(ppgi);
-		FileWriter a = null;
-		FileWriter b = null;
-		FileWriter c = null;
-		try {
-			a = new FileWriter("1-recredenciamento.csv");
-			b = new FileWriter("2-publicacoes.csv");
-			c = new FileWriter("3-estatisticas.csv");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			a.append("SADSADFYGUA");
-			b.append("SSSSSS");
-			c.append("AAAAAAA");
-			a.flush();
-			b.flush();
-			c.flush();
-			a.close();
-			b.close();
-			c.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(args.length > 0 && !excecao) {
+			try {
+				ppgi.carregaDocentes(docentes);
+				ppgi.carregaVeiculos(veiculos);
+				ppgi.carregaPublicacao(publicacoes);
+				ppgi.carregaQualis(qualis);
+			} catch (CodigoRepetidoDocente e1) {
+				System.out.println(e1.getMessage());
+				excecao = true;
+			} catch (SiglaVeiculoRepetido e2) {
+				System.out.println(e2.getMessage());
+				excecao = true;
+			}
+			//System.out.println(ppgi);
+			FileWriter a = null;
+			FileWriter b = null;
+			FileWriter c = null;
+			if(!readOnly && !excecao){
+				try {
+					a = new FileWriter("1-recredenciamento.csv");
+					b = new FileWriter("2-publicacoes.csv");
+					c = new FileWriter("3-estatisticas.csv");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try {
+					a.append("SADSADFYGUA");
+					b.append("SSSSSS");
+					c.append("AAAAAAA");
+					a.flush();
+					b.flush();
+					c.flush();
+					a.close();
+					b.close();
+					c.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

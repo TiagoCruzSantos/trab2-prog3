@@ -12,7 +12,7 @@ public abstract class Veiculo implements Serializable{
 	protected String sigla;
 	protected String nome;
 	protected double impacto;
-	protected Qualis qualis;
+	protected ArrayList<Qualis> qualis;
 	protected ArrayList<Publicacao> publicacoes;
 	
 	
@@ -28,6 +28,7 @@ public abstract class Veiculo implements Serializable{
 		this.nome = nome;
 		this.impacto = impacto;
 		this.publicacoes = new ArrayList<Publicacao>();
+		this.qualis = new ArrayList<Qualis>();
 	}
 	/**
 	 * @return Sigla do nome do veiculo
@@ -76,6 +77,10 @@ public abstract class Veiculo implements Serializable{
 	 */
 	public void setPublicacoes(ArrayList<Publicacao> publicacoes) {
 		this.publicacoes = publicacoes;
+	}
+	
+	public void adicionarPublicacao(Publicacao pub) {
+		this.publicacoes.add(pub);
 	}
 	
 }
