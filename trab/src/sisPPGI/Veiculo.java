@@ -2,6 +2,7 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 /**
  * Classe base para representação de Veiculo
  * 
@@ -12,7 +13,7 @@ public abstract class Veiculo implements Serializable{
 	protected String sigla;
 	protected String nome;
 	protected double impacto;
-	protected ArrayList<Qualis> qualis;
+	protected HashMap<Integer, Qualis> qualis;
 	protected ArrayList<Publicacao> publicacoes;
 	
 	
@@ -28,7 +29,7 @@ public abstract class Veiculo implements Serializable{
 		this.nome = nome;
 		this.impacto = impacto;
 		this.publicacoes = new ArrayList<Publicacao>();
-		this.qualis = new ArrayList<Qualis>();
+		this.qualis = new HashMap<Integer, Qualis>();
 	}
 	/**
 	 * @return Sigla do nome do veiculo
@@ -83,4 +84,8 @@ public abstract class Veiculo implements Serializable{
 		this.publicacoes.add(pub);
 	}
 	
+	public void adicionarQualis(Qualis qualis){
+		this.qualis.put(qualis.getAno(), qualis);
+	}
+
 }

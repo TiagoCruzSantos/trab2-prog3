@@ -94,6 +94,7 @@ public class Programa {
 				ppgi.carregaVeiculos(veiculos);
 				ppgi.carregaPublicacao(publicacoes);
 				ppgi.carregaQualis(qualis);
+				ppgi.carregaRegra(regras);
 			} catch (CodigoRepetidoDocente e1) {
 				System.out.println(e1.getMessage());
 				excecao = true;

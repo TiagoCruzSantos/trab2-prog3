@@ -1,6 +1,7 @@
 package sisPPGI;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Classe de representação do Qualis
@@ -15,7 +16,7 @@ public class Qualis implements Serializable{
 	
 	public Qualis(int ano, String nivel) {
 		this.nivel = nivel;
-		this.setAno(ano);
+		this.ano = ano;
 	}
 
 	/**

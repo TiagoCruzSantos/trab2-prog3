@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.swing.plaf.multi.MultiListUI;
+
 import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 /**
@@ -193,10 +195,41 @@ public class Sistema implements Serializable{
 			veiculo = infile.next();
 			nivel = infile.nextLine().split(";")[1];
 			Veiculo veic = this.veiculos.get(veiculo);
+			Qualis qualis = new Qualis(ano, nivel);
+			veic.adicionarQualis(qualis);
 			System.out.println("[" + ano + "][" + veiculo + "][" + nivel + "]");
 		}
 	}
 	
+	public void carregaRegra(Scanner infile){
+		infile.useDelimiter(";");
+		infile.nextLine();
+		String dataIni;
+		String dataFim;
+		String[] niveis;
+		String[] pontos;
+		double multiplicador;
+		int anos;
+		int maxPontos;
+		while(infile.hasNext()){
+			dataIni = infile.next();
+			dataFim = infile.next();
+			niveis = infile.next().split(",");
+			pontos = infile.next().split(",");
+			multiplicador = Double.parseDouble(infile.next().replace(',','.'));
+			anos = infile.nextInt();
+			maxPontos = Integer.parseInt(infile.nextLine().split(";")[1]);
+			System.out.print("[" + dataIni + "][" + dataFim + "][");
+			for(String nivel: niveis){
+				System.out.print(nivel + "][");
+			}
+			for(String ponto: pontos){
+				System.out.print(Integer.parseInt(ponto) + "][");
+			}
+			System.out.println(multiplicador + "][" + anos + "][" + maxPontos + "]");
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Sistema [docentesCadastrados=\n" + this.docentesCadastrados + ", publicacoes=\n" + this.publicacoes + ", veiculos=\n"
