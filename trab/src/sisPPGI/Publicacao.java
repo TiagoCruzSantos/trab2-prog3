@@ -6,134 +6,135 @@ import java.util.HashMap;
 
 /**
  * Classe de representação de Publicação
- * 
- * @author Tiago
- * @author Atilio
+ *
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
-public class Publicacao implements Serializable{
-	private int ano;
-	private String titulo;
-	private int numero;
-	private String local;
-	private int paginaIni;
-	private int paginaFim;
-	private int volume;
-	private HashMap<Long, Docente> autores;
-	
-	public Publicacao(int ano, String titulo, int numero,int volume, String local, int paginaIni, int paginaFim,
-			HashMap<Long, Docente> autores) {
-		this.ano = ano;
-		this.titulo = titulo;
-		this.numero = numero;
-		this.local = local;
-		this.paginaIni = paginaIni;
-		this.paginaFim = paginaFim;
-		this.autores = autores;
-		this.volume = volume;
-	}
+public class Publicacao implements Serializable {
+    private int ano;
+    private String titulo;
+    private int numero;
+    private String local;
+    private int paginaIni;
+    private int paginaFim;
+    private int volume;
+    private HashMap<Long, Docente> autores;
 
-	/**
-	 * @return Ano de publicação
-	 */
-	public int getAno() {
-		return ano;
-	}
-	
-	/**
-	 * @param ano Ano de publicação
-	 */
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
+    public Publicacao(int ano, String titulo, int numero, int volume, String local, int paginaIni, int paginaFim,
+            HashMap<Long, Docente> autores) {
+        this.ano = ano;
+        this.titulo = titulo;
+        this.numero = numero;
+        this.local = local;
+        this.paginaIni = paginaIni;
+        this.paginaFim = paginaFim;
+        this.autores = autores;
+        this.volume = volume;
+    }
 
-	/**
-	 * @return Titulo da publicação
-	 */
-	public String getTitulo() {
-		return titulo;
-	}
+    /**
+     * @return Ano de publicação
+     */
+    public int getAno() {
+        return ano;
+    }
 
-	/**
-	 * @param titulo Titulo da publicação
-	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    /**
+     * @param ano Ano de publicação
+     */
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
 
-	/**
-	 * @return Número da publicação
-	 */
-	public int getNumero() {
-		return numero;
-	}
+    /**
+     * @return Título da publicação
+     */
+    public String getTitulo() {
+        return titulo;
+    }
 
-	/**
-	 * @param numero Numero da publicação
-	 */
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
+    /**
+     * @param titulo Título da publicação
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	/**
-	 * @return Local de publicação
-	 */
-	public String getLocal() {
-		return local;
-	}
+    /**
+     * @return Número da publicação
+     */
+    public int getNumero() {
+        return numero;
+    }
 
-	/**
-	 * @param local Local de publicação
-	 */
-	public void setLocal(String local) {
-		this.local = local;
-	}
+    /**
+     * @param numero Número da publicação
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 
-	/**
-	 * @return Pagina inicial da publicação
-	 */
-	public int getPaginaIni() {
-		return paginaIni;
-	}
+    /**
+     * @return Local de publicação
+     */
+    public String getLocal() {
+        return local;
+    }
 
-	/**
-	 * @param paginaIni Pagina inicial da publicação
-	 */
-	public void setPaginaIni(int paginaIni) {
-		this.paginaIni = paginaIni;
-	}
+    /**
+     * @param local Local de publicação
+     */
+    public void setLocal(String local) {
+        this.local = local;
+    }
 
-	/**
-	 * @return Ultima pagina da publicação
-	 */
-	public int getPaginaFim() {
-		return paginaFim;
-	}
+    /**
+     * @return Página inicial da publicação
+     */
+    public int getPaginaIni() {
+        return paginaIni;
+    }
 
-	/**
-	 * @param paginaFim Ultima pagina da publicação
-	 */
-	public void setPaginaFim(int paginaFim) {
-		this.paginaFim = paginaFim;
-	}
+    /**
+     * @param paginaIni Página inicial da publicação
+     */
+    public void setPaginaIni(int paginaIni) {
+        this.paginaIni = paginaIni;
+    }
 
-	/**
-	 * @return Lista de autores
-	 */
-	public HashMap<Long, Docente> getAutores() {
-		return autores;
-	}
+    /**
+     * @return Última página da publicação
+     */
+    public int getPaginaFim() {
+        return paginaFim;
+    }
 
-	/**
-	 * @param autores Lista de autores
-	 */
-	public void setAutores(HashMap<Long, Docente> autores) {
-		this.autores = autores;
-	}
+    /**
+     * @param paginaFim Última página da publicação
+     */
+    public void setPaginaFim(int paginaFim) {
+        this.paginaFim = paginaFim;
+    }
 
-	@Override
-	public String toString() {
-		return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local=" + this.local
-				+ ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores=" + this.autores + "]\n";
-	}
-	
+    /**
+     * @return Lista de autores
+     */
+    public HashMap<Long, Docente> getAutores() {
+        return autores;
+    }
+
+    /**
+     * @param autores Lista de autores
+     */
+    public void setAutores(HashMap<Long, Docente> autores) {
+        this.autores = autores;
+    }
+
+    @Override
+    public String toString() {
+        return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local="
+                + this.local + ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores="
+                + this.autores + "]\n";
+    }
+
 }

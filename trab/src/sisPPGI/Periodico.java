@@ -1,59 +1,61 @@
 package sisPPGI;
+
 /**
- * Classe de representação de um veiculo periodico
- * 
- * @author Tiago
- * @author Atilio
+ * Classe de representação de um veículo periódico
+ *
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Periodico extends Veiculo {
+    private double multiplicador;
+    private String issn;
 
-	private double multiplicador;
-	private String issn;
-	
-	/**
-	 * Contrutor de um veículo periódico
-	 * 
-	 * @param sigla Sigla do veículo
-	 * @param nome Nome do veículo
-	 * @param impacto Impacto em {@code double}
-	 * @param issn Issn do periódico
-	 */
-	public Periodico(String sigla, String nome, double impacto, String issn) {
-		super(sigla, nome, impacto);
-		this.issn = issn;
-	}
-	
-	/**
-	 * @return Fator de multiplicação do periodico para as publicações
-	 */
-	public double getMultiplicador() {
-		return multiplicador;
-	}
+    /**
+     * Contrutor de um veículo periódico
+     *
+     * @param sigla   Sigla do veículo
+     * @param nome    Nome do veículo
+     * @param impacto Impacto em {@code double}
+     * @param issn    ISSN do periódico
+     */
+    public Periodico(String sigla, String nome, double impacto, String issn) {
+        super(sigla, nome, impacto);
+        this.issn = issn;
+    }
 
-	/**
-	 * @param multiplicador Fator de multiplicação do periodico para as publicações
-	 */
-	public void setMultiplicador(double multiplicador) {
-		this.multiplicador = multiplicador;
-	}
+    /**
+     * @return Fator de multiplicação do periódico para as publicações
+     */
+    public double getMultiplicador() {
+        return multiplicador;
+    }
 
-	/**
-	 * @return Issn do veiculo
-	 */
-	public String getIssn() {
-		return issn;
-	}
+    /**
+     * @param multiplicador Fator de multiplicação do periódico para as publicações
+     *                      a armazenar
+     */
+    public void setMultiplicador(double multiplicador) {
+        this.multiplicador = multiplicador;
+    }
 
-	/**
-	 * @param issn Issn do veiculo
-	 */
-	public void setIssn(String issn) {
-		this.issn = issn;
-	}
+    /**
+     * @return ISSN do veículo
+     */
+    public String getIssn() {
+        return issn;
+    }
 
-	@Override
-	public String toString() {
-		return "Periodico [multiplicador=" + this.multiplicador + ", issn=" + this.issn + ", sigla=" + this.sigla + ", nome=" + this.nome
-				+ ", impacto=" + this.impacto + ", qualis=" + this.qualis + ", publicacoes=" + this.publicacoes + "]\n";
-	}
+    /**
+     * @param issn ISSN do veículo a armazenar
+     */
+    public void setIssn(String issn) {
+        this.issn = issn;
+    }
+
+    @Override
+    public String toString() {
+        return "Periodico [multiplicador=" + this.multiplicador + ", issn=" + this.issn + ", sigla=" + this.sigla
+                + ", nome=" + this.nome + ", impacto=" + this.impacto + ", qualis=" + this.qualis + ", publicacoes="
+                + this.publicacoes + "]\n";
+    }
 }

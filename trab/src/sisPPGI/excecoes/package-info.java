@@ -1,6 +1,7 @@
 /**
  * Pacote de exceções do sistema PPGI
- * @author Tiago
- * @author Atilio
+ *
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 package sisPPGI.excecoes;
