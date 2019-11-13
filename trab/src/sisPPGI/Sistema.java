@@ -102,10 +102,7 @@ public class Sistema implements Serializable{
 		double impacto;
 		while(infile.hasNext()) {
 			sigla = infile.next();
-			
-			if(sigla.substring(sigla.length() - 1).compareTo(" ") == 0) {
-				sigla = sigla.substring(0, sigla.length()-1);
-			}
+			sigla = sigla.trim();
 			if(this.veiculos.containsKey(sigla)) {
 				throw new SiglaVeiculoRepetido(sigla);
 			}
@@ -148,7 +145,7 @@ public class Sistema implements Serializable{
 			volume = -1;
 			ano = infile.nextInt();
 			veiculo = infile.next();
-			
+			veiculo = veiculo.trim();
 			if(veiculo.substring(veiculo.length() - 1).compareTo(" ") == 0) {
 				veiculo = veiculo.substring(0, veiculo.length()-1);
 			}
