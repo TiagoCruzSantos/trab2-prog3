@@ -145,11 +145,7 @@ public class Sistema implements Serializable{
 			volume = -1;
 			ano = infile.nextInt();
 			veiculo = infile.next();
-			veiculo = veiculo.trim();
-			if(veiculo.substring(veiculo.length() - 1).compareTo(" ") == 0) {
-				veiculo = veiculo.substring(0, veiculo.length()-1);
-			}
-			
+			veiculo = veiculo.trim();			
 			nome = infile.next();
 			autores = infile.next().split(",");
 			numero = infile.nextInt();
