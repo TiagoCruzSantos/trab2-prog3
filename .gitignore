@@ -48,3 +48,4 @@ main
 *.txt
 !testes_excecoes.txt
 !*_e*.csv
+!/testes/**/*.csv
