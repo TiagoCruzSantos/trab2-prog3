@@ -44,7 +44,7 @@ def gera_veiculos(nVeiculos):
         for i in range(nVeiculos):
             sigla = ''
             nome = fakezada.company()
-            while sigla in siglasUtilizadas or nome in siglasUtilizadas or len(sigla) is 0:
+            while sigla in siglasUtilizadas or nome in siglasUtilizadas or len(sigla) == 0:
                 sigla = ''
                 nome = fakezada.company()
                 for palavra in nome.split(' '):
@@ -52,12 +52,14 @@ def gera_veiculos(nVeiculos):
 
             tipo = random.choice(tipos)
             if tipo == 'P':
-                issn = f"{fake.bban()[7:11]}-{fake.bban()[6:2:-1]}"
+                issn = f"{fake.bban()[7:11]}-{fake.bban()[6:2:-2]}{random.randint(0, 9)}{random.choice([random.randint(0, 9), 'X'])}"
             else:
-                issn = ''  # ?
+                issn = ''
 
             if random.randint(1, 3) == 1:
-                impacto = round(abs(random.gauss(10, 10)), 3)
+                impactoInt = round(abs(random.gauss(10, 10)))
+                impactoDecimal = random.randint(0, 99)
+                impacto = f"{impactoInt},{impactoDecimal}"
             else:
                 impacto = 0
 
@@ -70,14 +72,16 @@ def gera_qualis(arquivoVeiculos):
     with open(f"{path}/qualis_python.csv", "w+", encoding="utf8") as file:
         file.write("Ano;Veículo;Qualis\n")
         veiculosCSV = pd.read_csv(f"{path}/{arquivoVeiculos}", sep=';')
-        for veiculo in veiculosCSV["Sigla"].tolist():
-            ano = random.randint(2010, 2019)
+        for i in range(random.randrange(1, 10)):
+            print(i)
+            for veiculo in veiculosCSV["Sigla"].tolist():
+                ano = 2010 + i
 
-            sigla = veiculo
+                sigla = veiculo
 
-            qualisPossiveis = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
-            qualis = random.choice(qualisPossiveis)
-            file.write(f"{ano};{sigla};{qualis}\n")
+                qualisPossiveis = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
+                qualis = random.choice(qualisPossiveis)
+                file.write(f"{ano};{sigla};{qualis}\n")
 
 
 def gera_regras():
@@ -85,34 +89,34 @@ def gera_regras():
         file.write(
             "Início Vigência;Fim Vigência;Qualis;Pontos;Multiplicador;Anos;Mínimo Pontos\n")
 
-        inicio = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-        fim = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-        while (int(inicio.split("/")[2]) < 2010) or (int(fim.split("/")[2]) - int(inicio.split("/")[2]) < 1):
-            inicio = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-            fim = fake.date(pattern="%d/%m/%Y", end_datetime=None)
-        file.write(f"{inicio};{fim};")
+        nRegras = random.randrange(1, 10)
+        anos = list(range(2020 - nRegras, 2020))
+        for _ in range(nRegras):
+            ano = anos.pop()
+            file.write(f"01/01/{ano};31/12/{ano};")
 
-        qualisPossivel = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
-        qualisEscolhidas = sorted(random.sample(
-            qualisPossivel, random.randint(1, 6)))
-        for qualis in qualisEscolhidas:
-            if qualis != qualisEscolhidas[-1]:
-                file.write(f"{qualis},")
-            else:
-                file.write(f"{qualis};")
+            qualisPossivel = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
+            qualisEscolhidas = sorted(random.sample(
+                qualisPossivel, random.randint(1, 6)))
+            for qualis in qualisEscolhidas:
+                if qualis != qualisEscolhidas[-1]:
+                    file.write(f"{qualis},")
+                else:
+                    file.write(f"{qualis};")
 
-        pontos = random.sample(range(1, 10), len(qualisEscolhidas))
-        multiplicador = round(random.uniform(0.5, 2.5), 1)
-        anos = random.randint(1, 5)
-        minimoPontos = round(abs(random.gauss(30, 10)))
+            pontos = random.sample(range(1, 10), len(qualisEscolhidas))
+            multiplicadorInt = abs(round(random.gauss(1, 0.1)))
+            multiplicadorDecimal = random.randint(0, 9)
+            nAnos = random.randint(1, 5)
+            minimoPontos = round(abs(random.gauss(30, 10)))
 
-        for ponto in pontos:
-            if ponto != pontos[-1]:
-                file.write(f"{ponto},")
-            else:
-                file.write(f"{ponto};")
+            for ponto in pontos:
+                if ponto != pontos[-1]:
+                    file.write(f"{ponto},")
+                else:
+                    file.write(f"{ponto};")
 
-        file.write(f"{multiplicador};{anos};{minimoPontos}")
+            file.write(f"{multiplicadorInt},{multiplicadorDecimal};{nAnos};{minimoPontos}\n")
 
 
 def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
@@ -138,10 +142,10 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
             veiculo = veiculosCSV[veiculosCSV['Sigla'] == sigla]
             tipoVeiculo = veiculo['Tipo'].values
 
-            if tipoVeiculo == 'P':
-                volume = random.randint(1, 50)
-            else:
-                volume = ''
+            # if tipoVeiculo == 'P':
+            volume = random.randint(1, 50)
+            # else:
+            #     volume = ''
 
             if tipoVeiculo == 'C':
                 local = fakezada.city()
@@ -170,13 +174,13 @@ if __name__ == "__main__":
     path = "entradas_autorais/python"
 
     # Editar valores aqui
-    nDocentes = 200
-    nVeiculos = 100
-    nPublicacoes = 500
+    nDocentes = 10
+    nVeiculos = 20
+    nPublicacoes = 30
 
-    # gera_docentes(nDocentes)
-    # gera_veiculos(nVeiculos)
-    # gera_qualis("veiculos_python.csv")
+    gera_docentes(nDocentes)
+    gera_veiculos(nVeiculos)
+    gera_qualis("veiculos_python.csv")
     gera_regras()
-    # gera_publicacoes("veiculos_python.csv",
-                    #  "docentes_python.csv", nPublicacoes)
+    gera_publicacoes("veiculos_python.csv",
+                     "docentes_python.csv", nPublicacoes)
