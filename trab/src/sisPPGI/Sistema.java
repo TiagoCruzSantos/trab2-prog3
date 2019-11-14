@@ -36,7 +36,6 @@ public class Sistema implements Serializable {
      * Cadastra um docente no sistema
      *
      * @param docente Docente pré-existente
-     * @param cod     Código do docente para mapear
      */
     public void cadastrarDocente(Docente docente) {
         this.docentesCadastrados.put(docente.getCodigo(), docente);

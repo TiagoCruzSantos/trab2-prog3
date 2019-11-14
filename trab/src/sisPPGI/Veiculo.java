@@ -89,7 +89,7 @@ public abstract class Veiculo implements Serializable {
     }
 
     /**
-     * @param publicacoes Uma publicação
+     * @param pub Uma publicação
      */
     public void adicionarPublicacao(Publicacao pub) {
         this.publicacoes.add(pub);
