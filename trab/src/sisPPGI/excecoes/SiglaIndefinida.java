@@ -7,7 +7,6 @@ package sisPPGI.excecoes;
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
- *
  */
 public class SiglaIndefinida extends Exception {
     public SiglaIndefinida(String titulo, String sigla, Throwable cause) {

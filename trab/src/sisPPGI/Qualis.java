@@ -20,28 +20,28 @@ public class Qualis implements Serializable {
     }
 
     /**
-     * @return Nível da qualis
+     * @return Nível do qualis
      */
     public String getNivel() {
         return nivel;
     }
 
     /**
-     * @param nivel Nível da qualis a armazenar
+     * @param nivel Nível do qualis a armazenar
      */
     public void setNivel(String nivel) {
         this.nivel = nivel;
     }
 
     /**
-     * @return Pontuação do nível desta qualis
+     * @return Pontuação do nível deste qualis
      */
     public double getPontuacao() {
         return pontuacao;
     }
 
     /**
-     * @param pontuacao Pontuação em {@code double} do nível da qualis a armazenar
+     * @param pontuacao Pontuação em {@code double} do nível do qualis a armazenar
      */
     public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;

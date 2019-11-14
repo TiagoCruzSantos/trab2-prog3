@@ -6,7 +6,6 @@ package sisPPGI.excecoes;
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
- *
  */
 public class TipoVeiculoDesconhecido extends Exception {
     public TipoVeiculoDesconhecido(String sigla, String tipo, Throwable cause) {

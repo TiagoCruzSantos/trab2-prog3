@@ -18,8 +18,7 @@ public class Regra implements Serializable {
     private double multiplicador;
     private ArrayList<Qualis> qualis;
 
-    public Regra(Date dataIni, Date dataFim, double pontoMinimo, int anosConsiderados, double multiplicador,
-            ArrayList<Qualis> qualis) {
+    public Regra(Date dataIni, Date dataFim, double pontoMinimo, int anosConsiderados, double multiplicador, ArrayList<Qualis> qualis) {
         this.dataIni = dataIni;
         this.dataFim = dataFim;
         this.pontoMinimo = pontoMinimo;
@@ -29,28 +28,28 @@ public class Regra implements Serializable {
     }
 
     /**
-     * @return Data de inicio definida na regra
+     * @return Data de início definida na regra
      */
     public Date getDataIni() {
         return dataIni;
     }
 
     /**
-     * @param dataIni Data de inicio para definir na regra
+     * @param dataIni Data de início para definir na regra
      */
     public void setDataIni(Date dataIni) {
         this.dataIni = dataIni;
     }
 
     /**
-     * @return Data de termino definida na regra
+     * @return Data de término definida na regra
      */
     public Date getDataFim() {
         return dataFim;
     }
 
     /**
-     * @param dataFim Data de termino para definir na regra
+     * @param dataFim Data de término para definir na regra
      */
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
@@ -88,28 +87,28 @@ public class Regra implements Serializable {
     }
 
     /**
-     * @return Multiplicador
+     * @return Multiplicador de pontos de periódicos
      */
     public double getMultiplicador() {
         return multiplicador;
     }
 
     /**
-     * @param multiplicador Multiplicador
+     * @param multiplicador Multiplicador de pontos de periódicos
      */
     public void setMultiplicador(double multiplicador) {
         this.multiplicador = multiplicador;
     }
 
     /**
-     * @return Lista de Qualis da regra
+     * @return Lista de qualis da regra
      */
     public ArrayList<Qualis> getQualis() {
         return qualis;
     }
 
     /**
-     * @param qualis Lista de Qualis da regra
+     * @param qualis Lista de qualis da regra
      */
     public void setQualis(ArrayList<Qualis> qualis) {
         this.qualis = qualis;

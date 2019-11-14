@@ -5,7 +5,6 @@ package sisPPGI.excecoes;
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
- *
  */
 public class SiglaVeiculoRepetido extends Exception {
     public SiglaVeiculoRepetido(String sigla) {

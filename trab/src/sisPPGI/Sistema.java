@@ -15,7 +15,6 @@ import sisPPGI.excecoes.SiglaVeiculoRepetido;
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
- *
  */
 public class Sistema implements Serializable {
     private HashMap<Long, Docente> docentesCadastrados;
@@ -56,7 +55,7 @@ public class Sistema implements Serializable {
         String nome;
         String dataIng;
         boolean boolCoord;
-        
+
         while (infile.hasNext()) {
             codigo = infile.nextLong();
             // System.out.print("[" + codigo + "]");
@@ -91,9 +90,9 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Carrega os veiculos a partir de um arquivo csv
+     * Carrega os veículos a partir de um arquivo csv
      *
-     * @param infile Scanner com o arquivo de veiculos aberto
+     * @param infile Scanner com o arquivo de veículos aberto
      * @throws SiglaVeiculoRepetido Erro gerado quando veículo a ser inserido já
      *                              tiver sigla existente
      */
@@ -161,11 +160,11 @@ public class Sistema implements Serializable {
             autores = infile.next().split(",");
             numero = infile.nextInt();
 
-            if (infile.hasNextInt()) {
-                volume = infile.nextInt();
-            } else {
-                infile.next();
-            }
+            // if (infile.hasNextInt()) {
+            volume = infile.nextInt();
+            // } else {
+            // infile.next();
+            // }
 
             local = infile.next();
             paginaIni = infile.nextInt();

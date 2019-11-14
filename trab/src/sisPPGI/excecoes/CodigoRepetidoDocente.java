@@ -5,7 +5,6 @@ package sisPPGI.excecoes;
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
- *
  */
 public class CodigoRepetidoDocente extends Exception {
     public CodigoRepetidoDocente(long cod, Throwable cause) {
