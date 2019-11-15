@@ -19,6 +19,11 @@ public class Qualis implements Serializable {
         this.ano = ano;
     }
 
+    public Qualis(String nivel, double ponto) {
+        this.nivel = nivel;
+        this.pontuacao = ponto;
+    }
+
     /**
      * @return Nível do qualis
      */
@@ -59,5 +64,11 @@ public class Qualis implements Serializable {
      */
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "[Nivel = " + this.nivel + ":Pontuação = "+ this.pontuacao+"]";
     }
 }

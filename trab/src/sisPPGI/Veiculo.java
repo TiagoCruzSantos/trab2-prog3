@@ -102,4 +102,7 @@ public abstract class Veiculo implements Serializable {
         this.qualis.put(qualis.getAno(), qualis);
     }
 
+    public HashMap<Integer, Qualis> getQualis(){
+        return this.qualis;
+    }
 }

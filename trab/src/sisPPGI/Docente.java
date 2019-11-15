@@ -63,7 +63,6 @@ public class Docente implements Serializable {
         this.dataIngresso = new GregorianCalendar(Integer.parseInt(dataIngressoSplit[2]),
                 Integer.parseInt(dataIngressoSplit[1]) - 1, Integer.parseInt(dataIngressoSplit[0]));
         ;
-
         this.coordenador = coordenador;
         this.publicacoes = new ArrayList<Publicacao>();
     }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import javax.swing.plaf.multi.MultiListUI;
-
 import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 
@@ -21,14 +19,34 @@ public class Sistema implements Serializable {
     private ArrayList<Publicacao> publicacoes;
     private HashMap<String, Veiculo> veiculos;
     private ArrayList<Regra> regras;
-    private ArrayList<Qualis> qualificacoes;
+    private HashMap<String, Qualis> qualificacoes;
+    private enum Classificacoes{
+        A1("A1"), 
+        A2("A2"), 
+        B1("B1"), 
+        B2("B2"),
+        B3("B3"),
+        B4("B4"),
+        B5("B5"),
+        C("C");
+
+        private String classificacao;
+
+        Classificacoes(String classificacao){
+            this.classificacao = classificacao;
+        }
+
+        public String getClassi(){
+            return this.classificacao;
+        }
+    }
 
     public Sistema() {
         this.docentesCadastrados = new HashMap<Long, Docente>();
         this.publicacoes = new ArrayList<Publicacao>();
         this.veiculos = new HashMap<String, Veiculo>();
         this.regras = new ArrayList<Regra>();
-        this.qualificacoes = new ArrayList<Qualis>();
+        this.qualificacoes = new HashMap<String, Qualis>();
     }
 
     /**
@@ -160,11 +178,11 @@ public class Sistema implements Serializable {
             autores = infile.next().split(",");
             numero = infile.nextInt();
 
-            // if (infile.hasNextInt()) {
-            volume = infile.nextInt();
-            // } else {
-            // infile.next();
-            // }
+            if (infile.hasNextInt()) {
+                volume = infile.nextInt();
+            } else {
+                infile.next();
+            }
 
             local = infile.next();
             paginaIni = infile.nextInt();
@@ -220,8 +238,8 @@ public class Sistema implements Serializable {
         String[] pontos;
         double multiplicador;
         int anos;
-        int maxPontos;
-
+        int pontoMinimo;
+        ArrayList<Qualis> qualificacoes = new ArrayList<Qualis>();
         while (infile.hasNext()) {
             dataIni = infile.next();
             dataFim = infile.next();
@@ -229,17 +247,31 @@ public class Sistema implements Serializable {
             pontos = infile.next().split(",");
             multiplicador = Double.parseDouble(infile.next().replace(',', '.'));
             anos = infile.nextInt();
-            maxPontos = Integer.parseInt(infile.nextLine().split(";")[1]);
+            pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
             System.out.print("[" + dataIni + "][" + dataFim + "][");
 
             for (String nivel : niveis) {
                 System.out.print(nivel + "][");
+
             }
 
             for (String ponto : pontos) {
                 System.out.print(Integer.parseInt(ponto) + "][");
             }
-            System.out.println(multiplicador + "][" + anos + "][" + maxPontos + "]");
+
+            int count = 0;
+
+            for (Classificacoes cl : Classificacoes.values()){
+                if(cl.getClassi().compareTo(niveis[count]) == 0){
+                    qualificacoes.add(new Qualis(cl.getClassi(), Integer.parseInt(pontos[count])));
+                    count++;
+                }else{
+                    qualificacoes.add(new Qualis(cl.getClassi(), Integer.parseInt(pontos[count - 1])));
+                }
+            }
+
+            System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
+            this.regras.add(new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes));
         }
     }
 

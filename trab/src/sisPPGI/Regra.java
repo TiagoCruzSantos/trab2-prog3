@@ -2,7 +2,7 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Classe de representação de uma regra
@@ -11,16 +11,31 @@ import java.util.Date;
  * @author Atílio Antônio Dadalto
  */
 public class Regra implements Serializable {
-    private Date dataIni;
-    private Date dataFim;
-    private double pontoMinimo;
+    private GregorianCalendar dataIni;
+    private GregorianCalendar dataFim;
+    private int pontoMinimo;
     private int anosConsiderados;
     private double multiplicador;
     private ArrayList<Qualis> qualis;
 
-    public Regra(Date dataIni, Date dataFim, double pontoMinimo, int anosConsiderados, double multiplicador, ArrayList<Qualis> qualis) {
+    public Regra(GregorianCalendar dataIni, GregorianCalendar dataFim, int pontoMinimo, int anosConsiderados,
+            double multiplicador, ArrayList<Qualis> qualis) {
         this.dataIni = dataIni;
         this.dataFim = dataFim;
+        this.pontoMinimo = pontoMinimo;
+        this.anosConsiderados = anosConsiderados;
+        this.multiplicador = multiplicador;
+        this.qualis = qualis;
+    }
+
+    public Regra(String dataIni, String dataFim, int pontoMinimo, int anosConsiderados, double multiplicador,
+            ArrayList<Qualis> qualis) {
+        String[] dataIniSplit = dataIni.split("/");
+        String[] dataFimSplit = dataFim.split("/");
+        this.dataIni = new GregorianCalendar(Integer.parseInt(dataIniSplit[2]),
+            Integer.parseInt(dataIniSplit[1]) - 1, Integer.parseInt(dataIniSplit[0]));;
+        this.dataFim = new GregorianCalendar(Integer.parseInt(dataFimSplit[2]),
+            Integer.parseInt(dataFimSplit[1]) - 1, Integer.parseInt(dataFimSplit[0]));;;
         this.pontoMinimo = pontoMinimo;
         this.anosConsiderados = anosConsiderados;
         this.multiplicador = multiplicador;
@@ -30,28 +45,28 @@ public class Regra implements Serializable {
     /**
      * @return Data de início definida na regra
      */
-    public Date getDataIni() {
+    public GregorianCalendar getDataIni() {
         return dataIni;
     }
 
     /**
      * @param dataIni Data de início para definir na regra
      */
-    public void setDataIni(Date dataIni) {
+    public void setDataIni(GregorianCalendar dataIni) {
         this.dataIni = dataIni;
     }
 
     /**
      * @return Data de término definida na regra
      */
-    public Date getDataFim() {
+    public GregorianCalendar getDataFim() {
         return dataFim;
     }
 
     /**
      * @param dataFim Data de término para definir na regra
      */
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(GregorianCalendar dataFim) {
         this.dataFim = dataFim;
     }
 
@@ -67,7 +82,7 @@ public class Regra implements Serializable {
      * @param pontoMinimo Pontuação mínima que um docente deve alcançar para se
      *                    manter credenciado ao programa
      */
-    public void setPontoMinimo(double pontoMinimo) {
+    public void setPontoMinimo(int pontoMinimo) {
         this.pontoMinimo = pontoMinimo;
     }
 
