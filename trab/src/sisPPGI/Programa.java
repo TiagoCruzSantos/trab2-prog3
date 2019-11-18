@@ -109,7 +109,7 @@ public class Programa {
             FileWriter b = null;
             FileWriter c = null;
 
-            if (!readOnly && !excecao) {
+            if ((!readOnly && !excecao) || (writeOnly && !excecao)) {
                 try {
                     a = new FileWriter("1-recredenciamento.csv");
                     b = new FileWriter("2-publicacoes.csv");

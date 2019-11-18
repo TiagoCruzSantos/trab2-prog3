@@ -1,7 +1,6 @@
 package sisPPGI;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -29,7 +28,7 @@ public class Publicacao implements Serializable {
         this.paginaIni = paginaIni;
         this.paginaFim = paginaFim;
         this.autores = autores;
-        this.volume = volume;
+        this.setVolume(volume);
     }
 
     /**
@@ -129,6 +128,20 @@ public class Publicacao implements Serializable {
     public void setAutores(HashMap<Long, Docente> autores) {
         this.autores = autores;
     }
+    
+    /**
+     * @return Volume da publicação
+     */
+    public int getVolume() {
+    	return volume;
+    }
+    
+    /**
+     * @param volume Volume da publicação
+     */
+    public void setVolume(int volume) {
+    	this.volume = volume;
+    }
 
     @Override
     public String toString() {
@@ -136,5 +149,6 @@ public class Publicacao implements Serializable {
                 + this.local + ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores="
                 + this.autores + "]\n";
     }
+
 
 }

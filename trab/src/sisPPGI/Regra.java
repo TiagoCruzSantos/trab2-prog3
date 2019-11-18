@@ -18,6 +18,17 @@ public class Regra implements Serializable {
     private double multiplicador;
     private ArrayList<Qualis> qualis;
 
+    /**
+     * Cria uma nova regra
+     * 
+     * @param dataIni data de inicio de vigência da regra em {@code GregorianCalendar}
+     * @param dataFim data do fim da vigência da regra em {@code GregorianCalendar}
+     * @param pontoMinimo  Pontuação mínima que um docente deve alcançar para se manter credenciado ao programa
+     * @param anosConsiderados quantos anos devem ser considerados ao analisar as publicações de um docente
+     * @param multiplicador Multiplicador das publicações feitas em Periódicos
+     * @param qualis Pontuação dos qualis
+     * @deprecated Use {@link #Regra(String, String, int, int, double, ArrayList)} ao inves desse
+     */
     public Regra(GregorianCalendar dataIni, GregorianCalendar dataFim, int pontoMinimo, int anosConsiderados,
             double multiplicador, ArrayList<Qualis> qualis) {
         this.dataIni = dataIni;
@@ -27,7 +38,16 @@ public class Regra implements Serializable {
         this.multiplicador = multiplicador;
         this.qualis = qualis;
     }
-
+    /**
+     * Cria uma nova regra
+     * 
+     * @param dataIni data de inicio de vigência da regra no formato "dd/mm/aaaa"
+     * @param dataFim data do fim da vigência da regra no formato "dd/mm/aaaa"
+     * @param pontoMinimo  Pontuação mínima que um docente deve alcançar para se manter credenciado ao programa
+     * @param anosConsiderados quantos anos devem ser considerados ao analisar as publicações de um docente
+     * @param multiplicador Multiplicador das publicações feitas em Periódicos
+     * @param qualis Pontuação dos qualis
+     */
     public Regra(String dataIni, String dataFim, int pontoMinimo, int anosConsiderados, double multiplicador,
             ArrayList<Qualis> qualis) {
         String[] dataIniSplit = dataIni.split("/");
@@ -108,7 +128,7 @@ public class Regra implements Serializable {
         return multiplicador;
     }
 
-    /**
+	/**
      * @param multiplicador Multiplicador de pontos de periódicos
      */
     public void setMultiplicador(double multiplicador) {
@@ -127,5 +147,12 @@ public class Regra implements Serializable {
      */
     public void setQualis(ArrayList<Qualis> qualis) {
         this.qualis = qualis;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Regra [dataIni=" + this.dataIni + ", dataFim=" + this.dataFim + ", pontoMinimo=" + this.pontoMinimo
+    			+ ", anosConsiderados=" + this.anosConsiderados + ", multiplicador=" + this.multiplicador + ", qualis=" + this.qualis
+    			+ "]";
     }
 }

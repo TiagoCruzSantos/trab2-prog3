@@ -1,7 +1,6 @@
 package sisPPGI;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * Classe de representação do Qualis

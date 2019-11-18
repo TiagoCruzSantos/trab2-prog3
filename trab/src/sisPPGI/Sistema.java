@@ -229,6 +229,11 @@ public class Sistema implements Serializable {
         }
     }
 
+    /**
+     * Carrega as regras de pontuação no sistema
+     * 
+     * @param infile Arquivo de regras aberto
+     */
     public void carregaRegra(Scanner infile) {
         infile.useDelimiter(";");
         infile.nextLine();
