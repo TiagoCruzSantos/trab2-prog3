@@ -28,7 +28,7 @@ public class Publicacao implements Serializable {
         this.paginaIni = paginaIni;
         this.paginaFim = paginaFim;
         this.autores = autores;
-        this.setVolume(volume);
+        this.volume = volume;
     }
 
     /**
