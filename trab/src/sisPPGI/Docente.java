@@ -157,7 +157,18 @@ public class Docente implements Serializable {
     public void adicionarPublicacao(Publicacao pub) {
         this.publicacoes.add(pub);
     }
-
+    
+    /**
+     * Calcula a pontuação do docente baseado na regra estabelecida
+     * 
+     * @param regra Regra vigente
+     * @return Pontuação do docente
+     */
+    public double calculaPontuacao(Regra regra) {
+    	
+    	return 0;
+    }
+    
     @Override
     public String toString() {
         return "Docente [codigo=" + this.codigo + ", nome=" + this.nome + ", dataNascimento="
