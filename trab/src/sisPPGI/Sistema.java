@@ -140,9 +140,11 @@ public class Sistema implements Serializable {
                 issn = infile.nextLine();
                 issn = (issn.split(";"))[1];
                 this.cadastrarVeiculo(new Periodico(sigla, nome, impacto, issn));
-            } else {
+            } else if (tipo.compareTo("C") == 0){
                 infile.nextLine();
                 this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
+            }else {
+            	//erro
             }
             // System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto +
             // "][" + issn + ']');

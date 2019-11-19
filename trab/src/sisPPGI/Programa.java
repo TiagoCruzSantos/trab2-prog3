@@ -88,7 +88,6 @@ public class Programa {
                 break;
             }
         }
-
         if (args.length > 0 && !excecao) {
             try {
                 ppgi.carregaDocentes(docentes);
