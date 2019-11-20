@@ -18,7 +18,7 @@ public class Sistema implements Serializable {
     private HashMap<Long, Docente> docentesCadastrados;
     private ArrayList<Publicacao> publicacoes;
     private HashMap<String, Veiculo> veiculos;
-    private ArrayList<Regra> regras;
+    private HashMap<Integer, Regra> regras;
     private HashMap<String, Qualis> qualificacoes;
     private enum Classificacoes{
         A1("A1"), 
@@ -45,7 +45,7 @@ public class Sistema implements Serializable {
         this.docentesCadastrados = new HashMap<Long, Docente>();
         this.publicacoes = new ArrayList<Publicacao>();
         this.veiculos = new HashMap<String, Veiculo>();
-        this.regras = new ArrayList<Regra>();
+        this.regras = new HashMap<Integer, Regra> ();
         this.qualificacoes = new HashMap<String, Qualis>();
     }
 
@@ -278,10 +278,20 @@ public class Sistema implements Serializable {
             }
 
             System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
-            this.regras.add(new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes));
+            Regra regraLida = new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes);
+            this.regras.put(regraLida.getAno(), regraLida);
         }
     }
-
+    
+    public void analisar(int ano) {
+    	Regra regra = this.regras.get(ano);
+    	if(regra == null) {
+    		//não tem regra com esse ano
+    		return;
+    	}
+    	
+    }
+    
     @Override
     public String toString() {
         return "Sistema [docentesCadastrados=\n" + this.docentesCadastrados + ", publicacoes=\n" + this.publicacoes

@@ -2,6 +2,7 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -68,7 +69,14 @@ public class Regra implements Serializable {
     public GregorianCalendar getDataIni() {
         return dataIni;
     }
-
+    /**
+     * 
+     * @return Ano de vigencia
+     */
+    public int getAno() {
+    	return dataIni.get(Calendar.YEAR);
+    }
+    
     /**
      * @param dataIni Data de início para definir na regra
      */

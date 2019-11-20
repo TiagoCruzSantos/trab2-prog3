@@ -67,7 +67,6 @@ public class Qualis implements Serializable {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return "[Nivel = " + this.nivel + ":Pontuação = "+ this.pontuacao+"]";
     }
 }
