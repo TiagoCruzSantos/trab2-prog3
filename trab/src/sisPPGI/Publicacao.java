@@ -20,6 +20,19 @@ public class Publicacao implements Serializable {
     private int volume;
     private HashMap<Long, Docente> autores;
 
+    /**
+     * Cria uma nova publicação
+     * 
+     * @param ano Ano de publicação
+     * @param titulo Titulo da publicação
+     * @param numero Número da publicação
+     * @param volume Volume da publicação
+     * @param local Local da publicação
+     * @param paginaIni Página inicial
+     * @param paginaFim Página Final
+     * @param autores Autores da publicação
+     * @param veiculo Veiculo em que a publicação foi publicada
+     */
     public Publicacao(int ano, String titulo, int numero, int volume, String local, int paginaIni, int paginaFim,
             HashMap<Long, Docente> autores, Veiculo veiculo) {
         this.ano = ano;

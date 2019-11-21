@@ -12,12 +12,23 @@ public class Qualis implements Serializable {
     private String nivel;
     private int ano;
     private double pontuacao;
-
+    
+    /**
+     * Cria um novo qualis
+     * 
+     * @param ano Ano do qualis
+     * @param nivel Nivel do qualis
+     */
     public Qualis(int ano, String nivel) {
         this.nivel = nivel;
         this.ano = ano;
     }
-
+    /**
+     * Cria um novo qualis
+     * 
+     * @param nivel NIvel do qualis
+     * @param ponto Pontuação
+     */
     public Qualis(String nivel, double ponto) {
         this.nivel = nivel;
         this.pontuacao = ponto;

@@ -103,11 +103,6 @@ public class Programa {
                 excecao = true;
             }
 
-            // System.out.println(ppgi);
-            FileWriter a = null;
-            FileWriter b = null;
-            FileWriter c = null;
-
             if ((!readOnly && !excecao) || (writeOnly && !excecao)) {
                 try {
                 	ppgi.imprimirPublicacoes();
