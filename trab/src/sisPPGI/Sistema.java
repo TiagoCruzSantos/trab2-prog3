@@ -315,6 +315,22 @@ public class Sistema implements Serializable {
     	}
     	outfile.close();
     }
+    /**
+     * WIP
+     * @throws IOException
+     */
+    public void imprimirEstatisticas() throws IOException {
+    	FileWriter outfile = new FileWriter("3-estatisticas.csv");
+    	outfile.write("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
+    	HashMap<String, ArrayList<Publicacao>> pubsPorQualis = new HashMap<String, ArrayList<Publicacao>>();
+    	for(Classificacoes cl : Classificacoes.values()) {
+    		pubsPorQualis.put(cl.getClassi(), new ArrayList<Publicacao>());
+    	}
+    	for(Publicacao pub : this.publicacoes) {
+    		ArrayList<Publicacao> arrayAtual = pubsPorQualis.get(pub.getVeiculo().getQualisAno(pub.getAno()).getNivel());
+    		arrayAtual.add(pub);
+    	}
+    }
     
     @Override
     public String toString() {
