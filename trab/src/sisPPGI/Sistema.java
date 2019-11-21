@@ -300,7 +300,7 @@ public class Sistema implements Serializable {
     	outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
     	for(Publicacao pub : this.publicacoes) {
     		Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
-    		outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";" + qualis.getNivel() + ";" + pub.getVeiculo().getImpacto() + ";" + pub.getTitulo() + ";");
+    		outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";" + qualis.getNivel() + ";" + String.format("%.3f", pub.getVeiculo().getImpacto()).replace('.', ',') + ";" + pub.getTitulo() + ";");
     		for(Docente autor: pub.getAutores().values()) {
     			outfile.write(autor.getNome() + ",");
     		}
