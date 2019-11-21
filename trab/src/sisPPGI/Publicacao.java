@@ -9,7 +9,7 @@ import java.util.HashMap;
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
  */
-public class Publicacao implements Serializable {
+public class Publicacao implements Serializable, Comparable<Publicacao> {
     private int ano;
     private String titulo;
     private int numero;
@@ -171,6 +171,29 @@ public class Publicacao implements Serializable {
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
 	}
+
+	@Override
+	public int compareTo(Publicacao o){
+        if(this.veiculo.getQualisAno(this.ano).getNivel().compareTo(o.veiculo.getQualisAno(o.getAno()).getNivel()) < 0){
+        	return -1;
+        }else if(this.veiculo.getQualisAno(this.ano).getNivel().compareTo(o.veiculo.getQualisAno(o.getAno()).getNivel()) == 0){
+        	if(this.ano > o.getAno()) {
+        		return -1;
+        	}else if(this.ano == o.getAno()){
+        		if(this.veiculo.getSigla().compareTo(o.getVeiculo().getSigla()) < 0) {
+        			return -1;
+        		}else if(this.veiculo.getSigla().compareTo(o.getVeiculo().getSigla()) == 0) {
+        			return this.titulo.compareTo(o.getTitulo());
+        		}else {
+        			return 1;
+        		}
+        	}else{
+                return 1;
+            }
+        }else {
+        	return 1;
+        }
+    }
 
 	@Override
     public String toString() {

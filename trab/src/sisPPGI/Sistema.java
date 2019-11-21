@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -133,6 +134,7 @@ public class Sistema implements Serializable {
             }
 
             nome = infile.next();
+            nome = nome.trim();
             tipo = infile.next();
             impactoStr = infile.next();
             impacto = Double.parseDouble(impactoStr.replace(',', '.'));
@@ -179,6 +181,7 @@ public class Sistema implements Serializable {
             veiculo = infile.next();
             veiculo = veiculo.trim();
             nome = infile.next();
+            nome = nome.trim();
             autores = infile.next().split(",");
             numero = infile.nextInt();
 
@@ -294,11 +297,19 @@ public class Sistema implements Serializable {
     public void imprimirPublicacoes() throws IOException {
     	FileWriter outfile = new FileWriter("2-publicacoes.csv");
     	outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
+    	Collections.sort(this.publicacoes);
     	for(Publicacao pub : this.publicacoes) {
     		Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
     		outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";" + qualis.getNivel() + ";" + String.format("%.3f", pub.getVeiculo().getImpacto()).replace('.', ',') + ";" + pub.getTitulo() + ";");
-    		for(Docente autor: pub.getAutores().values()) {
-    			outfile.write(autor.getNome() + ",");
+            int i = 0;
+            int size = pub.getAutores().values().size() - 1;
+            for(Docente autor: pub.getAutores().values()) {
+                if(i++ == size){
+                    outfile.write(autor.getNome());
+                    break;
+                }else{
+                    outfile.write(autor.getNome() + ",");
+                }
     		}
     		outfile.write("\n");
     	}
