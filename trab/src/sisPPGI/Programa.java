@@ -110,22 +110,7 @@ public class Programa {
 
             if ((!readOnly && !excecao) || (writeOnly && !excecao)) {
                 try {
-                    a = new FileWriter("1-recredenciamento.csv");
-                    b = new FileWriter("2-publicacoes.csv");
-                    c = new FileWriter("3-estatisticas.csv");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    a.append("SADSADFYGUA");
-                    b.append("SSSSSS");
-                    c.append("?");
-                    a.flush();
-                    b.flush();
-                    c.flush();
-                    a.close();
-                    b.close();
-                    c.close();
+                	ppgi.imprimirPublicacoes();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

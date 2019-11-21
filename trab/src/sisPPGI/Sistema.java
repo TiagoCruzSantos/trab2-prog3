@@ -1,5 +1,7 @@
 package sisPPGI;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,13 +198,14 @@ public class Sistema implements Serializable {
                 autoresObj.put(cod, doc);
             }
 
-            Publicacao pub = new Publicacao(ano, nome, numero, volume, local, paginaIni, paginaFim, autoresObj);
+            Veiculo veic = this.veiculos.get(veiculo);
+            Publicacao pub = new Publicacao(ano, nome, numero, volume, local, paginaIni, paginaFim, autoresObj, veic);
             for (String aut : autores) {
                 long cod = Long.parseLong(aut.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
                 doc.adicionarPublicacao(pub);
             }
-            this.veiculos.get(veiculo).adicionarPublicacao(pub);
+            veic.adicionarPublicacao(pub);
             this.publicacoes.add(pub);
         }
     }
@@ -290,6 +293,20 @@ public class Sistema implements Serializable {
     		return;
     	}
     	
+    }
+    
+    public void imprimirPublicacoes() throws IOException {
+    	FileWriter outfile = new FileWriter("2-publicacoes.csv");
+    	outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
+    	for(Publicacao pub : this.publicacoes) {
+    		Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
+    		outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";" + qualis.getNivel() + ";" + pub.getVeiculo().getImpacto() + ";" + pub.getTitulo() + ";");
+    		for(Docente autor: pub.getAutores().values()) {
+    			outfile.write(autor.getNome() + ",");
+    		}
+    		outfile.write("\n");
+    	}
+    	outfile.close();
     }
     
     @Override

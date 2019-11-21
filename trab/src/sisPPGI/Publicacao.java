@@ -13,6 +13,7 @@ public class Publicacao implements Serializable {
     private int ano;
     private String titulo;
     private int numero;
+    private Veiculo veiculo;
     private String local;
     private int paginaIni;
     private int paginaFim;
@@ -20,7 +21,7 @@ public class Publicacao implements Serializable {
     private HashMap<Long, Docente> autores;
 
     public Publicacao(int ano, String titulo, int numero, int volume, String local, int paginaIni, int paginaFim,
-            HashMap<Long, Docente> autores) {
+            HashMap<Long, Docente> autores, Veiculo veiculo) {
         this.ano = ano;
         this.titulo = titulo;
         this.numero = numero;
@@ -29,6 +30,7 @@ public class Publicacao implements Serializable {
         this.paginaFim = paginaFim;
         this.autores = autores;
         this.volume = volume;
+        this.veiculo = veiculo;
     }
 
     /**
@@ -143,7 +145,21 @@ public class Publicacao implements Serializable {
     	this.volume = volume;
     }
 
-    @Override
+    /**
+	 * @return the veiculo
+	 */
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	/**
+	 * @param veiculo the veiculo to set
+	 */
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	@Override
     public String toString() {
         return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local="
                 + this.local + ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores="
