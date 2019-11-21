@@ -286,15 +286,11 @@ public class Sistema implements Serializable {
         }
     }
     
-    public void analisar(int ano) {
-    	Regra regra = this.regras.get(ano);
-    	if(regra == null) {
-    		//não tem regra com esse ano
-    		return;
-    	}
-    	
-    }
-    
+    /**
+     * Imprime as publicações no arquivo
+     * 
+     * @throws IOException Quando não consegue abrir um arquivo para escrever
+     */
     public void imprimirPublicacoes() throws IOException {
     	FileWriter outfile = new FileWriter("2-publicacoes.csv");
     	outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
