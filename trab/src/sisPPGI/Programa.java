@@ -105,7 +105,8 @@ public class Programa {
 
             if ((!readOnly && !excecao) || (writeOnly && !excecao)) {
                 try {
-                	ppgi.imprimirPublicacoes();
+                    ppgi.imprimirPublicacoes();
+                    ppgi.imprimirEstatisticas();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

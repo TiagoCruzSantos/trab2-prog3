@@ -322,6 +322,7 @@ public class Sistema implements Serializable {
     public void imprimirEstatisticas() throws IOException {
     	FileWriter outfile = new FileWriter("3-estatisticas.csv");
     	outfile.write("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
+
     	HashMap<String, ArrayList<Publicacao>> pubsPorQualis = new HashMap<String, ArrayList<Publicacao>>();
     	for(Classificacoes cl : Classificacoes.values()) {
     		pubsPorQualis.put(cl.getClassi(), new ArrayList<Publicacao>());
@@ -329,7 +330,19 @@ public class Sistema implements Serializable {
     	for(Publicacao pub : this.publicacoes) {
     		ArrayList<Publicacao> arrayAtual = pubsPorQualis.get(pub.getVeiculo().getQualisAno(pub.getAno()).getNivel());
     		arrayAtual.add(pub);
-    	}
+        }
+        for(Classificacoes cl : Classificacoes.values()){
+            int qtdPubsQualis = pubsPorQualis.get(cl.getClassi()).size();
+            double qtdAutores = 0;
+            double umSobre = 0;
+            for(Publicacao publicacao: pubsPorQualis.get(cl.getClassi())){
+                qtdAutores += publicacao.getAutores().size();
+                umSobre += (double) 1 / (double) publicacao.getAutores().size();
+            }
+            // double mediaArtAut = qtdAutores/qtdPubsQualis;
+            outfile.write(cl.getClassi() + ";" + qtdPubsQualis + ";" + String.format("%.2f",umSobre).replace('.',',') + "\n");
+        }
+        outfile.close();
     }
     
     @Override
