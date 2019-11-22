@@ -1,9 +1,13 @@
 package sisPPGI;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
@@ -94,18 +98,17 @@ public class Programa {
                 break;
             }
         }
-
-        if (args.length > 0 && !houveExcecao) {
-            try {
+        if(!houveExcecao && !writeOnly){
+            try{
                 ppgi.carregaArquivoArquivoDocentes(docentes);
                 ppgi.carregaArquivoVeiculos(veiculos);
                 ppgi.carregaArquivoPublicacao(publicacoes);
                 ppgi.carregaArquivoQualis(qualis);
                 ppgi.carregaArquivoRegra(regras);
-            } catch (CodigoRepetidoDocente e1) {
+            }catch(CodigoRepetidoDocente e1){
                 System.out.println(e1.getMessage());
                 houveExcecao = true;
-            } catch (SiglaVeiculoRepetido e2) {
+            }catch (SiglaVeiculoRepetido e2) {
                 System.out.println(e2.getMessage());
                 houveExcecao = true;
             /*
@@ -129,16 +132,38 @@ public class Programa {
                 houveExcecao = true;
             */
             }
-
-            if ((!readOnly && !houveExcecao) || (writeOnly && !houveExcecao)) {
-                try {
-                    ppgi.imprimirPublicacoes();
-                    ppgi.imprimirEstatisticas();
-                    ppgi.imprimirRecredenciamento(ano);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        }
+        if(!writeOnly && readOnly && !houveExcecao){
+        	try {
+        		FileOutputStream readOnlyDat = new FileOutputStream("recredenciamento.dat");
+            	ObjectOutputStream dat = new ObjectOutputStream(readOnlyDat);
+                dat.writeObject(ppgi);
+                dat.writeObject(ano);
+                dat.close();
+        	}catch(Exception e) {
+        		e.printStackTrace();
+        	}
+        }
+        if(writeOnly && !houveExcecao){
+        	try {
+	            FileInputStream writeOnlyDat = new FileInputStream("recredenciamento.dat");
+	            ObjectInputStream dat = new ObjectInputStream(writeOnlyDat);
+	            ppgi = (Sistema) dat.readObject();
+	            ano = (Integer) dat.readObject();
+	            dat.close();
+        	}catch(Exception e) {
+        		e.printStackTrace();
+        	}
+        }
+        if((writeOnly || !readOnly) && !houveExcecao) {
+        	try {
+				ppgi.imprimirEstatisticas();
+				ppgi.imprimirPublicacoes();
+				ppgi.imprimirRecredenciamento(ano);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        	
         }
     }
 }

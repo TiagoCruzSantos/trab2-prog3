@@ -369,7 +369,6 @@ public class Sistema implements Serializable {
             qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
             if (itVeiculo instanceof Periodico) {
                 ((Periodico) itVeiculo).setMultiplicador(multiDaRegra);
-                ;
             }
         }
     }
