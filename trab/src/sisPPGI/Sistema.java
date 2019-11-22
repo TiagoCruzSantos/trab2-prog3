@@ -4,8 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoRepetidoDocente;
@@ -366,6 +368,23 @@ public class Sistema implements Serializable {
     	FileWriter outfile = new FileWriter("1-recredenciamento.csv");
     	outfile.write("Docente;Pontuação;Recredenciado?\n");
     	this.aplicarRegra(ano);
+    	ArrayList<Docente> docentes = new ArrayList<Docente>(this.docentesCadastrados.values());
+    	Collections.sort(docentes);
+    	for(Docente docente: docentes) {
+    		double ponto = docente.calculaPontuacao(ano, this.regras.get(ano).getAnosConsiderados());
+    		outfile.write(docente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
+    		if(docente.isCoordenador()) {
+    			outfile.write("Coordenador\n");
+    		}else if(ano - docente.getAnoIngresso() < 3) {
+    			outfile.write("PPJ\n");
+    		}else if(docente.getIdade(ano) > 60) {
+    			outfile.write("PPS\n");
+    		}else if(ponto >= this.regras.get(ano).getPontoMinimo()) {
+    			outfile.write("Sim\n");
+    		}else {
+    			outfile.write("Não\n");
+    		}
+    	}
     	outfile.close();
     }
     

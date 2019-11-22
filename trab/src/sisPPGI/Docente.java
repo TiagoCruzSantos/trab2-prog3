@@ -2,6 +2,7 @@ package sisPPGI;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -10,7 +11,7 @@ import java.util.GregorianCalendar;
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
  */
-public class Docente implements Serializable {
+public class Docente implements Serializable, Comparable<Docente> {
 
     private long codigo;
     private String nome;
@@ -164,12 +165,33 @@ public class Docente implements Serializable {
      * @param regra Regra vigente
      * @return Pontuação do docente
      */
-    public double calculaPontuacao() {
+    public double calculaPontuacao(int ano, int range) {
     	int ponto = 0;
     	for(Publicacao pub : this.publicacoes) {
-    		ponto += pub.getVeiculo().getQualis().get(pub.getAno()).getPontuacao();
+    		if((pub.getAno() <= ano &&  pub.getAno() >= ano - range)) {
+    			System.out.println(pub.getAno());
+	    		Veiculo veic = pub.getVeiculo();
+	    		if(veic instanceof Periodico) {
+	    			ponto += veic.getQualisAno(ano).getPontuacao() * ((Periodico) veic).getMultiplicador();
+	    		}else {
+	    			ponto += veic.getQualisAno(ano).getPontuacao();
+	    		}
+    		}
     	}
     	return ponto;
+    }
+    
+    public int getAnoNascimento() {
+    	return this.dataNascimento.get(Calendar.YEAR);
+    }
+    
+    public int getIdade(int ano) {
+    	GregorianCalendar dataHj = new GregorianCalendar();
+    	return ano - this.getAnoNascimento();
+    }
+    
+    public int getAnoIngresso() {
+    	return this.dataIngresso.get(Calendar.YEAR);
     }
     
     @Override
@@ -178,5 +200,10 @@ public class Docente implements Serializable {
                 + this.dataNascimento.getTime() + ", dataIngresso=" + this.dataIngresso.getTime() + ", coordenador="
                 + this.coordenador + ", publicacoes=" + this.publicacoes + "]\n";
     }
+
+	@Override
+	public int compareTo(Docente o) {
+		return this.nome.compareTo(o.getNome());
+	}
 
 }
