@@ -107,18 +107,18 @@ public abstract class Veiculo implements Serializable {
     }
 
     public Qualis getQualisAno(int ano) {
-        Qualis qualis = this.getQualis().get(ano);
-        if (qualis == null) {
-            for (Qualis qua : this.getQualis().values()) {
-                if (qua.getAno() < ano) {
-                    if (qualis == null) {
-                        qualis = qua;
-                    } else if (qualis.getAno() < qua.getAno()) {
-                        qualis = qua;
+        Qualis qualisAno = this.getQualis().get(ano);
+        if (qualisAno == null) {
+            for (Qualis itQualis : this.getQualis().values()) {
+                if (itQualis.getAno() < ano) {
+                    if (qualisAno == null) {
+                        qualisAno = itQualis;
+                    } else if (qualisAno.getAno() < itQualis.getAno()) {
+                        qualisAno = itQualis;
                     }
                 }
             }
         }
-        return qualis;
+        return qualisAno;
     }
 }

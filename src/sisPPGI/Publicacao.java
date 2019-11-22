@@ -23,15 +23,15 @@ public class Publicacao implements Serializable, Comparable<Publicacao> {
     /**
      * Cria uma nova publicação.
      *
-     * @param ano Ano de publicação.
-     * @param titulo Titulo da publicação.
-     * @param numero Número da publicação.
-     * @param volume Volume da publicação.
-     * @param local Local da publicação.
+     * @param ano       Ano de publicação.
+     * @param titulo    Título da publicação.
+     * @param numero    Número da publicação.
+     * @param volume    Volume da publicação.
+     * @param local     Local da publicação.
      * @param paginaIni Página inicial.
      * @param paginaFim Página Final.
-     * @param autores Autores da publicação.
-     * @param veiculo Veiculo em que a publicação foi publicada.
+     * @param autores   Autores da publicação.
+     * @param veiculo   Veiculo em que a publicação foi publicada.
      */
     public Publicacao(int ano, String titulo, int numero, int volume, String local, int paginaIni, int paginaFim,
             HashMap<Long, Docente> autores, Veiculo veiculo) {
@@ -148,59 +148,63 @@ public class Publicacao implements Serializable, Comparable<Publicacao> {
      * @return Volume da publicação.
      */
     public int getVolume() {
-    	return volume;
+        return volume;
     }
 
     /**
      * @param volume Volume da publicação.
      */
     public void setVolume(int volume) {
-    	this.volume = volume;
+        this.volume = volume;
     }
 
     /**
-	 * @return the veiculo.
-	 */
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
+     * @return O veículo.
+     */
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
 
-	/**
-	 * @param veiculo the veiculo to set.
-	 */
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
+    /**
+     * @param veiculo O veículo.
+     */
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
 
-	@Override
-	public int compareTo(Publicacao o){
-        if(this.veiculo.getQualisAno(this.ano).getNivel().compareTo(o.veiculo.getQualisAno(o.getAno()).getNivel()) < 0){
-        	return -1;
-        }else if(this.veiculo.getQualisAno(this.ano).getNivel().compareTo(o.veiculo.getQualisAno(o.getAno()).getNivel()) == 0){
-        	if(this.ano > o.getAno()) {
-        		return -1;
-        	}else if(this.ano == o.getAno()){
-        		if(this.veiculo.getSigla().compareTo(o.getVeiculo().getSigla()) < 0) {
-        			return -1;
-        		}else if(this.veiculo.getSigla().compareTo(o.getVeiculo().getSigla()) == 0) {
-        			return this.titulo.compareTo(o.getTitulo());
-        		}else {
-        			return 1;
-        		}
-        	}else{
+    @Override
+    public int compareTo(Publicacao pub) {
+        // Ordena por nível Qualis do veículo primeiramente
+        if (this.veiculo.getQualisAno(this.ano).getNivel()
+                .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) < 0) {
+            return -1;
+        } else if (this.veiculo.getQualisAno(this.ano).getNivel()
+        .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) == 0) {
+            // Em caso de empate, ordena por ano de publicação
+            if (this.ano > pub.getAno()) {
+                return -1;
+            } else if (this.ano == pub.getAno()) {
+                // Em caso de empate, ordena por sigla do veículo
+                if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) < 0) {
+                    return -1;
+                } else if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) == 0) {
+                    // EM caso de empate, ordena por ordem alfabética de título
+                    return this.titulo.compareTo(pub.getTitulo());
+                } else {
+                    return 1;
+                }
+            } else {
                 return 1;
             }
-        }else {
-        	return 1;
+        } else {
+            return 1;
         }
     }
 
-	@Override
+    @Override
     public String toString() {
         return "Publicacao [ano=" + this.ano + ", titulo=" + this.titulo + ", numero=" + this.numero + ", local="
                 + this.local + ", paginaIni=" + this.paginaIni + ", paginaFim=" + this.paginaFim + ", autores="
                 + this.autores + "]\n";
     }
-
-
 }

@@ -23,17 +23,17 @@ public class Regra implements Serializable {
     /**
      * Cria uma nova regra.
      *
-     * @param dataIni          Data de inicio de vigência da regra em.
+     * @param dataIni          Data de inicio de vigência da regra em
      *                         {@code GregorianCalendar}.
-     * @param dataFim          Data do fim da vigência da regra em.
+     * @param dataFim          Data do fim da vigência da regra em
      *                         {@code GregorianCalendar}.
-     * @param pontoMinimo      Pontuação mínima que um docente deve alcançar para se.
+     * @param pontoMinimo      Pontuação mínima que um docente deve alcançar para se
      *                         manter credenciado ao programa.
-     * @param anosConsiderados Quantos anos devem ser considerados ao analisar as.
+     * @param anosConsiderados Quantos anos devem ser considerados ao analisar as
      *                         publicações de um docente.
-     * @param multiplicador    Multiplicador das publicações feitas em Periódicos.
+     * @param multiplicador    Multiplicador das publicações feitas em Periódicos
      * @param qualis           Pontuação dos qualis.
-     * @deprecated Use {@link #Regra(String, String, int, int, double, ArrayList)}.
+     * @deprecated Use {@link #Regra(String, String, int, int, double, ArrayList)}
      *             em vez deste.
      */
     public Regra(GregorianCalendar dataIni, GregorianCalendar dataFim, int pontoMinimo, int anosConsiderados,
@@ -49,13 +49,13 @@ public class Regra implements Serializable {
     /**
      * Cria uma nova regra.
      *
-     * @param dataIni          Data de início de vigência da regra no formato.
+     * @param dataIni          Data de início de vigência da regra no formato
      *                         "dd/mm/aaaa"
-     * @param dataFim          Data do fim da vigência da regra no formato.
+     * @param dataFim          Data do fim da vigência da regra no formato
      *                         "dd/mm/aaaa"
-     * @param pontoMinimo      Pontuação mínima que um docente deve alcançar para se.
+     * @param pontoMinimo      Pontuação mínima que um docente deve alcançar para se
      *                         manter credenciado ao programa.
-     * @param anosConsiderados Quantos anos devem ser considerados ao analisar as.
+     * @param anosConsiderados Quantos anos devem ser considerados ao analisar as
      *                         publicações de um docente.
      * @param multiplicador    Multiplicador das publicações feitas em Periódicos.
      * @param qualis           Pontuação dos Qualis.
@@ -111,7 +111,7 @@ public class Regra implements Serializable {
     }
 
     /**
-     * @return Pontuação mínima que um docente deve alcançar para se manter.
+     * @return Pontuação mínima que um docente deve alcançar para se manter
      *         credenciado ao programa.
      */
     public double getPontoMinimo() {
@@ -119,7 +119,7 @@ public class Regra implements Serializable {
     }
 
     /**
-     * @param pontoMinimo Pontuação mínima que um docente deve alcançar para se.
+     * @param pontoMinimo Pontuação mínima que um docente deve alcançar para se
      *                    manter credenciado ao programa.
      */
     public void setPontoMinimo(int pontoMinimo) {
@@ -134,7 +134,7 @@ public class Regra implements Serializable {
     }
 
     /**
-     * @param anosConsiderados Anos considerados ao analisar as publicações de um.
+     * @param anosConsiderados Anos considerados ao analisar as publicações de um
      *                         docente.
      */
     public void setAnosConsiderados(int anosConsiderados) {

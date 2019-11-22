@@ -64,7 +64,7 @@ public class Sistema implements Serializable {
      * @throws CodigoRepetidoDocente se um código de um docente lido já estiver
      *                               cadastrado.
      */
-    public void carregaDocentes(Scanner infile) throws CodigoRepetidoDocente {
+    public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente {
         infile.nextLine();
         infile.useDelimiter(";");
         long codigo;
@@ -122,7 +122,7 @@ public class Sistema implements Serializable {
      * @throws SiglaVeiculoRepetido Erro gerado quando veículo a ser inserido já
      *                              tiver sigla existente.
      */
-    public void carregaVeiculos(Scanner infile) throws SiglaVeiculoRepetido {
+    public void carregaArquivoVeiculos(Scanner infile) throws SiglaVeiculoRepetido {
         infile.nextLine();
         infile.useDelimiter(";");
         String sigla;
@@ -153,7 +153,7 @@ public class Sistema implements Serializable {
                 infile.nextLine();
                 this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
             } else {
-                // erro
+                // erro ava e memo Eb neezer
             }
             // System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto +
             // "][" + issn + ']');
@@ -166,7 +166,7 @@ public class Sistema implements Serializable {
      *
      * @param infile Arquivo das publicações carregadas em um Scanner.
      */
-    public void carregaPublicacao(Scanner infile) {
+    public void carregaArquivoPublicacao(Scanner infile) {
         infile.useDelimiter(";");
         infile.nextLine();
         int ano;
@@ -200,16 +200,16 @@ public class Sistema implements Serializable {
             paginaIni = infile.nextInt();
             paginaFim = Integer.parseInt(infile.nextLine().split(";")[1]);
 
-            for (String aut : autores) {
-                long cod = Long.parseLong(aut.replaceAll("\\s+", ""));
+            for (String itAutores : autores) {
+                long cod = Long.parseLong(itAutores.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
                 autoresObj.put(cod, doc);
             }
 
             Veiculo veic = this.veiculos.get(veiculo);
             Publicacao pub = new Publicacao(ano, nome, numero, volume, local, paginaIni, paginaFim, autoresObj, veic);
-            for (String aut : autores) {
-                long cod = Long.parseLong(aut.replaceAll("\\s+", ""));
+            for (String itAutores : autores) {
+                long cod = Long.parseLong(itAutores.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
                 doc.adicionarPublicacao(pub);
             }
@@ -223,7 +223,7 @@ public class Sistema implements Serializable {
      *
      * @param infile Arquivo aberto de qualis.
      */
-    public void carregaQualis(Scanner infile) {
+    public void carregaArquivoQualis(Scanner infile) {
         infile.useDelimiter(";");
         infile.nextLine();
         int ano;
@@ -247,7 +247,7 @@ public class Sistema implements Serializable {
      *
      * @param infile Arquivo de regras aberto.
      */
-    public void carregaRegra(Scanner infile) {
+    public void carregaArquivoRegra(Scanner infile) {
         infile.useDelimiter(";");
         infile.nextLine();
         String dataIni;
@@ -268,25 +268,23 @@ public class Sistema implements Serializable {
             pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
 
             /*
-            System.out.print("[" + dataIni + "][" + dataFim + "][");
-
-            for (String nivel : niveis) {
-                System.out.print(nivel + "][");
-            }
-
-            for (String ponto : pontos) {
-                System.out.print(Integer.parseInt(ponto) + "][");
-            }
-            */
+             * System.out.print("[" + dataIni + "][" + dataFim + "][");
+             *
+             * for (String nivel : niveis) { System.out.print(nivel + "]["); }
+             *
+             * for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
+             * "]["); }
+             */
 
             int count = 0;
 
-            for (Classificacoes cl : Classificacoes.values()) {
-                if (cl.getClassi().compareTo(niveis[count]) == 0) {
-                    qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count])));
+            for (Classificacoes itCl : Classificacoes.values()) {
+                if (itCl.getClassi().compareTo(niveis[count]) == 0) {
+                    qualificacoes.put(itCl.getClassi(), new Qualis(itCl.getClassi(), Integer.parseInt(pontos[count])));
                     count++;
                 } else {
-                    qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count - 1])));
+                    qualificacoes.put(itCl.getClassi(),
+                            new Qualis(itCl.getClassi(), Integer.parseInt(pontos[count - 1])));
                 }
             }
 
@@ -305,19 +303,20 @@ public class Sistema implements Serializable {
         FileWriter outfile = new FileWriter("2-publicacoes.csv");
         outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
         Collections.sort(this.publicacoes);
-        for (Publicacao pub : this.publicacoes) {
-            Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
-            outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";"
-                    + qualis.getNivel() + ";" + String.format("%.3f", pub.getVeiculo().getImpacto()).replace('.', ',')
-                    + ";" + pub.getTitulo() + ";");
+        for (Publicacao itPub : this.publicacoes) {
+            Qualis qualis = itPub.getVeiculo().getQualisAno(itPub.getAno());
+            outfile.write(itPub.getAno() + ";" + itPub.getVeiculo().getSigla() + ";" + itPub.getVeiculo().getNome()
+                    + ";" + qualis.getNivel() + ";"
+                    + String.format("%.3f", itPub.getVeiculo().getImpacto()).replace('.', ',') + ";" + itPub.getTitulo()
+                    + ";");
             int i = 0;
-            int size = pub.getAutores().values().size() - 1;
-            for (Docente autor : pub.getAutores().values()) {
+            int size = itPub.getAutores().values().size() - 1;
+            for (Docente itAutor : itPub.getAutores().values()) {
                 if (i++ == size) {
-                    outfile.write(autor.getNome());
+                    outfile.write(itAutor.getNome());
                     break;
                 } else {
-                    outfile.write(autor.getNome() + ",");
+                    outfile.write(itAutor.getNome() + ",");
                 }
             }
             outfile.write("\n");
@@ -326,34 +325,33 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Imprime as estatisticas dos qualis.
+     * Imprime as estatísticas dos Qualis.
      *
-     * @throws IOException Quando não for possivel abrir o arquivo para escrita.
+     * @throws IOException Quando não for possível abrir o arquivo para escrita.
      */
     public void imprimirEstatisticas() throws IOException {
         FileWriter outfile = new FileWriter("3-estatisticas.csv");
         outfile.write("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
 
         HashMap<String, ArrayList<Publicacao>> pubsPorQualis = new HashMap<String, ArrayList<Publicacao>>();
-        for (Classificacoes cl : Classificacoes.values()) {
-            pubsPorQualis.put(cl.getClassi(), new ArrayList<Publicacao>());
+        for (Classificacoes itCl : Classificacoes.values()) {
+            pubsPorQualis.put(itCl.getClassi(), new ArrayList<Publicacao>());
         }
-        for (Publicacao pub : this.publicacoes) {
+        for (Publicacao itPub : this.publicacoes) {
             ArrayList<Publicacao> arrayAtual = pubsPorQualis
-                    .get(pub.getVeiculo().getQualisAno(pub.getAno()).getNivel());
-            arrayAtual.add(pub);
+                    .get(itPub.getVeiculo().getQualisAno(itPub.getAno()).getNivel());
+            arrayAtual.add(itPub);
         }
-        for (Classificacoes cl : Classificacoes.values()) {
-            int qtdPubsQualis = pubsPorQualis.get(cl.getClassi()).size();
-            double qtdAutores = 0;
-            double umSobre = 0;
-            for (Publicacao publicacao : pubsPorQualis.get(cl.getClassi())) {
-                qtdAutores += publicacao.getAutores().size();
-                umSobre += (double) 1 / (double) publicacao.getAutores().size();
+        for (Classificacoes itCl : Classificacoes.values()) {
+            int qtdPubsQualis = pubsPorQualis.get(itCl.getClassi()).size();
+
+            double mediaAutoresArtigo = 0;
+            for (Publicacao itPub : pubsPorQualis.get(itCl.getClassi())) {
+                mediaAutoresArtigo += (double) 1 / (double) itPub.getAutores().size();
             }
-            // double mediaArtAut = qtdAutores/qtdPubsQualis;
-            outfile.write(cl.getClassi() + ";" + qtdPubsQualis + ";" + String.format("%.2f", umSobre).replace('.', ',')
-                    + "\n");
+
+            outfile.write(itCl.getClassi() + ";" + qtdPubsQualis + ";"
+                    + String.format("%.2f", mediaAutoresArtigo).replace('.', ',') + "\n");
         }
         outfile.close();
     }
@@ -366,30 +364,35 @@ public class Sistema implements Serializable {
     public void aplicarRegra(int ano) {
         HashMap<String, Qualis> qualisDoAno = this.regras.get(ano).getQualis();
         double multiDaRegra = this.regras.get(ano).getMultiplicador();
-        for (Veiculo veic : this.veiculos.values()) {
-            Qualis qualis = veic.getQualisAno(ano);
+        for (Veiculo itVeiculo : this.veiculos.values()) {
+            Qualis qualis = itVeiculo.getQualisAno(ano);
             qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
-            if (veic instanceof Periodico) {
-                ((Periodico) veic).setMultiplicador(multiDaRegra);
+            if (itVeiculo instanceof Periodico) {
+                ((Periodico) itVeiculo).setMultiplicador(multiDaRegra);
                 ;
             }
         }
     }
 
+    /**
+     * Faz o recredenciamento de docentes no ano passado como parâmetro.
+     *
+     * @param ano Ano para recredenciamento.
+     */
     public void imprimirRecredenciamento(int ano) throws IOException {
         FileWriter outfile = new FileWriter("1-recredenciamento.csv");
         outfile.write("Docente;Pontuação;Recredenciado?\n");
         this.aplicarRegra(ano);
         ArrayList<Docente> docentes = new ArrayList<Docente>(this.docentesCadastrados.values());
         Collections.sort(docentes);
-        for (Docente docente : docentes) {
-            double ponto = docente.calculaPontuacao(ano, this.regras.get(ano).getAnosConsiderados());
-            outfile.write(docente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
-            if (docente.isCoordenador()) {
+        for (Docente itDocente : docentes) {
+            double ponto = itDocente.calculaPontuacao(ano, this.regras.get(ano).getAnosConsiderados());
+            outfile.write(itDocente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
+            if (itDocente.isCoordenador()) {
                 outfile.write("Coordenador\n");
-            } else if (ano - docente.getAnoIngresso() < 3) {
+            } else if (ano - itDocente.getAnoIngresso() < 3) {
                 outfile.write("PPJ\n");
-            } else if (docente.getIdade(ano) > 60) {
+            } else if (itDocente.getIdade(ano) > 60) {
                 outfile.write("PPS\n");
             } else if (ponto >= this.regras.get(ano).getPontoMinimo()) {
                 outfile.write("Sim\n");

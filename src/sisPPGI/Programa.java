@@ -97,11 +97,11 @@ public class Programa {
 
         if (args.length > 0 && !houveExcecao) {
             try {
-                ppgi.carregaDocentes(docentes);
-                ppgi.carregaVeiculos(veiculos);
-                ppgi.carregaPublicacao(publicacoes);
-                ppgi.carregaQualis(qualis);
-                ppgi.carregaRegra(regras);
+                ppgi.carregaArquivoArquivoDocentes(docentes);
+                ppgi.carregaArquivoVeiculos(veiculos);
+                ppgi.carregaArquivoPublicacao(publicacoes);
+                ppgi.carregaArquivoQualis(qualis);
+                ppgi.carregaArquivoRegra(regras);
             } catch (CodigoRepetidoDocente e1) {
                 System.out.println(e1.getMessage());
                 houveExcecao = true;
