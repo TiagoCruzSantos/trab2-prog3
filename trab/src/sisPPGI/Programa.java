@@ -17,7 +17,7 @@ public class Programa {
         Scanner veiculos = null;
         Scanner publicacoes = null;
         Scanner regras = null;
-        int ano;
+        int ano = 0;
         boolean readOnly = false;
         boolean writeOnly = false;
         boolean excecao = false;
@@ -107,6 +107,7 @@ public class Programa {
                 try {
                     ppgi.imprimirPublicacoes();
                     ppgi.imprimirEstatisticas();
+                    ppgi.imprimirRecredenciamento(ano);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

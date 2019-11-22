@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Qualis implements Serializable {
     private String nivel;
     private int ano;
-    private double pontuacao;
+    private int pontuacao;
     
     /**
      * Cria um novo qualis
@@ -29,7 +29,7 @@ public class Qualis implements Serializable {
      * @param nivel NIvel do qualis
      * @param ponto Pontuação
      */
-    public Qualis(String nivel, double ponto) {
+    public Qualis(String nivel, int ponto) {
         this.nivel = nivel;
         this.pontuacao = ponto;
     }
@@ -51,14 +51,14 @@ public class Qualis implements Serializable {
     /**
      * @return Pontuação do nível deste qualis
      */
-    public double getPontuacao() {
+    public int getPontuacao() {
         return pontuacao;
     }
 
     /**
      * @param pontuacao Pontuação em {@code double} do nível do qualis a armazenar
      */
-    public void setPontuacao(double pontuacao) {
+    public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
     }
 

@@ -164,9 +164,12 @@ public class Docente implements Serializable {
      * @param regra Regra vigente
      * @return Pontuação do docente
      */
-    public double calculaPontuacao(Regra regra) {
-    	
-    	return 0;
+    public double calculaPontuacao() {
+    	int ponto = 0;
+    	for(Publicacao pub : this.publicacoes) {
+    		ponto += pub.getVeiculo().getQualis().get(pub.getAno()).getPontuacao();
+    	}
+    	return ponto;
     }
     
     @Override

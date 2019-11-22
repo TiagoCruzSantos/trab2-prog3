@@ -252,7 +252,7 @@ public class Sistema implements Serializable {
         double multiplicador;
         int anos;
         int pontoMinimo;
-        ArrayList<Qualis> qualificacoes = new ArrayList<Qualis>();
+        HashMap<String, Qualis> qualificacoes = new HashMap<String, Qualis>();
         while (infile.hasNext()) {
             dataIni = infile.next();
             dataFim = infile.next();
@@ -276,10 +276,10 @@ public class Sistema implements Serializable {
 
             for (Classificacoes cl : Classificacoes.values()){
                 if(cl.getClassi().compareTo(niveis[count]) == 0){
-                    qualificacoes.add(new Qualis(cl.getClassi(), Integer.parseInt(pontos[count])));
+                    qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count])));
                     count++;
                 }else{
-                    qualificacoes.add(new Qualis(cl.getClassi(), Integer.parseInt(pontos[count - 1])));
+                    qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count - 1])));
                 }
             }
 
@@ -316,8 +316,9 @@ public class Sistema implements Serializable {
     	outfile.close();
     }
     /**
-     * WIP
-     * @throws IOException
+     * Imprime as estatisticas dos qualis
+     * 
+     * @throws IOException Quando não for possivel abrir o arquivo para escrita
      */
     public void imprimirEstatisticas() throws IOException {
     	FileWriter outfile = new FileWriter("3-estatisticas.csv");
@@ -343,6 +344,29 @@ public class Sistema implements Serializable {
             outfile.write(cl.getClassi() + ";" + qtdPubsQualis + ";" + String.format("%.2f",umSobre).replace('.',',') + "\n");
         }
         outfile.close();
+    }
+    /**
+     * Aplica a regra relacionada ao ano de vigência
+     * 
+     * @param ano Ano de vigência de uma regra
+     */
+    public void aplicarRegra(int ano) {
+    	HashMap<String, Qualis> qualisDoAno = this.regras.get(ano).getQualis();
+    	double multiDaRegra = this.regras.get(ano).getMultiplicador();
+    	for(Veiculo veic : this.veiculos.values()) {
+    		Qualis qualis = veic.getQualisAno(ano);
+    		qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
+    		if(veic instanceof Periodico) {
+    			((Periodico) veic).setMultiplicador(multiDaRegra);;
+    		}
+    	}
+    }
+    
+    public void imprimirRecredenciamento(int ano) throws IOException {
+    	FileWriter outfile = new FileWriter("1-recredenciamento.csv");
+    	outfile.write("Docente;Pontuação;Recredenciado?\n");
+    	this.aplicarRegra(ano);
+    	outfile.close();
     }
     
     @Override

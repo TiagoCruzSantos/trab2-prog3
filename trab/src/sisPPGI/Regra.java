@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 /**
  * Classe de representação de uma regra
@@ -17,7 +18,7 @@ public class Regra implements Serializable {
     private int pontoMinimo;
     private int anosConsiderados;
     private double multiplicador;
-    private ArrayList<Qualis> qualis;
+    private HashMap<String, Qualis> qualis;
 
     /**
      * Cria uma nova regra
@@ -31,7 +32,7 @@ public class Regra implements Serializable {
      * @deprecated Use {@link #Regra(String, String, int, int, double, ArrayList)} ao inves desse
      */
     public Regra(GregorianCalendar dataIni, GregorianCalendar dataFim, int pontoMinimo, int anosConsiderados,
-            double multiplicador, ArrayList<Qualis> qualis) {
+            double multiplicador, HashMap<String, Qualis> qualis) {
         this.dataIni = dataIni;
         this.dataFim = dataFim;
         this.pontoMinimo = pontoMinimo;
@@ -50,7 +51,7 @@ public class Regra implements Serializable {
      * @param qualis Pontuação dos qualis
      */
     public Regra(String dataIni, String dataFim, int pontoMinimo, int anosConsiderados, double multiplicador,
-            ArrayList<Qualis> qualis) {
+    		HashMap<String, Qualis> qualis) {
         String[] dataIniSplit = dataIni.split("/");
         String[] dataFimSplit = dataFim.split("/");
         this.dataIni = new GregorianCalendar(Integer.parseInt(dataIniSplit[2]),
@@ -146,14 +147,14 @@ public class Regra implements Serializable {
     /**
      * @return Lista de qualis da regra
      */
-    public ArrayList<Qualis> getQualis() {
+    public HashMap<String, Qualis> getQualis() {
         return qualis;
     }
 
     /**
      * @param qualis Lista de qualis da regra
      */
-    public void setQualis(ArrayList<Qualis> qualis) {
+    public void setQualis(HashMap<String, Qualis> qualis) {
         this.qualis = qualis;
     }
     
