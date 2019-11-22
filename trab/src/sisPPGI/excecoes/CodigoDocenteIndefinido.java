@@ -16,5 +16,4 @@ public class CodigoDocenteIndefinido extends Exception {
     public CodigoDocenteIndefinido(String titulo, long codigo) {
         super("Código de docente não definido usado na publicação \"" + titulo + "\":" + codigo + ".");
     }
-
 }

@@ -1,7 +1,7 @@
 package sisPPGI.excecoes;
 
 /**
- * Excecao para quando o mesmo código for usado para dois docentes diferentes.
+ * Exceção para quando o mesmo código for usado para dois docentes diferentes.
  *
  * @author Tiago da Cruz Santos
  * @author Atílio Antônio Dadalto
