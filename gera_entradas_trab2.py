@@ -72,10 +72,9 @@ def gera_qualis(arquivoVeiculos):
     with open(f"{path}/qualis_python.csv", "w+", encoding="utf8") as file:
         file.write("Ano;Veículo;Qualis\n")
         veiculosCSV = pd.read_csv(f"{path}/{arquivoVeiculos}", sep=';')
-        for i in range(random.randrange(1, 10)):
-            print(i)
+        for i in range(random.randrange(1, 6)):
             for veiculo in veiculosCSV["Sigla"].tolist():
-                ano = 2010 + i
+                ano = 2013 + i
 
                 sigla = veiculo
 
@@ -90,7 +89,7 @@ def gera_regras():
             "Início Vigência;Fim Vigência;Qualis;Pontos;Multiplicador;Anos;Mínimo Pontos\n")
 
         nRegras = random.randrange(1, 10)
-        anos = list(range(2020 - nRegras, 2020))
+        anos = list(range(2017, 2019))
         for _ in range(nRegras):
             ano = anos.pop()
             file.write(f"01/01/{ano};31/12/{ano};")
@@ -126,7 +125,7 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
         file.write(
             "Ano;Veículo;Título;Autores;Número;Volume;Local;Página Inicial;Página Final\n")
         for i in range(nPublicacoes):
-            ano = random.randint(2010, 2019)
+            ano = random.randint(2013, 2016)
 
             veiculosCSV = pd.read_csv(f"{path}/{arquivoVeiculos}", sep=';')
             siglas = veiculosCSV["Sigla"].tolist()
@@ -142,10 +141,10 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
             veiculo = veiculosCSV[veiculosCSV['Sigla'] == sigla]
             tipoVeiculo = veiculo['Tipo'].values
 
-            # if tipoVeiculo == 'P':
-            volume = random.randint(1, 50)
-            # else:
-            #     volume = ''
+            if tipoVeiculo == 'P':
+                volume = random.randint(1, 50)
+            else:
+                volume = ''
 
             if tipoVeiculo == 'C':
                 local = fakezada.city()
@@ -161,7 +160,7 @@ def gera_publicacoes(arquivoVeiculos, arquivoDocentes, nPublicacoes):
             file.write(f"{ano};{sigla};{titulo};")
             for autor in autores:
                 if autor != autores[-1]:
-                    file.write(f"{autor}, ")
+                    file.write(f"{autor},")
                 else:
                     file.write(f"{autor};")
             file.write(

@@ -95,6 +95,67 @@ código-fonte.">
 		</delete>
 	</target>
 
+    <!-- Execução de entradas autorais -->
+    <target name="run_a1" depends="compile" description="Roda o programa com a entrada sem erros (1)">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/a1/docentes.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/a1/veiculos.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/a1/publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/a1/qualis.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/a1/regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+        <target name="run_a2" depends="compile" description="Roda o programa com a entrada com erro (2)">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/a2/docentes.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/a2/veiculos.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/a2/publicacoes.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/a2/qualis.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/a2/regras.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
+        <target name="run_p" depends="compile" description="Roda o programa com a entrada gerada automaticamente">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/python/docentes_python.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/python/veiculos_python.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/python/publicacoes_python.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/python/qualis_python.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/python/regras_python.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
+
     <!-- Execução de testes -->
     <!-- Erro 1-->
     <target name="run_e11" depends="compile" description="Roda o programa para a exceção 1.1">
