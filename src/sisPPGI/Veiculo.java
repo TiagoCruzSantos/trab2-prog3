@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Classe base para representação de Veiculo
+ * Classe base para representação de Veiculo.
  *
- * @author Tiago da Cruz Santos
- * @author Atílio Antônio Dadalto
+ * @author Tiago da Cruz Santos.
+ * @author Atílio Antônio Dadalto.
  */
 public abstract class Veiculo implements Serializable {
     protected String sigla;
@@ -18,11 +18,11 @@ public abstract class Veiculo implements Serializable {
     protected ArrayList<Publicacao> publicacoes;
 
     /**
-     * Construtor de um veículo para classes herdadas
+     * Construtor de um veículo para classes herdadas.
      *
-     * @param sigla   Sigla do veículo
-     * @param nome    Nome do veículo
-     * @param impacto Impacto em {@code double}
+     * @param sigla   Sigla do veículo.
+     * @param nome    Nome do veículo.
+     * @param impacto Impacto em {@code double}.
      */
     public Veiculo(String sigla, String nome, double impacto) {
         this.sigla = sigla;
@@ -33,92 +33,92 @@ public abstract class Veiculo implements Serializable {
     }
 
     /**
-     * @return Sigla do nome do veículo
+     * @return Sigla do nome do veículo.
      */
     public String getSigla() {
         return sigla;
     }
 
     /**
-     * @param sigla Sigla do nome do veículo
+     * @param sigla Sigla do nome do veículo.
      */
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
 
     /**
-     * @return Nome do veículo
+     * @return Nome do veículo.
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * @param nome Nome do veículo
+     * @param nome Nome do veículo.
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return Impacto do qualis
+     * @return Impacto do qualis.
      */
     public double getImpacto() {
         return impacto;
     }
 
     /**
-     * @param impacto Impacto do qualis
+     * @param impacto Impacto do qualis.
      */
     public void setImpacto(double impacto) {
         this.impacto = impacto;
     }
 
     /**
-     * @return Lista de publicações do veículo
+     * @return Lista de publicações do veículo.
      */
     public ArrayList<Publicacao> getPublicacoes() {
         return publicacoes;
     }
 
     /**
-     * @param publicacoes Lista de publicações do veículo
+     * @param publicacoes Lista de publicações do veículo.
      */
     public void setPublicacoes(ArrayList<Publicacao> publicacoes) {
         this.publicacoes = publicacoes;
     }
 
     /**
-     * @param pub Uma publicação
+     * @param pub Uma publicação.
      */
     public void adicionarPublicacao(Publicacao pub) {
         this.publicacoes.add(pub);
     }
 
     /**
-     * @param qualis Uma qualis
+     * @param qualis Uma qualis.
      */
     public void adicionarQualis(Qualis qualis) {
         this.qualis.put(qualis.getAno(), qualis);
     }
 
-    public HashMap<Integer, Qualis> getQualis(){
+    public HashMap<Integer, Qualis> getQualis() {
         return this.qualis;
     }
-    
+
     public Qualis getQualisAno(int ano) {
-    	Qualis qualis = this.getQualis().get(ano);
-		if(qualis == null) {
-			for(Qualis qua: this.getQualis().values()) {
-				if(qua.getAno() < ano) {
-					if(qualis == null) {
-						qualis = qua;
-					}else if(qualis.getAno() < qua.getAno()) {
-						qualis = qua;
-					}
-				}
-			}
-		}
-		return qualis;
+        Qualis qualis = this.getQualis().get(ano);
+        if (qualis == null) {
+            for (Qualis qua : this.getQualis().values()) {
+                if (qua.getAno() < ano) {
+                    if (qualis == null) {
+                        qualis = qua;
+                    } else if (qualis.getAno() < qua.getAno()) {
+                        qualis = qua;
+                    }
+                }
+            }
+        }
+        return qualis;
     }
 }

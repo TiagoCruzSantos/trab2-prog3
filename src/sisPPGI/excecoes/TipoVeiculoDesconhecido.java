@@ -4,8 +4,8 @@ package sisPPGI.excecoes;
  *
  * Exceção para quando o tipo de um veículo não é nem ‘C’ nem ‘P’.
  *
- * @author Tiago da Cruz Santos
- * @author Atílio Antônio Dadalto
+ * @author Tiago da Cruz Santos.
+ * @author Atílio Antônio Dadalto.
  */
 public class TipoVeiculoDesconhecido extends Exception {
     public TipoVeiculoDesconhecido(String sigla, String tipo, Throwable cause) {

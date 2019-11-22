@@ -28,15 +28,15 @@
 principal, em modo normal.">
 		<java classname="${mainClass}">
 			<arg value="-d" />
-			<arg value="docentes.csv" />
+			<arg value="testes/01/in/docentes.csv" />
 			<arg value="-v" />
-			<arg value="veiculos.csv" />
+			<arg value="testes/01/in/veiculos.csv" />
 			<arg value="-p" />
-			<arg value="publicacoes.csv" />
+			<arg value="testes/01/in/publicacoes.csv" />
 			<arg value="-q" />
-			<arg value="qualis.csv" />
+			<arg value="testes/01/in/qualis.csv" />
 			<arg value="-r" />
-			<arg value="regras.csv" />
+			<arg value="testes/01/in/regras.csv" />
 			<arg value="-a" />
 			<arg value="2017" />
 			<classpath>
@@ -50,15 +50,15 @@ principal, em modo normal.">
 programa principal, em modo somente leitura.">
 		<java classname="${mainClass}">
 			<arg value="-d" />
-			<arg value="docentes.csv" />
+			<arg value="testes/01/in/docentes.csv" />
 			<arg value="-v" />
-			<arg value="veiculos.csv" />
+			<arg value="testes/01/in/veiculos.csv" />
 			<arg value="-p" />
-			<arg value="publicacoes.csv" />
+			<arg value="testes/01/in/publicacoes.csv" />
 			<arg value="-q" />
-			<arg value="qualis.csv" />
+			<arg value="testes/01/in/qualis.csv" />
 			<arg value="-r" />
-			<arg value="regras.csv" />
+			<arg value="testes/01/in/regras.csv" />
 			<arg value="-a" />
 			<arg value="2017" />
 			<arg value="--read-only" />

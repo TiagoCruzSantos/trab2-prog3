@@ -6,8 +6,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
+import sisPPGI.excecoes.CodigoRepetidoVeiculo;
+import sisPPGI.excecoes.QualisDesconhecidoRegra;
+import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
+import sisPPGI.excecoes.SiglaIndefinida;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
 public class Programa {
     public static void main(String[] args) {
@@ -20,7 +26,7 @@ public class Programa {
         int ano = 0;
         boolean readOnly = false;
         boolean writeOnly = false;
-        boolean excecao = false;
+        boolean houveExcecao = false;
 
         for (int i = 0; i < args.length; i++) {
             String argAtual = args[i];
@@ -32,8 +38,8 @@ public class Programa {
                     i++;
                     break;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Arquivo de docentes não foi encontrado");
-                    excecao = true;
+                    System.out.println("Erro de I/O - Não foi possível abrir o arquivo de docentes.");
+                    houveExcecao = true;
                     break;
                 }
             case "-r":
@@ -42,8 +48,8 @@ public class Programa {
                     i++;
                     break;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Arquivo de regras não foi encontrado");
-                    excecao = true;
+                    System.out.println("Erro de I/O - Não foi possível abrir o arquivo de regras.");
+                    houveExcecao = true;
                     break;
                 }
             case "-q":
@@ -52,8 +58,8 @@ public class Programa {
                     i++;
                     break;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Arquivo de qualis não foi encontrado");
-                    excecao = true;
+                    System.out.println("Erro de I/O - Não foi possível abrir o arquivo de qualis.");
+                    houveExcecao = true;
                     break;
                 }
             case "-v":
@@ -62,8 +68,8 @@ public class Programa {
                     i++;
                     break;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Arquivo de veiculos não foi encontrado");
-                    excecao = true;
+                    System.out.println("Erro de I/O - Não foi possível abrir o arquivo de veículos.");
+                    houveExcecao = true;
                     break;
                 }
             case "-p":
@@ -72,8 +78,8 @@ public class Programa {
                     i++;
                     break;
                 } catch (FileNotFoundException e) {
-                    System.out.println("Arquivo de publicações não foi encontrado");
-                    excecao = true;
+                    System.out.println("Erro de I/O - Não foi possível abrir o arquivo de publicações.");
+                    houveExcecao = true;
                     break;
                 }
             case "-a":
@@ -88,7 +94,8 @@ public class Programa {
                 break;
             }
         }
-        if (args.length > 0 && !excecao) {
+
+        if (args.length > 0 && !houveExcecao) {
             try {
                 ppgi.carregaDocentes(docentes);
                 ppgi.carregaVeiculos(veiculos);
@@ -97,13 +104,33 @@ public class Programa {
                 ppgi.carregaRegra(regras);
             } catch (CodigoRepetidoDocente e1) {
                 System.out.println(e1.getMessage());
-                excecao = true;
+                houveExcecao = true;
             } catch (SiglaVeiculoRepetido e2) {
                 System.out.println(e2.getMessage());
-                excecao = true;
+                houveExcecao = true;
+            /*
+            } catch (CodigoDocenteIndefinido e3) {
+                System.out.println(e3.getMessage());
+                houveExcecao = true;
+            } catch (CodigoRepetidoVeiculo e4) {
+                System.out.println(e4.getMessage());
+                houveExcecao = true;
+            } catch (QualisDesconhecidoRegra e5) {
+                System.out.println(e5.getMessage());
+                houveExcecao = true;
+            } catch (QualisDesconhecidoVeiculo e6) {
+                System.out.println(e6.getMessage());
+                houveExcecao = true;
+            } catch (SiglaIndefinida e7) {
+                System.out.println(e7.getMessage());
+                houveExcecao = true;
+            } catch (TipoVeiculoDesconhecido e8) {
+                System.out.println(e8.getMessage());
+                houveExcecao = true;
+            */
             }
 
-            if ((!readOnly && !excecao) || (writeOnly && !excecao)) {
+            if ((!readOnly && !houveExcecao) || (writeOnly && !houveExcecao)) {
                 try {
                     ppgi.imprimirPublicacoes();
                     ppgi.imprimirEstatisticas();
@@ -114,5 +141,4 @@ public class Programa {
             }
         }
     }
-
 }

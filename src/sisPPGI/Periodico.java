@@ -1,22 +1,22 @@
 package sisPPGI;
 
 /**
- * Classe de representação de um veículo periódico
+ * Classe de representação de um veículo periódico.
  *
- * @author Tiago da Cruz Santos
- * @author Atílio Antônio Dadalto
+ * @author Tiago da Cruz Santos.
+ * @author Atílio Antônio Dadalto.
  */
 public class Periodico extends Veiculo {
     private double multiplicador;
     private String issn;
 
     /**
-     * Contrutor de um veículo periódico
+     * Contrutor de um veículo periódico.
      *
-     * @param sigla   Sigla do veículo
-     * @param nome    Nome do veículo
-     * @param impacto Impacto em {@code double}
-     * @param issn    ISSN do periódico
+     * @param sigla   Sigla do veículo.
+     * @param nome    Nome do veículo.
+     * @param impacto Impacto em {@code double}.
+     * @param issn    ISSN do periódico.
      */
     public Periodico(String sigla, String nome, double impacto, String issn) {
         super(sigla, nome, impacto);
@@ -24,29 +24,28 @@ public class Periodico extends Veiculo {
     }
 
     /**
-     * @return Fator de multiplicação do periódico para as publicações
+     * @return Fator de multiplicação do periódico para as publicações.
      */
     public double getMultiplicador() {
         return multiplicador;
     }
 
     /**
-     * @param multiplicador Fator de multiplicação do periódico para as publicações
-     *                      a armazenar
+     * @param multiplicador Fator de multiplicação do periódico para as publicações.
      */
     public void setMultiplicador(double multiplicador) {
         this.multiplicador = multiplicador;
     }
 
     /**
-     * @return ISSN do veículo
+     * @return ISSN do veículo.
      */
     public String getIssn() {
         return issn;
     }
 
     /**
-     * @param issn ISSN do veículo a armazenar
+     * @param issn ISSN do veículo.
      */
     public void setIssn(String issn) {
         this.issn = issn;

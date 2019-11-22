@@ -14,10 +14,10 @@ import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 
 /**
- * Classe principal do PPGI
+ * Classe principal do PPGI.
  *
- * @author Tiago da Cruz Santos
- * @author Atílio Antônio Dadalto
+ * @author Tiago da Cruz Santos.
+ * @author Atílio Antônio Dadalto.
  */
 public class Sistema implements Serializable {
     private HashMap<Long, Docente> docentesCadastrados;
@@ -25,23 +25,17 @@ public class Sistema implements Serializable {
     private HashMap<String, Veiculo> veiculos;
     private HashMap<Integer, Regra> regras;
     private HashMap<String, Qualis> qualificacoes;
-    private enum Classificacoes{
-        A1("A1"), 
-        A2("A2"), 
-        B1("B1"), 
-        B2("B2"),
-        B3("B3"),
-        B4("B4"),
-        B5("B5"),
-        C("C");
+
+    private enum Classificacoes {
+        A1("A1"), A2("A2"), B1("B1"), B2("B2"), B3("B3"), B4("B4"), B5("B5"), C("C");
 
         private String classificacao;
 
-        Classificacoes(String classificacao){
+        Classificacoes(String classificacao) {
             this.classificacao = classificacao;
         }
 
-        public String getClassi(){
+        public String getClassi() {
             return this.classificacao;
         }
     }
@@ -50,25 +44,25 @@ public class Sistema implements Serializable {
         this.docentesCadastrados = new HashMap<Long, Docente>();
         this.publicacoes = new ArrayList<Publicacao>();
         this.veiculos = new HashMap<String, Veiculo>();
-        this.regras = new HashMap<Integer, Regra> ();
+        this.regras = new HashMap<Integer, Regra>();
         this.qualificacoes = new HashMap<String, Qualis>();
     }
 
     /**
-     * Cadastra um docente no sistema
+     * Cadastra um docente no sistema.
      *
-     * @param docente Docente pré-existente
+     * @param docente Docente pré-existente.
      */
     public void cadastrarDocente(Docente docente) {
         this.docentesCadastrados.put(docente.getCodigo(), docente);
     }
 
     /**
-     * Carrega os docentes de um arquivo para o sistema
+     * Carrega os docentes de um arquivo para o sistema.
      *
-     * @param infile Scanner com o arquivo de docentes aberto
+     * @param infile Scanner com o arquivo de docentes aberto.
      * @throws CodigoRepetidoDocente se um código de um docente lido já estiver
-     *                               cadastrado
+     *                               cadastrado.
      */
     public void carregaDocentes(Scanner infile) throws CodigoRepetidoDocente {
         infile.nextLine();
@@ -80,7 +74,16 @@ public class Sistema implements Serializable {
         boolean boolCoord;
 
         while (infile.hasNext()) {
+
             codigo = infile.nextLong();
+            // System.out.println(codigo);
+
+            // try {
+            // codigo = Long.parseLong(codigo2);
+            // System.exit(1);
+            // } catch (NumberFormatException | NullPointerException nfe) {
+            // }
+
             // System.out.print("[" + codigo + "]");
             if (this.docentesCadastrados.containsKey(codigo)) {
                 throw new CodigoRepetidoDocente(codigo);
@@ -104,20 +107,20 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Cadastra um veículo no sistema
+     * Cadastra um veículo no sistema.
      *
-     * @param veiculo Veículo pré-existente
+     * @param veiculo Veículo pré-existente.
      */
     public void cadastrarVeiculo(Veiculo veiculo) {
         this.veiculos.put(veiculo.getSigla(), veiculo);
     }
 
     /**
-     * Carrega os veículos a partir de um arquivo csv
+     * Carrega os veículos a partir de um arquivo csv.
      *
-     * @param infile Scanner com o arquivo de veículos aberto
+     * @param infile Scanner com o arquivo de veículos aberto.
      * @throws SiglaVeiculoRepetido Erro gerado quando veículo a ser inserido já
-     *                              tiver sigla existente
+     *                              tiver sigla existente.
      */
     public void carregaVeiculos(Scanner infile) throws SiglaVeiculoRepetido {
         infile.nextLine();
@@ -146,11 +149,11 @@ public class Sistema implements Serializable {
                 issn = infile.nextLine();
                 issn = (issn.split(";"))[1];
                 this.cadastrarVeiculo(new Periodico(sigla, nome, impacto, issn));
-            } else if (tipo.compareTo("C") == 0){
+            } else if (tipo.compareTo("C") == 0) {
                 infile.nextLine();
                 this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
-            }else {
-            	//erro
+            } else {
+                // erro
             }
             // System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto +
             // "][" + issn + ']');
@@ -159,9 +162,9 @@ public class Sistema implements Serializable {
 
     /**
      * Carrega as publicações de um arquivo para o sistema e faz as relações entre
-     * as publicações, os docentes e os veiculos
+     * as publicações, os docentes e os veículos.
      *
-     * @param infile Arquivo das publicações carregadas em um Scanner
+     * @param infile Arquivo das publicações carregadas em um Scanner.
      */
     public void carregaPublicacao(Scanner infile) {
         infile.useDelimiter(";");
@@ -216,9 +219,9 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Carrega arquivo de qualis e aplica a pontuação nos veículos
+     * Carrega arquivo de qualis e aplica a pontuação nos veículos.
      *
-     * @param infile Arquivo aberto de qualis
+     * @param infile Arquivo aberto de qualis.
      */
     public void carregaQualis(Scanner infile) {
         infile.useDelimiter(";");
@@ -240,9 +243,9 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Carrega as regras de pontuação no sistema
-     * 
-     * @param infile Arquivo de regras aberto
+     * Carrega as regras de pontuação no sistema.
+     *
+     * @param infile Arquivo de regras aberto.
      */
     public void carregaRegra(Scanner infile) {
         infile.useDelimiter(";");
@@ -263,131 +266,140 @@ public class Sistema implements Serializable {
             multiplicador = Double.parseDouble(infile.next().replace(',', '.'));
             anos = infile.nextInt();
             pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
+
+            /*
             System.out.print("[" + dataIni + "][" + dataFim + "][");
 
             for (String nivel : niveis) {
                 System.out.print(nivel + "][");
-
             }
 
             for (String ponto : pontos) {
                 System.out.print(Integer.parseInt(ponto) + "][");
             }
+            */
 
             int count = 0;
 
-            for (Classificacoes cl : Classificacoes.values()){
-                if(cl.getClassi().compareTo(niveis[count]) == 0){
+            for (Classificacoes cl : Classificacoes.values()) {
+                if (cl.getClassi().compareTo(niveis[count]) == 0) {
                     qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count])));
                     count++;
-                }else{
+                } else {
                     qualificacoes.put(cl.getClassi(), new Qualis(cl.getClassi(), Integer.parseInt(pontos[count - 1])));
                 }
             }
 
-            System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
+            // System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
             Regra regraLida = new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes);
             this.regras.put(regraLida.getAno(), regraLida);
         }
     }
-    
+
     /**
-     * Imprime as publicações no arquivo
-     * 
-     * @throws IOException Quando não consegue abrir um arquivo para escrever
+     * Imprime as publicações no arquivo.
+     *
+     * @throws IOException Quando não consegue abrir um arquivo para escrever.
      */
     public void imprimirPublicacoes() throws IOException {
-    	FileWriter outfile = new FileWriter("2-publicacoes.csv");
-    	outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
-    	Collections.sort(this.publicacoes);
-    	for(Publicacao pub : this.publicacoes) {
-    		Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
-    		outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";" + qualis.getNivel() + ";" + String.format("%.3f", pub.getVeiculo().getImpacto()).replace('.', ',') + ";" + pub.getTitulo() + ";");
+        FileWriter outfile = new FileWriter("2-publicacoes.csv");
+        outfile.write("Ano;Sigla Veículo;Veículo;Qualis;Fator de Impacto;Título;Docentes\n");
+        Collections.sort(this.publicacoes);
+        for (Publicacao pub : this.publicacoes) {
+            Qualis qualis = pub.getVeiculo().getQualisAno(pub.getAno());
+            outfile.write(pub.getAno() + ";" + pub.getVeiculo().getSigla() + ";" + pub.getVeiculo().getNome() + ";"
+                    + qualis.getNivel() + ";" + String.format("%.3f", pub.getVeiculo().getImpacto()).replace('.', ',')
+                    + ";" + pub.getTitulo() + ";");
             int i = 0;
             int size = pub.getAutores().values().size() - 1;
-            for(Docente autor: pub.getAutores().values()) {
-                if(i++ == size){
+            for (Docente autor : pub.getAutores().values()) {
+                if (i++ == size) {
                     outfile.write(autor.getNome());
                     break;
-                }else{
+                } else {
                     outfile.write(autor.getNome() + ",");
                 }
-    		}
-    		outfile.write("\n");
-    	}
-    	outfile.close();
+            }
+            outfile.write("\n");
+        }
+        outfile.close();
     }
+
     /**
-     * Imprime as estatisticas dos qualis
-     * 
-     * @throws IOException Quando não for possivel abrir o arquivo para escrita
+     * Imprime as estatisticas dos qualis.
+     *
+     * @throws IOException Quando não for possivel abrir o arquivo para escrita.
      */
     public void imprimirEstatisticas() throws IOException {
-    	FileWriter outfile = new FileWriter("3-estatisticas.csv");
-    	outfile.write("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
+        FileWriter outfile = new FileWriter("3-estatisticas.csv");
+        outfile.write("Qualis;Qtd. Artigos;Média Artigos / Docente\n");
 
-    	HashMap<String, ArrayList<Publicacao>> pubsPorQualis = new HashMap<String, ArrayList<Publicacao>>();
-    	for(Classificacoes cl : Classificacoes.values()) {
-    		pubsPorQualis.put(cl.getClassi(), new ArrayList<Publicacao>());
-    	}
-    	for(Publicacao pub : this.publicacoes) {
-    		ArrayList<Publicacao> arrayAtual = pubsPorQualis.get(pub.getVeiculo().getQualisAno(pub.getAno()).getNivel());
-    		arrayAtual.add(pub);
+        HashMap<String, ArrayList<Publicacao>> pubsPorQualis = new HashMap<String, ArrayList<Publicacao>>();
+        for (Classificacoes cl : Classificacoes.values()) {
+            pubsPorQualis.put(cl.getClassi(), new ArrayList<Publicacao>());
         }
-        for(Classificacoes cl : Classificacoes.values()){
+        for (Publicacao pub : this.publicacoes) {
+            ArrayList<Publicacao> arrayAtual = pubsPorQualis
+                    .get(pub.getVeiculo().getQualisAno(pub.getAno()).getNivel());
+            arrayAtual.add(pub);
+        }
+        for (Classificacoes cl : Classificacoes.values()) {
             int qtdPubsQualis = pubsPorQualis.get(cl.getClassi()).size();
             double qtdAutores = 0;
             double umSobre = 0;
-            for(Publicacao publicacao: pubsPorQualis.get(cl.getClassi())){
+            for (Publicacao publicacao : pubsPorQualis.get(cl.getClassi())) {
                 qtdAutores += publicacao.getAutores().size();
                 umSobre += (double) 1 / (double) publicacao.getAutores().size();
             }
             // double mediaArtAut = qtdAutores/qtdPubsQualis;
-            outfile.write(cl.getClassi() + ";" + qtdPubsQualis + ";" + String.format("%.2f",umSobre).replace('.',',') + "\n");
+            outfile.write(cl.getClassi() + ";" + qtdPubsQualis + ";" + String.format("%.2f", umSobre).replace('.', ',')
+                    + "\n");
         }
         outfile.close();
     }
+
     /**
-     * Aplica a regra relacionada ao ano de vigência
-     * 
-     * @param ano Ano de vigência de uma regra
+     * Aplica a regra relacionada ao ano de vigência.
+     *
+     * @param ano Ano de vigência de uma regra.
      */
     public void aplicarRegra(int ano) {
-    	HashMap<String, Qualis> qualisDoAno = this.regras.get(ano).getQualis();
-    	double multiDaRegra = this.regras.get(ano).getMultiplicador();
-    	for(Veiculo veic : this.veiculos.values()) {
-    		Qualis qualis = veic.getQualisAno(ano);
-    		qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
-    		if(veic instanceof Periodico) {
-    			((Periodico) veic).setMultiplicador(multiDaRegra);;
-    		}
-    	}
+        HashMap<String, Qualis> qualisDoAno = this.regras.get(ano).getQualis();
+        double multiDaRegra = this.regras.get(ano).getMultiplicador();
+        for (Veiculo veic : this.veiculos.values()) {
+            Qualis qualis = veic.getQualisAno(ano);
+            qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
+            if (veic instanceof Periodico) {
+                ((Periodico) veic).setMultiplicador(multiDaRegra);
+                ;
+            }
+        }
     }
-    
+
     public void imprimirRecredenciamento(int ano) throws IOException {
-    	FileWriter outfile = new FileWriter("1-recredenciamento.csv");
-    	outfile.write("Docente;Pontuação;Recredenciado?\n");
-    	this.aplicarRegra(ano);
-    	ArrayList<Docente> docentes = new ArrayList<Docente>(this.docentesCadastrados.values());
-    	Collections.sort(docentes);
-    	for(Docente docente: docentes) {
-    		double ponto = docente.calculaPontuacao(ano, this.regras.get(ano).getAnosConsiderados());
-    		outfile.write(docente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
-    		if(docente.isCoordenador()) {
-    			outfile.write("Coordenador\n");
-    		}else if(ano - docente.getAnoIngresso() < 3) {
-    			outfile.write("PPJ\n");
-    		}else if(docente.getIdade(ano) > 60) {
-    			outfile.write("PPS\n");
-    		}else if(ponto >= this.regras.get(ano).getPontoMinimo()) {
-    			outfile.write("Sim\n");
-    		}else {
-    			outfile.write("Não\n");
-    		}
-    	}
-    	outfile.close();
+        FileWriter outfile = new FileWriter("1-recredenciamento.csv");
+        outfile.write("Docente;Pontuação;Recredenciado?\n");
+        this.aplicarRegra(ano);
+        ArrayList<Docente> docentes = new ArrayList<Docente>(this.docentesCadastrados.values());
+        Collections.sort(docentes);
+        for (Docente docente : docentes) {
+            double ponto = docente.calculaPontuacao(ano, this.regras.get(ano).getAnosConsiderados());
+            outfile.write(docente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
+            if (docente.isCoordenador()) {
+                outfile.write("Coordenador\n");
+            } else if (ano - docente.getAnoIngresso() < 3) {
+                outfile.write("PPJ\n");
+            } else if (docente.getIdade(ano) > 60) {
+                outfile.write("PPS\n");
+            } else if (ponto >= this.regras.get(ano).getPontoMinimo()) {
+                outfile.write("Sim\n");
+            } else {
+                outfile.write("Não\n");
+            }
+        }
+        outfile.close();
     }
-    
+
     @Override
     public String toString() {
         return "Sistema [docentesCadastrados=\n" + this.docentesCadastrados + ", publicacoes=\n" + this.publicacoes

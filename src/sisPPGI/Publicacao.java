@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Classe de representação de Publicação
+ * Classe de representação de Publicação.
  *
- * @author Tiago da Cruz Santos
- * @author Atílio Antônio Dadalto
+ * @author Tiago da Cruz Santos.
+ * @author Atílio Antônio Dadalto.
  */
 public class Publicacao implements Serializable, Comparable<Publicacao> {
     private int ano;
@@ -21,17 +21,17 @@ public class Publicacao implements Serializable, Comparable<Publicacao> {
     private HashMap<Long, Docente> autores;
 
     /**
-     * Cria uma nova publicação
-     * 
-     * @param ano Ano de publicação
-     * @param titulo Titulo da publicação
-     * @param numero Número da publicação
-     * @param volume Volume da publicação
-     * @param local Local da publicação
-     * @param paginaIni Página inicial
-     * @param paginaFim Página Final
-     * @param autores Autores da publicação
-     * @param veiculo Veiculo em que a publicação foi publicada
+     * Cria uma nova publicação.
+     *
+     * @param ano Ano de publicação.
+     * @param titulo Titulo da publicação.
+     * @param numero Número da publicação.
+     * @param volume Volume da publicação.
+     * @param local Local da publicação.
+     * @param paginaIni Página inicial.
+     * @param paginaFim Página Final.
+     * @param autores Autores da publicação.
+     * @param veiculo Veiculo em que a publicação foi publicada.
      */
     public Publicacao(int ano, String titulo, int numero, int volume, String local, int paginaIni, int paginaFim,
             HashMap<Long, Docente> autores, Veiculo veiculo) {
@@ -47,126 +47,126 @@ public class Publicacao implements Serializable, Comparable<Publicacao> {
     }
 
     /**
-     * @return Ano de publicação
+     * @return Ano de publicação.
      */
     public int getAno() {
         return ano;
     }
 
     /**
-     * @param ano Ano de publicação
+     * @param ano Ano de publicação.
      */
     public void setAno(int ano) {
         this.ano = ano;
     }
 
     /**
-     * @return Título da publicação
+     * @return Título da publicação.
      */
     public String getTitulo() {
         return titulo;
     }
 
     /**
-     * @param titulo Título da publicação
+     * @param titulo Título da publicação.
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
     /**
-     * @return Número da publicação
+     * @return Número da publicação.
      */
     public int getNumero() {
         return numero;
     }
 
     /**
-     * @param numero Número da publicação
+     * @param numero Número da publicação.
      */
     public void setNumero(int numero) {
         this.numero = numero;
     }
 
     /**
-     * @return Local de publicação
+     * @return Local de publicação.
      */
     public String getLocal() {
         return local;
     }
 
     /**
-     * @param local Local de publicação
+     * @param local Local de publicação.
      */
     public void setLocal(String local) {
         this.local = local;
     }
 
     /**
-     * @return Página inicial da publicação
+     * @return Página inicial da publicação.
      */
     public int getPaginaIni() {
         return paginaIni;
     }
 
     /**
-     * @param paginaIni Página inicial da publicação
+     * @param paginaIni Página inicial da publicação.
      */
     public void setPaginaIni(int paginaIni) {
         this.paginaIni = paginaIni;
     }
 
     /**
-     * @return Última página da publicação
+     * @return Última página da publicação.
      */
     public int getPaginaFim() {
         return paginaFim;
     }
 
     /**
-     * @param paginaFim Última página da publicação
+     * @param paginaFim Última página da publicação.
      */
     public void setPaginaFim(int paginaFim) {
         this.paginaFim = paginaFim;
     }
 
     /**
-     * @return Lista de autores
+     * @return Lista de autores.
      */
     public HashMap<Long, Docente> getAutores() {
         return autores;
     }
 
     /**
-     * @param autores Lista de autores
+     * @param autores Lista de autores.
      */
     public void setAutores(HashMap<Long, Docente> autores) {
         this.autores = autores;
     }
-    
+
     /**
-     * @return Volume da publicação
+     * @return Volume da publicação.
      */
     public int getVolume() {
     	return volume;
     }
-    
+
     /**
-     * @param volume Volume da publicação
+     * @param volume Volume da publicação.
      */
     public void setVolume(int volume) {
     	this.volume = volume;
     }
 
     /**
-	 * @return the veiculo
+	 * @return the veiculo.
 	 */
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
 
 	/**
-	 * @param veiculo the veiculo to set
+	 * @param veiculo the veiculo to set.
 	 */
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
