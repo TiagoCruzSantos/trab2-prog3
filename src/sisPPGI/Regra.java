@@ -85,7 +85,7 @@ public class Regra implements Serializable {
      *
      * @return Ano de vigência.
      */
-    public int getAno() {
+    public int getAno() {;
         return dataIni.get(Calendar.YEAR);
     }
 

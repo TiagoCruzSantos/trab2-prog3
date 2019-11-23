@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 
@@ -166,7 +167,7 @@ public class Sistema implements Serializable {
      *
      * @param infile Arquivo das publicações carregadas em um Scanner.
      */
-    public void carregaArquivoPublicacao(Scanner infile) {
+    public void carregaArquivoPublicacao(Scanner infile) throws CodigoDocenteIndefinido{
         infile.useDelimiter(";");
         infile.nextLine();
         int ano;
@@ -203,6 +204,9 @@ public class Sistema implements Serializable {
             for (String itAutores : autores) {
                 long cod = Long.parseLong(itAutores.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
+                if(doc == null){
+                    throw new CodigoDocenteIndefinido(nome, cod);
+                }
                 autoresObj.put(cod, doc);
             }
 
@@ -233,12 +237,13 @@ public class Sistema implements Serializable {
         while (infile.hasNext()) {
             ano = infile.nextInt();
             veiculo = infile.next();
+            veiculo = veiculo.trim();
             nivel = infile.nextLine().split(";")[1];
 
+            //System.out.println("[" + ano + "][" + veiculo + "][" + nivel + "]");
             Veiculo veic = this.veiculos.get(veiculo);
             Qualis qualis = new Qualis(ano, nivel);
             veic.adicionarQualis(qualis);
-            System.out.println("[" + ano + "][" + veiculo + "][" + nivel + "]");
         }
     }
 
@@ -257,8 +262,8 @@ public class Sistema implements Serializable {
         double multiplicador;
         int anos;
         int pontoMinimo;
-        HashMap<String, Qualis> qualificacoes = new HashMap<String, Qualis>();
         while (infile.hasNext()) {
+            HashMap<String, Qualis> qualificacoes = new HashMap<String, Qualis>();
             dataIni = infile.next();
             dataFim = infile.next();
             niveis = infile.next().split(",");
@@ -268,18 +273,18 @@ public class Sistema implements Serializable {
             pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
 
             /*
-             * System.out.print("[" + dataIni + "][" + dataFim + "][");
-             *
-             * for (String nivel : niveis) { System.out.print(nivel + "]["); }
-             *
-             * for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
-             * "]["); }
-             */
-
+            System.out.print("[" + dataIni + "][" + dataFim + "][");
+            
+            for (String nivel : niveis) { System.out.print(nivel + "]["); }
+            
+            for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
+            "]["); }
+            System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
+            */
             int count = 0;
 
             for (Classificacoes itCl : Classificacoes.values()) {
-                if (itCl.getClassi().compareTo(niveis[count]) == 0) {
+                if (count < niveis.length && itCl.getClassi().compareTo(niveis[count]) == 0) {
                     qualificacoes.put(itCl.getClassi(), new Qualis(itCl.getClassi(), Integer.parseInt(pontos[count])));
                     count++;
                 } else {
@@ -288,8 +293,8 @@ public class Sistema implements Serializable {
                 }
             }
 
-            // System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
             Regra regraLida = new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes);
+            //System.out.println(regraLida.getAno());
             this.regras.put(regraLida.getAno(), regraLida);
         }
     }
@@ -364,11 +369,18 @@ public class Sistema implements Serializable {
     public void aplicarRegra(int ano) {
         HashMap<String, Qualis> qualisDoAno = this.regras.get(ano).getQualis();
         double multiDaRegra = this.regras.get(ano).getMultiplicador();
+        int range = this.regras.get(ano).getAnosConsiderados();
         for (Veiculo itVeiculo : this.veiculos.values()) {
-            Qualis qualis = itVeiculo.getQualisAno(ano);
-            qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
-            if (itVeiculo instanceof Periodico) {
-                ((Periodico) itVeiculo).setMultiplicador(multiDaRegra);
+            //System.out.println("aqui?");
+            for(int i = ano; i >= ano - range; i--){
+                Qualis qualis = itVeiculo.getQualisAno(i);
+                //System.out.println(this.regras.get(ano).getAno() + ";" + qualis.getNivel() + ";" + itVeiculo.getNome() + ";" + qualisDoAno.get(qualis.getNivel()).getPontuacao());
+                if(qualis != null){
+                    qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
+                    if (itVeiculo instanceof Periodico) {
+                        ((Periodico) itVeiculo).setMultiplicador(multiDaRegra);
+                    }
+                }
             }
         }
     }
@@ -391,7 +403,7 @@ public class Sistema implements Serializable {
                 outfile.write("Coordenador\n");
             } else if (ano - itDocente.getAnoIngresso() < 3) {
                 outfile.write("PPJ\n");
-            } else if (itDocente.getIdade(ano) > 60) {
+            } else if (itDocente.getIdade(ano) >= 60) {
                 outfile.write("PPS\n");
             } else if (ponto >= this.regras.get(ano).getPontoMinimo()) {
                 outfile.write("Sim\n");

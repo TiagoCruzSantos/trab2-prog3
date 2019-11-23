@@ -159,21 +159,24 @@ public class Docente implements Serializable, Comparable<Docente> {
     }
 
     /**
-     * Calcula a pontuação do docente baseado na regra estabelecida.
-     *
-     * @param regra Regra vigente.
-     * @return Pontuação do docente.
+     * Calcula a pontuação do docente
+     * 
+     * @param ano Ano de publicação das publicações a serem analisadas
+     * @param range Quantidade de anos anteriaores aceitos
+     * @return Pontuação do docente
      */
     public double calculaPontuacao(int ano, int range) {
-        int pontuacao = 0;
+        double pontuacao = 0;
         for (Publicacao itPub : this.publicacoes) {
             if ((itPub.getAno() <= ano && itPub.getAno() >= ano - range)) {
                 // System.out.println(itPub.getAno());
                 Veiculo veicPub = itPub.getVeiculo();
                 if (veicPub instanceof Periodico) {
-                    pontuacao += veicPub.getQualisAno(ano).getPontuacao() * ((Periodico) veicPub).getMultiplicador();
+                    pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador();
+                    //System.out.println(veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador() + "; " + this.nome + ";multi= " + ((Periodico) veicPub).getMultiplicador() + ";pt= " + veicPub.getQualisAno(itPub.getAno()).getPontuacao());
                 } else {
-                    pontuacao += veicPub.getQualisAno(ano).getPontuacao();
+                    pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao();
+                    //System.out.println(veicPub.getQualisAno(itPub.getAno()).getPontuacao() + "; " + this.nome);
                 }
             }
         }

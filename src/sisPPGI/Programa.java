@@ -111,11 +111,11 @@ public class Programa {
             }catch (SiglaVeiculoRepetido e2) {
                 System.out.println(e2.getMessage());
                 houveExcecao = true;
-            /*
+            
             } catch (CodigoDocenteIndefinido e3) {
                 System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (CodigoRepetidoVeiculo e4) {
+            /*} catch (CodigoRepetidoVeiculo e4) {
                 System.out.println(e4.getMessage());
                 houveExcecao = true;
             } catch (QualisDesconhecidoRegra e5) {
