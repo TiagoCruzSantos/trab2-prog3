@@ -56,7 +56,7 @@ public class ControladorEntradas {
                  * houveExcecao = true; } catch (QualisDesconhecidoRegra e5) {
                  * System.out.println(e5.getMessage()); houveExcecao = true; } catch
                  * (QualisDesconhecidoVeiculo e6) { System.out.println(e6.getMessage());
-                 * houveExcecao = true; } catch (SiglaIndefinida e7) {
+                 * houveExcecao = true; } catch (SiglaVeiculoPublicacaoIndefinida e7) {
                  * System.out.println(e7.getMessage()); houveExcecao = true; } catch
                  * (TipoVeiculoDesconhecido e8) { System.out.println(e8.getMessage());
                  * houveExcecao = true;

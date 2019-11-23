@@ -12,7 +12,10 @@ import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
+import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
+import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
 /**
  * Classe principal do PPGI.
@@ -27,7 +30,7 @@ public class Sistema implements Serializable {
     private HashMap<Integer, Regra> regras;
     private HashMap<String, Qualis> qualificacoes;
 
-    private enum Classificacoes {
+    private enum Classificacoes { // Precisa JavaDoczar isso?
         A1("A1"), A2("A2"), B1("B1"), B2("B2"), B3("B3"), B4("B4"), B5("B5"), C("C");
 
         private String classificacao;
@@ -66,12 +69,20 @@ public class Sistema implements Serializable {
      *                               cadastrado.
      */
     public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente {
-        infile.nextLine();
+        /* TODO: Detectar erros de formatação:
+         * Código: não ser número inteiro (erro 1)
+         * Nome: não ser alfabético (erro 2)
+         * Data de nascimento: não ser data (erro 3)
+         * Data de ingresso: não ser data (erro 4)
+         * Coordenador: se preenchido, não ser char 'X' (erro 5)
+         */
+        infile.nextLine(); // Ignora primeira linha
         infile.useDelimiter(";");
+
         long codigo;
         String dataNas;
-        String nome;
         String dataIng;
+        String nome;
         boolean boolCoord;
 
         while (infile.hasNext()) {
@@ -86,6 +97,8 @@ public class Sistema implements Serializable {
             // }
 
             // System.out.print("[" + codigo + "]");
+
+            /* Verificar se isso tudão é válido */
             if (this.docentesCadastrados.containsKey(codigo)) {
                 throw new CodigoRepetidoDocente(codigo);
             }
@@ -120,12 +133,18 @@ public class Sistema implements Serializable {
      * Carrega os veículos a partir de um arquivo csv.
      *
      * @param infile Scanner com o arquivo de veículos aberto.
-     * @throws SiglaVeiculoRepetido Erro gerado quando veículo a ser inserido já
+     * @throws SiglaVeiculoRepetido se um veículo a ser inserido já
      *                              tiver sigla existente.
+     * @throws TipoVeiculoDesconhecido se um veículo tiver um tipo desconhecioo
      */
-    public void carregaArquivoVeiculos(Scanner infile) throws SiglaVeiculoRepetido {
-        infile.nextLine();
+    public void carregaArquivoVeiculos(Scanner infile) throws SiglaVeiculoRepetido, TipoVeiculoDesconhecido {
+        /* TODO: Detectar erros de formatação:
+         * Impacto: não ser número (inteiro ou float) (erro 19)
+         * ISSN: não ser um ISSN válido (pelo menos 7 números e 1 char) (erro 20)
+         */
+        infile.nextLine(); // Ignora primeira linha
         infile.useDelimiter(";");
+
         String sigla;
         String nome;
         String tipo;
@@ -154,6 +173,8 @@ public class Sistema implements Serializable {
                 infile.nextLine();
                 this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
             } else {
+                throw new TipoVeiculoDesconhecido(sigla, tipo);
+                // TipoVeiculoDesconhecido
                 // erro ava e memo Eb neezer
             }
             // System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto +
@@ -167,12 +188,21 @@ public class Sistema implements Serializable {
      *
      * @param infile Arquivo das publicações carregadas em um Scanner.
      */
-    public void carregaArquivoPublicacao(Scanner infile) throws CodigoDocenteIndefinido{
+    public void carregaArquivoPublicacao(Scanner infile) throws CodigoDocenteIndefinido, SiglaVeiculoPublicacaoIndefinida {
+        /* TODO: Detectar erros de formatação:
+         * Ano: não ser número inteiro (erro 6)
+         * Autores: não serem números inteiros (erro 7)
+         * Número: não ser número inteiro :-O!! (erro 8)
+         * Volume: não ser número inteiro (erro 9)
+         * Página Inicial: não ser número inteiro (erro 10)
+         * Página Final: não ser número inteiro (erro 11)
+         */
+        infile.nextLine(); // Ignora primeira linha
         infile.useDelimiter(";");
-        infile.nextLine();
+
         int ano;
-        String veiculo;
-        String nome;
+        String siglaVeiculo;
+        String titulo;
         String[] autores;
         int numero;
         int volume;
@@ -184,10 +214,10 @@ public class Sistema implements Serializable {
             HashMap<Long, Docente> autoresObj = new HashMap<Long, Docente>();
             volume = -1;
             ano = infile.nextInt();
-            veiculo = infile.next();
-            veiculo = veiculo.trim();
-            nome = infile.next();
-            nome = nome.trim();
+            siglaVeiculo = infile.next();
+            siglaVeiculo = siglaVeiculo.trim();
+            titulo = infile.next();
+            titulo = titulo.trim();
             autores = infile.next().split(",");
             numero = infile.nextInt();
 
@@ -204,46 +234,59 @@ public class Sistema implements Serializable {
             for (String itAutores : autores) {
                 long cod = Long.parseLong(itAutores.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
-                if(doc == null){
-                    throw new CodigoDocenteIndefinido(nome, cod);
+                if (doc == null) {
+                    throw new CodigoDocenteIndefinido(titulo, cod);
                 }
                 autoresObj.put(cod, doc);
             }
 
-            Veiculo veic = this.veiculos.get(veiculo);
-            Publicacao pub = new Publicacao(ano, nome, numero, volume, local, paginaIni, paginaFim, autoresObj, veic);
+            Veiculo veiculo = this.veiculos.get(siglaVeiculo);
+            if (veiculo == null) {
+                throw new SiglaVeiculoPublicacaoIndefinida(titulo, siglaVeiculo);
+            }
+            Publicacao pub = new Publicacao(ano, titulo, numero, volume, local, paginaIni, paginaFim, autoresObj, veiculo);
             for (String itAutores : autores) {
                 long cod = Long.parseLong(itAutores.replaceAll("\\s+", ""));
                 Docente doc = this.docentesCadastrados.get(cod);
                 doc.adicionarPublicacao(pub);
             }
-            veic.adicionarPublicacao(pub);
+            veiculo.adicionarPublicacao(pub);
             this.publicacoes.add(pub);
         }
     }
 
     /**
-     * Carrega arquivo de qualis e aplica a pontuação nos veículos.
+     * Carrega arquivo de Qualis e aplica a pontuação nos veículos.
      *
      * @param infile Arquivo aberto de qualis.
      */
-    public void carregaArquivoQualis(Scanner infile) {
+    public void carregaArquivoQualis(Scanner infile) throws QualisDesconhecidoVeiculo {
+        /* TODO: Detectar erros de formatação:
+         * Ano: não ser número inteiro (erro 12)
+         *
+         * TODO: Detectar erros de inconsistência:
+         * Qualis especificado para uma qualificação de veículo não é nenhuma das categorias
+         * existentes: A1, A2, B1, B2, B3, B4, B5 ou C.
+         */
         infile.useDelimiter(";");
         infile.nextLine();
         int ano;
-        String veiculo;
+        String siglaVeiculo;
         String nivel;
 
         while (infile.hasNext()) {
             ano = infile.nextInt();
-            veiculo = infile.next();
-            veiculo = veiculo.trim();
+            siglaVeiculo = infile.next();
+            siglaVeiculo = siglaVeiculo.trim();
             nivel = infile.nextLine().split(";")[1];
 
-            //System.out.println("[" + ano + "][" + veiculo + "][" + nivel + "]");
-            Veiculo veic = this.veiculos.get(veiculo);
+            // System.out.println("[" + ano + "][" + siglaVeiculo + "][" + nivel + "]");
+            Veiculo veiculo = this.veiculos.get(siglaVeiculo);
+            if (veiculo == null) {
+                throw new QualisDesconhecidoVeiculo(siglaVeiculo, ano, nivel);
+            }
             Qualis qualis = new Qualis(ano, nivel);
-            veic.adicionarQualis(qualis);
+            veiculo.adicionarQualis(qualis);
         }
     }
 
@@ -253,6 +296,18 @@ public class Sistema implements Serializable {
      * @param infile Arquivo de regras aberto.
      */
     public void carregaArquivoRegra(Scanner infile) {
+        /* TODO: Detectar erros de formatação:
+         * Início de vigência: não ser data (erro 13)
+         * Fim de vigência: não ser data (erro 14)
+         * Pontos: não ser número inteiros (erro 15)
+         * Multiplicador: não ser número (inteiro ou float) (erro 16)
+         * Anos: não ser número inteiro (erro 17)
+         * Mínimo pontos: não ser número inteiro (erro 18)
+         *
+         * TODO: Detectar erros de inconsistências:
+         * Qualis especificado para uma regra de pontuação não é nenhuma das categorias
+         * existentes: A1, A2, B1, B2, B3, B4, B5 ou C.
+         */
         infile.useDelimiter(";");
         infile.nextLine();
         String dataIni;
@@ -273,14 +328,14 @@ public class Sistema implements Serializable {
             pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
 
             /*
-            System.out.print("[" + dataIni + "][" + dataFim + "][");
-            
-            for (String nivel : niveis) { System.out.print(nivel + "]["); }
-            
-            for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
-            "]["); }
-            System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");
-            */
+             * System.out.print("[" + dataIni + "][" + dataFim + "][");
+             *
+             * for (String nivel : niveis) { System.out.print(nivel + "]["); }
+             *
+             * for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
+             * "]["); } System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo
+             * + "]");
+             */
             int count = 0;
 
             for (Classificacoes itCl : Classificacoes.values()) {
@@ -294,7 +349,7 @@ public class Sistema implements Serializable {
             }
 
             Regra regraLida = new Regra(dataIni, dataFim, pontoMinimo, anos, multiplicador, qualificacoes);
-            //System.out.println(regraLida.getAno());
+            // System.out.println(regraLida.getAno());
             this.regras.put(regraLida.getAno(), regraLida);
         }
     }
@@ -371,11 +426,13 @@ public class Sistema implements Serializable {
         double multiDaRegra = this.regras.get(ano).getMultiplicador();
         int range = this.regras.get(ano).getAnosConsiderados();
         for (Veiculo itVeiculo : this.veiculos.values()) {
-            //System.out.println("aqui?");
-            for(int i = ano; i >= ano - range; i--){
+            // System.out.println("aqui?");
+            for (int i = ano; i >= ano - range; i--) {
                 Qualis qualis = itVeiculo.getQualisAno(i);
-                //System.out.println(this.regras.get(ano).getAno() + ";" + qualis.getNivel() + ";" + itVeiculo.getNome() + ";" + qualisDoAno.get(qualis.getNivel()).getPontuacao());
-                if(qualis != null){
+                // System.out.println(this.regras.get(ano).getAno() + ";" + qualis.getNivel() +
+                // ";" + itVeiculo.getNome() + ";" +
+                // qualisDoAno.get(qualis.getNivel()).getPontuacao());
+                if (qualis != null) {
                     qualis.setPontuacao(qualisDoAno.get(qualis.getNivel()).getPontuacao());
                     if (itVeiculo instanceof Periodico) {
                         ((Periodico) itVeiculo).setMultiplicador(multiDaRegra);

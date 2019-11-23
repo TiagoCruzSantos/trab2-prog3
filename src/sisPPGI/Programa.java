@@ -15,7 +15,7 @@ import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.CodigoRepetidoVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
-import sisPPGI.excecoes.SiglaIndefinida;
+import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
@@ -98,72 +98,74 @@ public class Programa {
                 break;
             }
         }
-        if(!houveExcecao && !writeOnly){
-            try{
+        if (!houveExcecao && !writeOnly) {
+            try {
                 ppgi.carregaArquivoArquivoDocentes(docentes);
                 ppgi.carregaArquivoVeiculos(veiculos);
                 ppgi.carregaArquivoPublicacao(publicacoes);
                 ppgi.carregaArquivoQualis(qualis);
                 ppgi.carregaArquivoRegra(regras);
-            }catch(CodigoRepetidoDocente e1){
+            } catch (CodigoRepetidoDocente e1) {
                 System.out.println(e1.getMessage());
                 houveExcecao = true;
-            }catch (SiglaVeiculoRepetido e2) {
+            } catch (SiglaVeiculoRepetido e2) {
                 System.out.println(e2.getMessage());
                 houveExcecao = true;
-            
             } catch (CodigoDocenteIndefinido e3) {
                 System.out.println(e3.getMessage());
                 houveExcecao = true;
-            /*} catch (CodigoRepetidoVeiculo e4) {
+            } catch (SiglaVeiculoPublicacaoIndefinida e4) {
                 System.out.println(e4.getMessage());
                 houveExcecao = true;
-            } catch (QualisDesconhecidoRegra e5) {
+            } catch (TipoVeiculoDesconhecido e5) {
                 System.out.println(e5.getMessage());
                 houveExcecao = true;
             } catch (QualisDesconhecidoVeiculo e6) {
                 System.out.println(e6.getMessage());
                 houveExcecao = true;
-            } catch (SiglaIndefinida e7) {
-                System.out.println(e7.getMessage());
-                houveExcecao = true;
-            } catch (TipoVeiculoDesconhecido e8) {
-                System.out.println(e8.getMessage());
-                houveExcecao = true;
-            */
+                /*
+                 * } catch (CodigoRepetidoVeiculo e4) { System.out.println(e4.getMessage());
+                 * houveExcecao = true; } catch (QualisDesconhecidoRegra e5) {
+                 * System.out.println(e5.getMessage()); houveExcecao = true; } catch
+                 * (QualisDesconhecidoVeiculo e6) { System.out.println(e6.getMessage());
+                 * houveExcecao = true; } catch (SiglaVeiculoPublicacaoIndefinida e7) {
+                 * System.out.println(e7.getMessage()); houveExcecao = true; } catch
+                 * (TipoVeiculoDesconhecido e8) { System.out.println(e8.getMessage());
+                 * houveExcecao = true;
+                 */
             }
         }
-        if(!writeOnly && readOnly && !houveExcecao){
-        	try {
-        		FileOutputStream readOnlyDat = new FileOutputStream("recredenciamento.dat");
-            	ObjectOutputStream dat = new ObjectOutputStream(readOnlyDat);
+        if (!writeOnly && readOnly && !houveExcecao) {
+            try {
+                FileOutputStream readOnlyDat = new FileOutputStream("recredenciamento.dat");
+                ObjectOutputStream dat = new ObjectOutputStream(readOnlyDat);
                 dat.writeObject(ppgi);
                 dat.writeObject(ano);
                 dat.close();
-        	}catch(Exception e) {
-        		e.printStackTrace();
-        	}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        if(writeOnly && !houveExcecao){
-        	try {
-	            FileInputStream writeOnlyDat = new FileInputStream("recredenciamento.dat");
-	            ObjectInputStream dat = new ObjectInputStream(writeOnlyDat);
-	            ppgi = (Sistema) dat.readObject();
-	            ano = (Integer) dat.readObject();
-	            dat.close();
-        	}catch(Exception e) {
-        		e.printStackTrace();
-        	}
+        if (writeOnly && !houveExcecao) {
+            try {
+                FileInputStream writeOnlyDat = new FileInputStream("recredenciamento.dat");
+                ObjectInputStream dat = new ObjectInputStream(writeOnlyDat);
+                ppgi = (Sistema) dat.readObject();
+                ano = (Integer) dat.readObject();
+                dat.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        if((writeOnly || !readOnly) && !houveExcecao) {
-        	try {
-				ppgi.imprimirEstatisticas();
-				ppgi.imprimirPublicacoes();
-				ppgi.imprimirRecredenciamento(ano);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-        	
+        if ((writeOnly || !readOnly) && !houveExcecao) {
+            try {
+                ppgi.imprimirEstatisticas();
+                ppgi.imprimirPublicacoes();
+                ppgi.imprimirRecredenciamento(ano);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

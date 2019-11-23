@@ -8,10 +8,10 @@ package sisPPGI.excecoes;
  */
 public class SiglaVeiculoRepetido extends Exception {
     public SiglaVeiculoRepetido(String sigla) {
-        super("Sigla repetida para veiculo: " + sigla + ".");
+        super("Sigla repetida para veículo: " + sigla + ".");
     }
 
     public SiglaVeiculoRepetido(String sigla, Throwable cause) {
-        super("Sigla repetida para veiculo: " + sigla + ".", cause);
+        super("Sigla repetida para veículo: " + sigla + ".", cause);
     }
 }

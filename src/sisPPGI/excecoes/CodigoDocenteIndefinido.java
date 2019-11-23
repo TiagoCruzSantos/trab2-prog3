@@ -2,7 +2,7 @@ package sisPPGI.excecoes;
 
 /**
  *
- * Exceção para quando o código de docente especificado para uma publicação não.
+ * Exceção para quando o código de docente especificado para uma publicação não
  * foi definido na planilha de docentes.
  *
  * @author Tiago da Cruz Santos.

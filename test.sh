@@ -11,7 +11,7 @@ SUBDIR_OUTPUT=out
 # Procedure that tests one assignment.
 test() {
 	# Argument definition.
-	dir=$1
+	dir=.
 
 	# Check if it's a directory, but not the teste directory.
 	if [ -d $dir ] && [ "$dir" != "$TEST_DIR" ]; then

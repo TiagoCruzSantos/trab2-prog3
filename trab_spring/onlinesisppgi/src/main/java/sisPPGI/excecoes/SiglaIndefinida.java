@@ -8,12 +8,12 @@ package sisPPGI.excecoes;
  * @author Tiago da Cruz Santos.
  * @author Atílio Antônio Dadalto.
  */
-public class SiglaIndefinida extends Exception {
-    public SiglaIndefinida(String titulo, String sigla, Throwable cause) {
+public class SiglaVeiculoPublicacaoIndefinida extends Exception {
+    public SiglaVeiculoPublicacaoIndefinida(String titulo, String sigla, Throwable cause) {
         super("Sigla de veículo não definida usada na publicação \"" + titulo + "\":" + sigla + ".", cause);
     }
 
-    public SiglaIndefinida(String titulo, String sigla) {
+    public SiglaVeiculoPublicacaoIndefinida(String titulo, String sigla) {
         super("Sigla de veículo não definida usada na publicação \"" + titulo + "\":" + sigla + ".");
     }
 }

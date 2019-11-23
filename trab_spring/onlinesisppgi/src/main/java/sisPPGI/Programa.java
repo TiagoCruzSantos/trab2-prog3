@@ -15,7 +15,7 @@ import sisPPGI.excecoes.CodigoRepetidoDocente;
 import sisPPGI.excecoes.CodigoRepetidoVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
-import sisPPGI.excecoes.SiglaIndefinida;
+import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
 import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
@@ -111,7 +111,7 @@ public class Programa {
             }catch (SiglaVeiculoRepetido e2) {
                 System.out.println(e2.getMessage());
                 houveExcecao = true;
-            
+
             } catch (CodigoDocenteIndefinido e3) {
                 System.out.println(e3.getMessage());
                 houveExcecao = true;
@@ -124,7 +124,7 @@ public class Programa {
             } catch (QualisDesconhecidoVeiculo e6) {
                 System.out.println(e6.getMessage());
                 houveExcecao = true;
-            } catch (SiglaIndefinida e7) {
+            } catch (SiglaVeiculoPublicacaoIndefinida e7) {
                 System.out.println(e7.getMessage());
                 houveExcecao = true;
             } catch (TipoVeiculoDesconhecido e8) {
@@ -163,7 +163,7 @@ public class Programa {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	
+
         }
     }
 }
