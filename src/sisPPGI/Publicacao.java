@@ -175,29 +175,35 @@ public class Publicacao implements Serializable, Comparable<Publicacao> {
     @Override
     public int compareTo(Publicacao pub) {
         // Ordena por nível Qualis do veículo primeiramente
-        if (this.veiculo.getQualisAno(this.ano).getNivel()
-                .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) < 0) {
+        if(this.veiculo.getQualisAno(this.ano) == null){
             return -1;
-        } else if (this.veiculo.getQualisAno(this.ano).getNivel()
-        .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) == 0) {
-            // Em caso de empate, ordena por ano de publicação
-            if (this.ano > pub.getAno()) {
+        }else if(pub.veiculo.getQualisAno(pub.getAno()) == null){
+            return 1;
+        }else{
+            if (this.veiculo.getQualisAno(this.ano).getNivel()
+                    .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) < 0) {
                 return -1;
-            } else if (this.ano == pub.getAno()) {
-                // Em caso de empate, ordena por sigla do veículo
-                if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) < 0) {
+            } else if (this.veiculo.getQualisAno(this.ano).getNivel()
+            .compareTo(pub.veiculo.getQualisAno(pub.getAno()).getNivel()) == 0) {
+                // Em caso de empate, ordena por ano de publicação
+                if (this.ano > pub.getAno()) {
                     return -1;
-                } else if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) == 0) {
-                    // EM caso de empate, ordena por ordem alfabética de título
-                    return this.titulo.compareTo(pub.getTitulo());
+                } else if (this.ano == pub.getAno()) {
+                    // Em caso de empate, ordena por sigla do veículo
+                    if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) < 0) {
+                        return -1;
+                    } else if (this.veiculo.getSigla().compareTo(pub.getVeiculo().getSigla()) == 0) {
+                        // EM caso de empate, ordena por ordem alfabética de título
+                        return this.titulo.compareTo(pub.getTitulo());
+                    } else {
+                        return 1;
+                    }
                 } else {
                     return 1;
                 }
             } else {
                 return 1;
             }
-        } else {
-            return 1;
         }
     }
 

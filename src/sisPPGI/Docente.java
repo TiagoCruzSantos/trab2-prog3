@@ -171,10 +171,12 @@ public class Docente implements Serializable, Comparable<Docente> {
             if ((itPub.getAno() < ano && itPub.getAno() >= ano - range)) {
                 // System.out.println(itPub.getAno());
                 Veiculo veicPub = itPub.getVeiculo();
-                if (veicPub instanceof Periodico) {
-                    pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador();
-                } else {
-                    pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao();
+                if(veicPub.getQualisAno(itPub.getAno()) != null){
+                    if (veicPub instanceof Periodico) {
+                        pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador();
+                    } else {
+                        pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao();
+                    }
                 }
             }
         }

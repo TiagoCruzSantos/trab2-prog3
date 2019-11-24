@@ -375,21 +375,23 @@ public class Sistema implements Serializable {
         Collections.sort(this.publicacoes);
         for (Publicacao itPub : this.publicacoes) {
             Qualis qualis = itPub.getVeiculo().getQualisAno(itPub.getAno());
-            outfile.write(itPub.getAno() + ";" + itPub.getVeiculo().getSigla() + ";" + itPub.getVeiculo().getNome()
-                    + ";" + qualis.getNivel() + ";"
-                    + String.format("%.3f", itPub.getVeiculo().getImpacto()).replace('.', ',') + ";" + itPub.getTitulo()
-                    + ";");
-            int i = 0;
-            int size = itPub.getAutores().values().size() - 1;
-            for (Docente itAutor : itPub.getAutores().values()) {
-                if (i++ == size) {
-                    outfile.write(itAutor.getNome());
-                    break;
-                } else {
-                    outfile.write(itAutor.getNome() + ",");
+            if(qualis != null){
+                outfile.write(itPub.getAno() + ";" + itPub.getVeiculo().getSigla() + ";" + itPub.getVeiculo().getNome()
+                        + ";" + qualis.getNivel() + ";"
+                        + String.format("%.3f", itPub.getVeiculo().getImpacto()).replace('.', ',') + ";" + itPub.getTitulo()
+                        + ";");
+                int i = 0;
+                int size = itPub.getAutores().values().size() - 1;
+                for (Docente itAutor : itPub.getAutores().values()) {
+                    if (i++ == size) {
+                        outfile.write(itAutor.getNome());
+                        break;
+                    } else {
+                        outfile.write(itAutor.getNome() + ",");
+                    }
                 }
+                outfile.write("\n");
             }
-            outfile.write("\n");
         }
         outfile.close();
     }
