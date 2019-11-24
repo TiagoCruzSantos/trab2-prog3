@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
-import sisPPGI.excecoes.CodigoRepetidoVeiculo;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
 import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;

@@ -12,9 +12,10 @@ import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
-import sisPPGI.excecoes.CodigoRepetidoVeiculo;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
+import sisPPGI.excecoes.SiglaIndefinidaVeiculo;
 import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
 import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 import sisPPGI.excecoes.TipoVeiculoDesconhecido;
@@ -126,11 +127,12 @@ public class Programa {
             } catch (QualisDesconhecidoRegra e7) {
                 System.out.println(e7.getMessage());
             	houveExcecao = true;
-            } catch (CodigoRepetidoVeiculo e8) {
+            } catch(SiglaIndefinidaVeiculo e8){
                 System.out.println(e8.getMessage());
+            }
             // } catch(IllegalArgumentException e9) {
             //         System.out.println("Erro de formatação fodase");
-            }
+            //}
         }
         if (!writeOnly && readOnly && !houveExcecao) {
             try {
