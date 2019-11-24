@@ -690,9 +690,9 @@ código-fonte.">
 			<arg value="-d" />
 			<arg value="entradas_autorais/e3/docentes_e3.csv" />
 			<arg value="-v" />
-			<arg value="entradas_autorais/e3/veiculos_e32.csv" />
+			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
 			<arg value="-p" />
-			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="entradas_autorais/e3/publicacoes_e32.csv" />
 			<arg value="-q" />
 			<arg value="entradas_autorais/e3/qualis_e3.csv" />
 			<arg value="-r" />
@@ -756,7 +756,7 @@ código-fonte.">
 			<arg value="-q" />
 			<arg value="entradas_autorais/e3/qualis_e35.csv" />
 			<arg value="-r" />
-			<arg value="entradas_autorais/e3/regras_e35.csv" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
 			<arg value="-a" />
 			<arg value="2017" />
 			<classpath>
@@ -772,11 +772,11 @@ código-fonte.">
 			<arg value="-v" />
 			<arg value="entradas_autorais/e3/veiculos_e3.csv" />
 			<arg value="-p" />
-			<arg value="entradas_autorais/e3/publicacoes_e36.csv" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
 			<arg value="-q" />
 			<arg value="entradas_autorais/e3/qualis_e3.csv" />
 			<arg value="-r" />
-			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="entradas_autorais/e3/regras_e36.csv" />
 			<arg value="-a" />
 			<arg value="2017" />
 			<classpath>
@@ -805,4 +805,23 @@ código-fonte.">
 		</java>
 	</target>
 
+	<target name="run_e38" depends="compile" description="Roda o programa para a exceção 3.8.">
+		<java classname="${mainClass}">
+			<arg value="-d" />
+			<arg value="entradas_autorais/e3/docentes_e3.csv" />
+			<arg value="-v" />
+			<arg value="entradas_autorais/e3/veiculos_e38.csv" />
+			<arg value="-p" />
+			<arg value="entradas_autorais/e3/publicacoes_e3.csv" />
+			<arg value="-q" />
+			<arg value="entradas_autorais/e3/qualis_e3.csv" />
+			<arg value="-r" />
+			<arg value="entradas_autorais/e3/regras_e3.csv" />
+			<arg value="-a" />
+			<arg value="2017" />
+			<classpath>
+				<pathelement path="${bin}" />
+			</classpath>
+		</java>
+	</target>
 </project>
