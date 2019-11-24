@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
-import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 
 /**
  * Classe principal do PPGI.
@@ -120,10 +120,10 @@ public class Sistema implements Serializable {
      * Carrega os veículos a partir de um arquivo csv.
      *
      * @param infile Scanner com o arquivo de veículos aberto.
-     * @throws SiglaVeiculoRepetido Erro gerado quando veículo a ser inserido já
+     * @throws SiglaRepetidaVeiculo Erro gerado quando veículo a ser inserido já
      *                              tiver sigla existente.
      */
-    public void carregaArquivoVeiculos(Scanner infile) throws SiglaVeiculoRepetido {
+    public void carregaArquivoVeiculos(Scanner infile) throws SiglaRepetidaVeiculo {
         infile.nextLine();
         infile.useDelimiter(";");
         String sigla;
@@ -136,7 +136,7 @@ public class Sistema implements Serializable {
             sigla = infile.next();
             sigla = sigla.trim();
             if (this.veiculos.containsKey(sigla)) {
-                throw new SiglaVeiculoRepetido(sigla);
+                throw new SiglaRepetidaVeiculo(sigla);
             }
 
             nome = infile.next();
@@ -274,9 +274,9 @@ public class Sistema implements Serializable {
 
             /*
             System.out.print("[" + dataIni + "][" + dataFim + "][");
-            
+
             for (String nivel : niveis) { System.out.print(nivel + "]["); }
-            
+
             for (String ponto : pontos) { System.out.print(Integer.parseInt(ponto) +
             "]["); }
             System.out.println(multiplicador + "][" + anos + "][" + pontoMinimo + "]");

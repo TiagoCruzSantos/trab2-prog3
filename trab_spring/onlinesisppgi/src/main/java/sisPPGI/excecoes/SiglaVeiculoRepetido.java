@@ -6,12 +6,13 @@ package sisPPGI.excecoes;
  * @author Tiago da Cruz Santos.
  * @author Atílio Antônio Dadalto.
  */
-public class SiglaVeiculoRepetido extends Exception {
-    public SiglaVeiculoRepetido(String sigla) {
+public class SiglaRepetidaVeiculo extends Exception {
+    public SiglaRepetidaVeiculo(String sigla, Throwable cause) {
+        super("Sigla repetida para veiculo: " + sigla + ".", cause);
+    }
+    
+    public SiglaRepetidaVeiculo(String sigla) {
         super("Sigla repetida para veiculo: " + sigla + ".");
     }
 
-    public SiglaVeiculoRepetido(String sigla, Throwable cause) {
-        super("Sigla repetida para veiculo: " + sigla + ".", cause);
-    }
 }

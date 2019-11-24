@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
+import sisPPGI.excecoes.CodigoRepetidoVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
 import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
-import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
+import sisPPGI.excecoes.SiglaIndefinidaVeiculo;
 import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
 /**
@@ -67,7 +69,7 @@ public class Sistema implements Serializable {
      * @throws CodigoRepetidoDocente se um código de um docente lido já estiver
      *                               cadastrado.
      */
-    public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente {
+    public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente, IllegalArgumentException {
         /* TODO: Detectar erros de formatação:
          * Código: não ser número inteiro (erro 1)
          * Nome: não ser alfabético (erro 2)
@@ -132,11 +134,11 @@ public class Sistema implements Serializable {
      * Carrega os veículos a partir de um arquivo csv.
      *
      * @param infile Scanner com o arquivo de veículos aberto.
-     * @throws SiglaVeiculoRepetido se um veículo a ser inserido já
-     *                              tiver sigla existente.
-     * @throws TipoVeiculoDesconhecido se um veículo tiver um tipo desconhecioo
+     * @throws SiglaRepetidaVeiculo     se um veículo a ser inserido possuir
+     *                                  sigla já utilizada.
+     * @throws TipoVeiculoDesconhecido  se um veículo tiver um tipo desconhecido
      */
-    public void carregaArquivoVeiculos(Scanner infile) throws SiglaVeiculoRepetido, TipoVeiculoDesconhecido {
+    public void carregaArquivoVeiculos(Scanner infile) throws SiglaRepetidaVeiculo, TipoVeiculoDesconhecido {
         /* TODO: Detectar erros de formatação:
          * Impacto: não ser número (inteiro ou float) (erro 19)
          * ISSN: não ser um ISSN válido (pelo menos 7 números e 1 char) (erro 20)
@@ -154,7 +156,7 @@ public class Sistema implements Serializable {
             sigla = infile.next();
             sigla = sigla.trim();
             if (this.veiculos.containsKey(sigla)) {
-                throw new SiglaVeiculoRepetido(sigla);
+                throw new SiglaRepetidaVeiculo(sigla);
             }
 
             nome = infile.next();
@@ -173,8 +175,6 @@ public class Sistema implements Serializable {
                 this.cadastrarVeiculo(new Conferencia(sigla, nome, impacto));
             } else {
                 throw new TipoVeiculoDesconhecido(sigla, tipo);
-                // TipoVeiculoDesconhecido
-                // erro ava e memo Eb neezer
             }
             // System.out.println("[" + sigla + "][" + nome + "][" + tipo + "][" + impacto +
             // "][" + issn + ']');
@@ -260,8 +260,13 @@ public class Sistema implements Serializable {
      * @param infile Arquivo aberto de qualis.
      * @throws QualisDesconhecidoVeiculo Qualis desconhecida para o veiculo
      */
-    public void carregaArquivoQualis(Scanner infile) throws QualisDesconhecidoVeiculo {
-        /* TODO: Detectar erros de formatação:
+    public void carregaArquivoQualis(Scanner infile) throws SiglaIndefinidaVeiculo, QualisDesconhecidoVeiculo {
+        /* TODO: Detectar erro de inconsistência: SiglaIndefinidaVeiculo:
+         * Exceção para quando a sigla de um veículo especificada para uma qualificação
+         * não foi definida na planilha de veículos.
+         * REVIEW: na verdade acho que eu corrigi ali embaixo. Plot tuiste.
+         *
+         * TODO: Detectar erros de formatação:
          * Ano: não ser número inteiro (erro 12)
          */
         infile.useDelimiter(";");
@@ -275,17 +280,17 @@ public class Sistema implements Serializable {
             siglaVeiculo = infile.next();
             siglaVeiculo = siglaVeiculo.trim();
             nivel = infile.nextLine().split(";")[1];
-            
+
             try {
             	Classificacoes.valueOf(nivel);
-            }catch(Exception e) {
+            } catch(Exception e) {
             	throw new QualisDesconhecidoVeiculo(siglaVeiculo, ano, nivel, e);
             }
-            
+
             // System.out.println("[" + ano + "][" + siglaVeiculo + "][" + nivel + "]");
             Veiculo veiculo = this.veiculos.get(siglaVeiculo);
             if (veiculo == null) {
-                throw new QualisDesconhecidoVeiculo(siglaVeiculo, ano, nivel);
+                throw new SiglaIndefinidaVeiculo(ano, siglaVeiculo);
             }
             Qualis qualis = new Qualis(ano, nivel);
             veiculo.adicionarQualis(qualis);

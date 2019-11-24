@@ -16,7 +16,7 @@ import sisPPGI.excecoes.CodigoRepetidoVeiculo;
 import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
 import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
-import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 
 public class Programa {
@@ -108,7 +108,7 @@ public class Programa {
             } catch (CodigoRepetidoDocente e1) {
                 System.out.println(e1.getMessage());
                 houveExcecao = true;
-            } catch (SiglaVeiculoRepetido e2) {
+            } catch (SiglaRepetidaVeiculo e2) {
                 System.out.println(e2.getMessage());
                 houveExcecao = true;
             } catch (CodigoDocenteIndefinido e3) {
@@ -126,17 +126,11 @@ public class Programa {
             } catch (QualisDesconhecidoRegra e7) {
                 System.out.println(e7.getMessage());
             	houveExcecao = true;
-                /*
-                 * } catch (CodigoRepetidoVeiculo e4) { System.out.println(e4.getMessage());
-                 * houveExcecao = true; } catch (QualisDesconhecidoRegra e5) {
-                 * System.out.println(e5.getMessage()); houveExcecao = true; } catch
-                 * (QualisDesconhecidoVeiculo e6) { System.out.println(e6.getMessage());
-                 * houveExcecao = true; } catch (SiglaVeiculoPublicacaoIndefinida e7) {
-                 * System.out.println(e7.getMessage()); houveExcecao = true; } catch
-                 * (TipoVeiculoDesconhecido e8) { System.out.println(e8.getMessage());
-                 * houveExcecao = true;
-                 */
-			}
+            } catch (CodigoRepetidoVeiculo e8) {
+                System.out.println(e8.getMessage());
+            // } catch(IllegalArgumentException e9) {
+            //         System.out.println("Erro de formatação fodase");
+            }
         }
         if (!writeOnly && readOnly && !houveExcecao) {
             try {

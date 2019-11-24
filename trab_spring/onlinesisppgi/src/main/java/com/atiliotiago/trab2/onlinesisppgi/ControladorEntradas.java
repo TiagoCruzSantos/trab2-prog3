@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import sisPPGI.Sistema;
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
-import sisPPGI.excecoes.SiglaVeiculoRepetido;
+import sisPPGI.excecoes.SiglaRepetidaVeiculo;
 
 @Controller
 public class ControladorEntradas {
@@ -47,7 +47,7 @@ public class ControladorEntradas {
                 ppgi.carregaArquivoRegra(regras);
             } catch (CodigoRepetidoDocente e1) {
                 System.out.println(e1.getMessage());
-            } catch (SiglaVeiculoRepetido e2) {
+            } catch (SiglaRepetidaVeiculo e2) {
                 System.out.println(e2.getMessage());
 
             } catch (CodigoDocenteIndefinido e3) {
