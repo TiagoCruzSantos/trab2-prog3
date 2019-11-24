@@ -149,7 +149,7 @@ código-fonte.">
 			<arg value="-r" />
 			<arg value="entradas_autorais/python/regras_python.csv" />
 			<arg value="-a" />
-			<arg value="2017" />
+			<arg value="2018" />
 			<classpath>
 				<pathelement path="${bin}" />
 			</classpath>

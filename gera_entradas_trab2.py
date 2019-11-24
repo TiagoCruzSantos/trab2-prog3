@@ -73,9 +73,9 @@ def gera_qualis(arquivoVeiculos):
     with open(f"{path}/qualis_python.csv", "w+", encoding="utf8") as file:
         file.write("Ano;Veículo;Qualis\n")
         veiculosCSV = pd.read_csv(f"{path}/{arquivoVeiculos}", sep=';')
-        for i in range(random.randrange(1, 6)):
+        for i in range(random.randrange(1, 3)):
             for veiculo in veiculosCSV["Sigla"].tolist():
-                ano = 2013 + i
+                ano = 2016 + i
 
                 sigla = veiculo
 
@@ -90,13 +90,13 @@ def gera_regras():
             "Início Vigência;Fim Vigência;Qualis;Pontos;Multiplicador;Anos;Mínimo Pontos\n")
 
         nRegras = random.randrange(1, 10)
-        anos = list(range(2017, 2019))
-        for _ in range(nRegras):
+        anos = list(range(2016, 2019))
+        for _ in range(len(anos)):
             ano = anos.pop()
             file.write(f"01/01/{ano};31/12/{ano};")
 
-            qualisPossivel = ['A1', 'A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
-            qualisEscolhidas = sorted(random.sample(
+            qualisPossivel = ['A2', 'B1', 'B2', 'B3', 'B4', 'B5', 'C']
+            qualisEscolhidas = ['A1'] + sorted(random.sample(
                 qualisPossivel, random.randint(1, 6)))
             for qualis in qualisEscolhidas:
                 if qualis != qualisEscolhidas[-1]:
