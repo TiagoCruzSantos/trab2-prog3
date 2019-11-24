@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
@@ -106,34 +108,40 @@ public class Programa {
                 ppgi.carregaArquivoPublicacao(publicacoes);
                 ppgi.carregaArquivoQualis(qualis);
                 ppgi.carregaArquivoRegra(regras);
-            } catch (CodigoRepetidoDocente e1) {
-                System.out.println(e1.getMessage());
+            } catch (CodigoRepetidoDocente e3) {
+                System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (SiglaRepetidaVeiculo e2) {
-                System.out.println(e2.getMessage());
+            } catch (SiglaRepetidaVeiculo e3) {
+                System.out.println(e3.getMessage());
                 houveExcecao = true;
             } catch (CodigoDocenteIndefinido e3) {
                 System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (SiglaVeiculoPublicacaoIndefinida e4) {
-                System.out.println(e4.getMessage());
+            } catch (SiglaVeiculoPublicacaoIndefinida e3) {
+                System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (TipoVeiculoDesconhecido e5) {
-                System.out.println(e5.getMessage());
+            } catch (TipoVeiculoDesconhecido e3) {
+                System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (QualisDesconhecidoVeiculo e6) {
-                System.out.println(e6.getMessage());
+            } catch (QualisDesconhecidoVeiculo e3) {
+                System.out.println(e3.getMessage());
                 houveExcecao = true;
-            } catch (QualisDesconhecidoRegra e7) {
-                System.out.println(e7.getMessage());
-            	houveExcecao = true;
-            } catch(SiglaIndefinidaVeiculo e8){
-                System.out.println(e8.getMessage());
+            } catch (QualisDesconhecidoRegra e3) {
+                System.out.println(e3.getMessage());
+                houveExcecao = true;
+            } catch (SiglaIndefinidaVeiculo e3) {
+                System.out.println(e3.getMessage());
+                houveExcecao = true;
+            } catch (InputMismatchException e2) {
+                System.out.println("Erro de formatação");
+                houveExcecao = true;
+            } catch (IllegalArgumentException e2) {
+                System.out.println("Erro de formatação");
+                houveExcecao = true;
+            } catch (ArrayIndexOutOfBoundsException e2) {
+                System.out.println("Erro de formatação");
                 houveExcecao = true;
             }
-            // } catch(IllegalArgumentException e9) {
-            //         System.out.println("Erro de formatação fodase");
-            //}
         }
         if (!writeOnly && readOnly && !houveExcecao) {
             try {

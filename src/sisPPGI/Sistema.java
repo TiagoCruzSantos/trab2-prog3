@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
@@ -68,8 +70,11 @@ public class Sistema implements Serializable {
      * @param infile Scanner com o arquivo de docentes aberto.
      * @throws CodigoRepetidoDocente se um código de um docente lido já estiver
      *                               cadastrado.
+     * @throws InputMismatchException se houver erro de formatação
+     * @throws ArrayIndexOutOfBoundsException se houver erro de formatação
+     *
      */
-    public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente, IllegalArgumentException {
+    public void carregaArquivoArquivoDocentes(Scanner infile) throws CodigoRepetidoDocente, InputMismatchException {
         /* TODO: Detectar erros de formatação:
          * Código: não ser número inteiro (erro 1)
          * Nome: não ser alfabético (erro 2)
@@ -87,15 +92,7 @@ public class Sistema implements Serializable {
         boolean boolCoord;
 
         while (infile.hasNext()) {
-
             codigo = infile.nextLong();
-            // System.out.println(codigo);
-
-            // try {
-            // codigo = Long.parseLong(codigo2);
-            // System.exit(1);
-            // } catch (NumberFormatException | NullPointerException nfe) {
-            // }
 
             // System.out.print("[" + codigo + "]");
 
@@ -137,8 +134,10 @@ public class Sistema implements Serializable {
      * @throws SiglaRepetidaVeiculo     se um veículo a ser inserido possuir
      *                                  sigla já utilizada.
      * @throws TipoVeiculoDesconhecido  se um veículo tiver um tipo desconhecido
+     * @throws InputMismatchException se houver erro de formatação
+     *
      */
-    public void carregaArquivoVeiculos(Scanner infile) throws SiglaRepetidaVeiculo, TipoVeiculoDesconhecido {
+    public void carregaArquivoVeiculos(Scanner infile) throws SiglaRepetidaVeiculo, TipoVeiculoDesconhecido, InputMismatchException {
         /* TODO: Detectar erros de formatação:
          * Impacto: não ser número (inteiro ou float) (erro 19)
          * ISSN: não ser um ISSN válido (pelo menos 7 números e 1 char) (erro 20)
@@ -186,8 +185,14 @@ public class Sistema implements Serializable {
      * as publicações, os docentes e os veículos.
      *
      * @param infile Arquivo das publicações carregadas em um Scanner.
+     * @throws CodigoDocenteIndefinido se o código de um docente não tiver sido
+     * definido na planilha de docentes
+     * @throws SiglaVeiculoPublicacaoIndefinida se a sigla de um veículo não tiver sido
+     * definida na planilha de veículos
+     * @throws InputMismatchException se houver erro de formatação
+     *
      */
-    public void carregaArquivoPublicacao(Scanner infile) throws CodigoDocenteIndefinido, SiglaVeiculoPublicacaoIndefinida {
+    public void carregaArquivoPublicacao(Scanner infile) throws CodigoDocenteIndefinido, SiglaVeiculoPublicacaoIndefinida, InputMismatchException {
         /* TODO: Detectar erros de formatação:
          * Ano: não ser número inteiro (erro 6)
          * Autores: não serem números inteiros (erro 7)
@@ -258,9 +263,12 @@ public class Sistema implements Serializable {
      * Carrega arquivo de Qualis e aplica a pontuação nos veículos.
      *
      * @param infile Arquivo aberto de qualis.
-     * @throws QualisDesconhecidoVeiculo Qualis desconhecida para o veiculo
+     * @throws QualisDesconhecidoVeiculo se houver Qualis desconhecida para um veículo
+     * @throws SiglaIndefinidaVeiculo se houver sigla de veículo não definida na planilha de veículos
+     * @throws InputMismatchException se houver erro de formatação
+     *
      */
-    public void carregaArquivoQualis(Scanner infile) throws SiglaIndefinidaVeiculo, QualisDesconhecidoVeiculo {
+    public void carregaArquivoQualis(Scanner infile) throws SiglaIndefinidaVeiculo, QualisDesconhecidoVeiculo, InputMismatchException {
         /* TODO: Detectar erro de inconsistência: SiglaIndefinidaVeiculo:
          * Exceção para quando a sigla de um veículo especificada para uma qualificação
          * não foi definida na planilha de veículos.
@@ -301,9 +309,12 @@ public class Sistema implements Serializable {
      * Carrega as regras de pontuação no sistema.
      *
      * @param infile Arquivo de regras aberto.
-     * @throws QualisDesconhecidoRegra Qulis desconhecida para a regra
+     * @throws QualisDesconhecidoRegra se houver Qualis desconhecida para uma regra
+     * @throws InputMismatchException se houver erro de formatação
+     * @throws ArrayIndexOutOfBoundsException se houver erro de formatação
+     *
      */
-    public void carregaArquivoRegra(Scanner infile) throws QualisDesconhecidoRegra {
+    public void carregaArquivoRegra(Scanner infile) throws QualisDesconhecidoRegra, InputMismatchException {
         /* TODO: Detectar erros de formatação:
          * Início de vigência: não ser data (erro 13)
          * Fim de vigência: não ser data (erro 14)
