@@ -123,6 +123,9 @@ public class Programa {
             } catch (QualisDesconhecidoVeiculo e6) {
                 System.out.println(e6.getMessage());
                 houveExcecao = true;
+            } catch (QualisDesconhecidoRegra e7) {
+                System.out.println(e7.getMessage());
+            	houveExcecao = true;
                 /*
                  * } catch (CodigoRepetidoVeiculo e4) { System.out.println(e4.getMessage());
                  * houveExcecao = true; } catch (QualisDesconhecidoRegra e5) {
@@ -133,7 +136,7 @@ public class Programa {
                  * (TipoVeiculoDesconhecido e8) { System.out.println(e8.getMessage());
                  * houveExcecao = true;
                  */
-            }
+			}
         }
         if (!writeOnly && readOnly && !houveExcecao) {
             try {

@@ -4,14 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 import sisPPGI.excecoes.CodigoDocenteIndefinido;
 import sisPPGI.excecoes.CodigoRepetidoDocente;
+import sisPPGI.excecoes.QualisDesconhecidoRegra;
 import sisPPGI.excecoes.QualisDesconhecidoVeiculo;
 import sisPPGI.excecoes.SiglaVeiculoPublicacaoIndefinida;
 import sisPPGI.excecoes.SiglaVeiculoRepetido;
@@ -259,14 +258,11 @@ public class Sistema implements Serializable {
      * Carrega arquivo de Qualis e aplica a pontuação nos veículos.
      *
      * @param infile Arquivo aberto de qualis.
+     * @throws QualisDesconhecidoVeiculo Qualis desconhecida para o veiculo
      */
     public void carregaArquivoQualis(Scanner infile) throws QualisDesconhecidoVeiculo {
         /* TODO: Detectar erros de formatação:
          * Ano: não ser número inteiro (erro 12)
-         *
-         * TODO: Detectar erros de inconsistência:
-         * Qualis especificado para uma qualificação de veículo não é nenhuma das categorias
-         * existentes: A1, A2, B1, B2, B3, B4, B5 ou C.
          */
         infile.useDelimiter(";");
         infile.nextLine();
@@ -279,7 +275,13 @@ public class Sistema implements Serializable {
             siglaVeiculo = infile.next();
             siglaVeiculo = siglaVeiculo.trim();
             nivel = infile.nextLine().split(";")[1];
-
+            
+            try {
+            	Classificacoes.valueOf(nivel);
+            }catch(Exception e) {
+            	throw new QualisDesconhecidoVeiculo(siglaVeiculo, ano, nivel, e);
+            }
+            
             // System.out.println("[" + ano + "][" + siglaVeiculo + "][" + nivel + "]");
             Veiculo veiculo = this.veiculos.get(siglaVeiculo);
             if (veiculo == null) {
@@ -294,8 +296,9 @@ public class Sistema implements Serializable {
      * Carrega as regras de pontuação no sistema.
      *
      * @param infile Arquivo de regras aberto.
+     * @throws QualisDesconhecidoRegra Qulis desconhecida para a regra
      */
-    public void carregaArquivoRegra(Scanner infile) {
+    public void carregaArquivoRegra(Scanner infile) throws QualisDesconhecidoRegra {
         /* TODO: Detectar erros de formatação:
          * Início de vigência: não ser data (erro 13)
          * Fim de vigência: não ser data (erro 14)
@@ -303,10 +306,6 @@ public class Sistema implements Serializable {
          * Multiplicador: não ser número (inteiro ou float) (erro 16)
          * Anos: não ser número inteiro (erro 17)
          * Mínimo pontos: não ser número inteiro (erro 18)
-         *
-         * TODO: Detectar erros de inconsistências:
-         * Qualis especificado para uma regra de pontuação não é nenhuma das categorias
-         * existentes: A1, A2, B1, B2, B3, B4, B5 ou C.
          */
         infile.useDelimiter(";");
         infile.nextLine();
@@ -326,7 +325,13 @@ public class Sistema implements Serializable {
             multiplicador = Double.parseDouble(infile.next().replace(',', '.'));
             anos = infile.nextInt();
             pontoMinimo = Integer.parseInt(infile.nextLine().split(";")[1]);
-
+            for(String nivel: niveis){
+            	try {
+            		Classificacoes.valueOf(nivel);
+            	}catch(Exception e){
+            		throw new QualisDesconhecidoRegra(dataIni, nivel, e);
+            	}
+            }
             /*
              * System.out.print("[" + dataIni + "][" + dataFim + "][");
              *
@@ -398,9 +403,11 @@ public class Sistema implements Serializable {
             pubsPorQualis.put(itCl.getClassi(), new ArrayList<Publicacao>());
         }
         for (Publicacao itPub : this.publicacoes) {
-            ArrayList<Publicacao> arrayAtual = pubsPorQualis
-                    .get(itPub.getVeiculo().getQualisAno(itPub.getAno()).getNivel());
-            arrayAtual.add(itPub);
+            if(itPub.getVeiculo().getQualisAno(itPub.getAno()) != null) {
+                ArrayList<Publicacao> arrayAtual = pubsPorQualis
+                        .get(itPub.getVeiculo().getQualisAno(itPub.getAno()).getNivel());
+                arrayAtual.add(itPub);
+            }
         }
         for (Classificacoes itCl : Classificacoes.values()) {
             int qtdPubsQualis = pubsPorQualis.get(itCl.getClassi()).size();

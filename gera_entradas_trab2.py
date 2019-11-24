@@ -3,6 +3,7 @@ import string
 import pandas as pd
 from faker import Faker
 
+#Acertar o gerador de regras para começar sempre com A1
 
 def gera_docentes(nDocentes):
     with open(f"{path}/docentes_python.csv", "w+", encoding="utf8") as file:

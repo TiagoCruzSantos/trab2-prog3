@@ -1,5 +1,7 @@
 package sisPPGI.excecoes;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * Exceção para quando o Qualis especificado para uma qualificação de veículo
@@ -10,13 +12,11 @@ package sisPPGI.excecoes;
  */
 
 public class QualisDesconhecidoRegra extends Exception {
-    /* IGNORE IGNORE IMEDIATAMENTE.
-    public QualisDesconhecidoRegra(GregorianCalendar inicioVigencia, Qualis qualis, Throwable cause) {
-        super("Qualis desconhecido para regras de" + inicioVigencia + ": " + qualis + ".", cause);
+    public QualisDesconhecidoRegra(String inicioVigencia, String qualis, Throwable cause) {
+        super("Qualis desconhecido para regras de " + inicioVigencia + ": " + qualis + ".", cause);
     }
 
-    public QualisDesconhecidoRegra(GregorianCalendar inicioVigencia, Qualis qualis) {
-        super("Qualis desconhecido para regras de" + inicioVigencia + ": " + qualis);
+    public QualisDesconhecidoRegra(String inicioVigencia, String qualis) {
+        super("Qualis desconhecido para regras de " + inicioVigencia + ": " + qualis + ".");
     }
-    */
 }

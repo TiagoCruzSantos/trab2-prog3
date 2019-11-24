@@ -9,10 +9,10 @@ package sisPPGI.excecoes;
  */
 public class QualisDesconhecidoVeiculo extends Exception {
     public QualisDesconhecidoVeiculo(String sigla, int ano, String qualis, Throwable cause) {
-        super("Qualis desconhecido para qualificação do veículo" + sigla + " no ano " + ano + ": " + qualis + ".", cause);
+        super("Qualis desconhecido para qualificação do veículo " + sigla + " no ano " + ano + ": " + qualis + ".", cause);
     }
 
     public QualisDesconhecidoVeiculo(String sigla, int ano, String qualis) {
-        super("Qualis desconhecido para qualificação do veículo" + sigla + " no ano " + ano + ": " + qualis + ".");
+        super("Qualis desconhecido para qualificação do veículo " + sigla + " no ano " + ano + ": " + qualis + ".");
     }
 }
