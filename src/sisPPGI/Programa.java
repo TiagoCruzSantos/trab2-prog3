@@ -129,6 +129,7 @@ public class Programa {
             	houveExcecao = true;
             } catch(SiglaIndefinidaVeiculo e8){
                 System.out.println(e8.getMessage());
+                houveExcecao = true;
             }
             // } catch(IllegalArgumentException e9) {
             //         System.out.println("Erro de formatação fodase");
