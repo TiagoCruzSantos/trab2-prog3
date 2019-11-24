@@ -142,6 +142,13 @@ public class Programa {
                 System.out.println("Erro de formatação");
                 houveExcecao = true;
             }
+            finally {
+                docentes.close();
+                publicacoes.close();
+                veiculos.close();
+                qualis.close();
+                regras.close();
+            }
         }
         if (!writeOnly && readOnly && !houveExcecao) {
             try {
