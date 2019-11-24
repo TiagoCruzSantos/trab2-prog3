@@ -113,6 +113,7 @@ local.properties
 
 *.csv
 *.txt
+*.dat
 !testes_excecoes.txt
 !*_e*.csv
 !/testes/**/*.csv
