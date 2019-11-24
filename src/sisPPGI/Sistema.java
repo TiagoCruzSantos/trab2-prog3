@@ -465,7 +465,7 @@ public class Sistema implements Serializable {
             outfile.write(itDocente.getNome() + ';' + String.format("%.1f", ponto).replace('.', ',') + ";");
             if (itDocente.isCoordenador()) {
                 outfile.write("Coordenador\n");
-            } else if (ano - itDocente.getAnoIngresso() < 3) {
+            } else if (ano - itDocente.getAnoIngresso() <= 3) {
                 outfile.write("PPJ\n");
             } else if (itDocente.getIdade(ano) >= 60) {
                 outfile.write("PPS\n");
