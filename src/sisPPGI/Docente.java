@@ -168,15 +168,13 @@ public class Docente implements Serializable, Comparable<Docente> {
     public double calculaPontuacao(int ano, int range) {
         double pontuacao = 0;
         for (Publicacao itPub : this.publicacoes) {
-            if ((itPub.getAno() <= ano && itPub.getAno() >= ano - range)) {
+            if ((itPub.getAno() < ano && itPub.getAno() >= ano - range)) {
                 // System.out.println(itPub.getAno());
                 Veiculo veicPub = itPub.getVeiculo();
                 if (veicPub instanceof Periodico) {
                     pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador();
-                    //System.out.println(veicPub.getQualisAno(itPub.getAno()).getPontuacao() * ((Periodico) veicPub).getMultiplicador() + "; " + this.nome + ";multi= " + ((Periodico) veicPub).getMultiplicador() + ";pt= " + veicPub.getQualisAno(itPub.getAno()).getPontuacao());
                 } else {
                     pontuacao += veicPub.getQualisAno(itPub.getAno()).getPontuacao();
-                    //System.out.println(veicPub.getQualisAno(itPub.getAno()).getPontuacao() + "; " + this.nome);
                 }
             }
         }
