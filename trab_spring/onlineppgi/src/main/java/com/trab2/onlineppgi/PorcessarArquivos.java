@@ -1,11 +1,15 @@
 package com.trab2.onlineppgi;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +29,7 @@ import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 @RestController
 public class PorcessarArquivos {
 	
-	@RequestMapping("/processar")
+	@RequestMapping(value = "/processar", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String processarArquivos(HttpServletResponse response, @RequestParam("files") MultipartFile[] files,
             @RequestParam("number") String number, ModelMap modelMap) {
         modelMap.addAttribute("files", files);
@@ -117,7 +121,16 @@ public class PorcessarArquivos {
         if(houveExcecao) {
         	return esaida.getMessage();
         }else {
-        	return "Arquivos foram processados com sucesso";
+        	try {
+        		response.setContentType("text/csv");
+				InputStream estatisticas = new FileInputStream("3-estatisticas.csv");
+				IOUtils.copy(estatisticas, response.getOutputStream());
+				response.flushBuffer();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	return "";
         }
     }
 }
