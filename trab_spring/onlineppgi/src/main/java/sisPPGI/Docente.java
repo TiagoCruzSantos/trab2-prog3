@@ -161,7 +161,7 @@ public class Docente implements Serializable, Comparable<Docente> {
     /**
      * Calcula a pontuação do docente
      * 
-     * @param ano Ano da regra
+     * @param ano Ano de publicação das publicações a serem analisadas
      * @param range Quantidade de anos anteriaores aceitos
      * @return Pontuação do docente
      */

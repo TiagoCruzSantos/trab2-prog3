@@ -18,7 +18,7 @@
     </target>
 
 	<!-- Documentação. -->
-	<target name="document" depends="compile" description="Gera a documentação.">
+	<target name="document" description="Gera a documentação.">
 		<javadoc sourcepath="${src}" destdir="${doc}">
 		</javadoc>
 	</target>
