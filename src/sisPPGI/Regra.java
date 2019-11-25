@@ -33,7 +33,7 @@ public class Regra implements Serializable {
      *                         publicações de um docente.
      * @param multiplicador    Multiplicador das publicações feitas em Periódicos
      * @param qualis           Pontuação dos qualis.
-     * @deprecated Use {@link #Regra(String, String, int, int, double, ArrayList)}
+     * @deprecated Use {@link #Regra(String, String, int, int, double, HashMap)}
      *             em vez deste.
      */
     public Regra(GregorianCalendar dataIni, GregorianCalendar dataFim, int pontoMinimo, int anosConsiderados,

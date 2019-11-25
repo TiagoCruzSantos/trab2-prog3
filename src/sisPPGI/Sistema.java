@@ -418,6 +418,7 @@ public class Sistema implements Serializable {
      * Faz o recredenciamento de docentes no ano passado como parâmetro.
      *
      * @param ano Ano para recredenciamento.
+     * @throws IOException Quando não for possivel abrir o arquivo para escrita
      */
     public void imprimirRecredenciamento(int ano) throws IOException {
         FileWriter outfile = new FileWriter("1-recredenciamento.csv");
