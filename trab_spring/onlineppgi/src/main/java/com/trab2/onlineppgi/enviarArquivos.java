@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class enviarArquivos {
+
 	@RequestMapping("/3-estatisticas.csv")
 	public String estatisticas(HttpServletResponse response) {
 		InputStream estatisticas;

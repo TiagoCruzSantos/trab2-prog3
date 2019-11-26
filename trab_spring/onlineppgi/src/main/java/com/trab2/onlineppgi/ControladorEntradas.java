@@ -31,7 +31,7 @@ public class ControladorEntradas {
     public String homePage() {
         return "index";
     }
-	
+
 	@RequestMapping(value = "/processar")
     public String processarArquivos(Model model, HttpServletResponse response, @RequestParam("files") MultipartFile[] files,
             @RequestParam("number") String number, ModelMap modelMap) {
@@ -41,86 +41,99 @@ public class ControladorEntradas {
         Exception esaida = null;
         int ano = 0;
         Sistema ppgi = new Sistema();
-        try {
-            Scanner docentes = new Scanner(files[0].getInputStream());
-            Scanner veiculos = new Scanner(files[1].getInputStream());
-            Scanner publicacoes = new Scanner(files[2].getInputStream());
-            Scanner qualis = new Scanner(files[3].getInputStream());
-            Scanner regras = new Scanner(files[4].getInputStream());
-            ano = Integer.parseInt(number);
-
+        for(int i = 0; i < files.length; i++){
+            if(files[i].getOriginalFilename().compareTo("") == 0){
+                houveExcecao = true;
+                esaida = new Exception("Menos de 5 arquivos informados");
+                break;
+            }
+        }
+        if(number.compareTo("") == 0){
+            houveExcecao = true;
+            esaida = new Exception("Ano não infomado");
+        }
+        if(!houveExcecao){
             try {
-                ppgi.carregaArquivoArquivoDocentes(docentes);
-                ppgi.carregaArquivoVeiculos(veiculos);
-                ppgi.carregaArquivoPublicacao(publicacoes);
-                ppgi.carregaArquivoQualis(qualis);
-                ppgi.carregaArquivoRegra(regras);
-            } catch (CodigoRepetidoDocente e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (SiglaRepetidaVeiculo e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (CodigoDocenteIndefinido e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (SiglaVeiculoPublicacaoIndefinida e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (TipoVeiculoDesconhecido e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (QualisDesconhecidoVeiculo e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (QualisDesconhecidoRegra e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (SiglaIndefinidaVeiculo e3) {
-                System.out.println(e3.getMessage());
-                esaida = e3;
-                houveExcecao = true;
-            } catch (InputMismatchException e2) {
-                System.out.println("Erro de formatação");
-                esaida = e2;
-                houveExcecao = true;
-            } catch (IllegalArgumentException e2) {
-                System.out.println("Erro de formatação");
-                esaida = e2;
-                houveExcecao = true;
-            } catch (ArrayIndexOutOfBoundsException e2) {
-                System.out.println("Erro de formatação");
-                esaida = e2;
-                houveExcecao = true;
-            }
-            finally {
-                docentes.close();
-                publicacoes.close();
-                veiculos.close();
-                qualis.close();
-                regras.close();
-            }
-            if(!houveExcecao) {
-	            try {
-	                ppgi.imprimirEstatisticas();
-	                ppgi.imprimirPublicacoes();
-	                ppgi.imprimirRecredenciamento(ano);
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	                esaida = e;
-	            }
-            }
+                Scanner docentes = new Scanner(files[0].getInputStream());
+                Scanner veiculos = new Scanner(files[1].getInputStream());
+                Scanner publicacoes = new Scanner(files[2].getInputStream());
+                Scanner qualis = new Scanner(files[3].getInputStream());
+                Scanner regras = new Scanner(files[4].getInputStream());
+                ano = Integer.parseInt(number.trim());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            esaida = e;
+                try {
+                    ppgi.carregaArquivoArquivoDocentes(docentes);
+                    ppgi.carregaArquivoVeiculos(veiculos);
+                    ppgi.carregaArquivoPublicacao(publicacoes);
+                    ppgi.carregaArquivoQualis(qualis);
+                    ppgi.carregaArquivoRegra(regras);
+                } catch (CodigoRepetidoDocente e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (SiglaRepetidaVeiculo e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (CodigoDocenteIndefinido e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (SiglaVeiculoPublicacaoIndefinida e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (TipoVeiculoDesconhecido e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (QualisDesconhecidoVeiculo e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (QualisDesconhecidoRegra e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (SiglaIndefinidaVeiculo e3) {
+                    System.out.println(e3.getMessage());
+                    esaida = e3;
+                    houveExcecao = true;
+                } catch (InputMismatchException e2) {
+                    System.out.println("Erro de formatação");
+                    esaida = e2;
+                    houveExcecao = true;
+                } catch (IllegalArgumentException e2) {
+                    System.out.println("Erro de formatação");
+                    esaida = e2;
+                    houveExcecao = true;
+                } catch (ArrayIndexOutOfBoundsException e2) {
+                    System.out.println("Erro de formatação");
+                    esaida = e2;
+                    houveExcecao = true;
+                }
+                finally {
+                    docentes.close();
+                    publicacoes.close();
+                    veiculos.close();
+                    qualis.close();
+                    regras.close();
+                }
+                if(!houveExcecao) {
+                    try {
+                        ppgi.imprimirEstatisticas();
+                        ppgi.imprimirPublicacoes();
+                        ppgi.imprimirRecredenciamento(ano);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        esaida = e;
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                esaida = e;
+            }
         }
         if(houveExcecao) {
         	model.addAttribute("erro", esaida.getMessage());
