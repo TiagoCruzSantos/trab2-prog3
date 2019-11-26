@@ -9,7 +9,6 @@ import java.util.Scanner;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +28,7 @@ import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 @RestController
 public class PorcessarArquivos {
 	
-	@RequestMapping(value = "/processar", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@RequestMapping(value = "/processar")
     public String processarArquivos(HttpServletResponse response, @RequestParam("files") MultipartFile[] files,
             @RequestParam("number") String number, ModelMap modelMap) {
         modelMap.addAttribute("files", files);
@@ -121,16 +120,53 @@ public class PorcessarArquivos {
         if(houveExcecao) {
         	return esaida.getMessage();
         }else {
-        	try {
-        		response.setContentType("text/csv");
-				InputStream estatisticas = new FileInputStream("3-estatisticas.csv");
-				IOUtils.copy(estatisticas, response.getOutputStream());
-				response.flushBuffer();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	return "";
+        	return "Arquivos processados com sucesso<br>"
+        			+ "<a target=\"blank_\" href=\"/1-recredenciamento.csv\">Recredenciamento</a><br>"
+        			+ "<a target=\"blank_\" href=\"/2-publicacoes.csv\">Publicacoes</a><br>"
+        			+ "<a target=\"blank_\" href=\"/3-estatisticas.csv\">Estatisticas</a>";
         }
     }
+	
+	@RequestMapping("/3-estatisticas.csv")
+	public String estatisticas(HttpServletResponse response) {
+		InputStream estatisticas;
+		try {
+			response.setContentType("text/csv");
+			estatisticas = new FileInputStream("3-estatisticas.csv");
+			IOUtils.copy(estatisticas, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	@RequestMapping("/1-recredenciamento.csv")
+	public String recredenciamento(HttpServletResponse response) {
+		InputStream recredenciamento;
+		try {
+			response.setContentType("text/csv");
+			recredenciamento = new FileInputStream("1-recredenciamento.csv");
+			IOUtils.copy(recredenciamento, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	@RequestMapping("/2-publicacoes.csv")
+	public String publicacoes(HttpServletResponse response) {
+		InputStream publicacoes;
+		try {
+			response.setContentType("text/csv");
+			publicacoes = new FileInputStream("2-publicacoes.csv");
+			IOUtils.copy(publicacoes, response.getOutputStream());
+			response.flushBuffer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 }
