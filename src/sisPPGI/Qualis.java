@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Classe de representação do Qualis.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Qualis implements Serializable {
     private String nivel;

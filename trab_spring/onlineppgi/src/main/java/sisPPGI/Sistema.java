@@ -23,8 +23,8 @@ import sisPPGI.excecoes.TipoVeiculoDesconhecido;
 /**
  * Classe principal do sistema PPGI.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Sistema implements Serializable {
     private HashMap<Long, Docente> docentesCadastrados;

@@ -5,8 +5,8 @@ package sisPPGI.excecoes;
  * Exceção para quando o código de docente especificado para uma publicação não
  * foi definido na planilha de docentes.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class CodigoDocenteIndefinido extends Exception {
     public CodigoDocenteIndefinido(String titulo, long codigo, Throwable cause) {

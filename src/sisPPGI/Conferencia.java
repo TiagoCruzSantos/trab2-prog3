@@ -3,8 +3,8 @@ package sisPPGI;
 /**
  * Classe de representação de uma conferência.
  *
- * @author Tiago da Cruz Santos,.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos,
+ * @author Atílio Antônio Dadalto
  */
 public class Conferencia extends Veiculo {
 

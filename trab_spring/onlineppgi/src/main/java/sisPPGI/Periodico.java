@@ -3,15 +3,15 @@ package sisPPGI;
 /**
  * Classe de representação de um veículo periódico.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Periodico extends Veiculo {
     private double multiplicador;
     private String issn;
 
     /**
-     * Contrutor de um veículo periódico.
+     * Construtor de um veículo periódico.
      *
      * @param sigla   Sigla do veículo.
      * @param nome    Nome do veículo.

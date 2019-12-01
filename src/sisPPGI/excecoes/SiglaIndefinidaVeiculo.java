@@ -4,8 +4,8 @@ package sisPPGI.excecoes;
  * Exceção para quando a sigla de um veículo especificada para uma qualificação
  * não foi definida na planilha de veículos.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class SiglaIndefinidaVeiculo extends Exception {
     public SiglaIndefinidaVeiculo(int ano, String sigla, Throwable cause) {

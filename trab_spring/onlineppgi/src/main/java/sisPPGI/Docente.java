@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 /**
  * Classe de representação de docente.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Docente implements Serializable, Comparable<Docente> {
 
@@ -160,7 +160,7 @@ public class Docente implements Serializable, Comparable<Docente> {
 
     /**
      * Calcula a pontuação do docente
-     * 
+     *
      * @param ano Ano de publicação das publicações a serem analisadas
      * @param range Quantidade de anos anteriaores aceitos
      * @return Pontuação do docente

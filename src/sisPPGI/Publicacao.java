@@ -6,8 +6,8 @@ import java.util.HashMap;
 /**
  * Classe de representação de Publicação.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class Publicacao implements Serializable, Comparable<Publicacao> {
     private int ano;

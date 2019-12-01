@@ -7,8 +7,8 @@ import java.util.HashMap;
 /**
  * Classe base para representação de Veiculo.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public abstract class Veiculo implements Serializable {
     protected String sigla;

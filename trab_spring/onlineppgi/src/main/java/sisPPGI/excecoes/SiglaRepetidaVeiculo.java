@@ -3,8 +3,8 @@ package sisPPGI.excecoes;
 /**
  * Exceção para quando a mesma sigla for usado para dois veículos diferentes.
  *
- * @author Tiago da Cruz Santos.
- * @author Atílio Antônio Dadalto.
+ * @author Tiago da Cruz Santos
+ * @author Atílio Antônio Dadalto
  */
 public class SiglaRepetidaVeiculo extends Exception {
     public SiglaRepetidaVeiculo(String sigla) {
