@@ -11,7 +11,7 @@ Autores: Atílio Antônio Dadalto e Tiago da Cruz Santos.
 
 ## Script de testes
 
-O script de testes (`test.sh`, na raiz do projeto) foi levemente modificado para se adequar à estrutura do projeto. Ele irá rodar testando apenas com a pasta raiz ao projeto.
+O script de testes (`test.sh`, na raiz do projeto) deve ser executado pelo comando `./test.sh .`
 
 ## Compilação e execução com o ant
 

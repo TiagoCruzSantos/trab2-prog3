@@ -11,7 +11,7 @@ SUBDIR_OUTPUT=out
 # Procedure that tests one assignment.
 test() {
 	# Argument definition.
-	dir=.
+	dir=$1
 
 	# Check if it's a directory, but not the teste directory.
 	if [ -d $dir ] && [ "$dir" != "$TEST_DIR" ]; then
@@ -40,7 +40,7 @@ test() {
 				cp -f $TEST_DIR/$subdir/$SUBDIR_INPUT/* $srcdir/
 
 				# Runs the test.
-				$TEST_DIR/$subdir/$TEST_SCRIPT "$subdir" "$dir" "$srcdir" "$TEMP_DIR" "$BASE_DIR" "$TEST_DIR/$subdir" "$SUBDIR_INPUT" "$SUBDIR_OUTPUT" "diff -y -W `tput cols`"
+				$TEST_DIR/$subdir/$TEST_SCRIPT "$subdir" "$dir" "$srcdir" "$TEMP_DIR" "$BASE_DIR" "$TEST_DIR/$subdir" "$SUBDIR_INPUT" "$SUBDIR_OUTPUT" "diff -y -W 300"
 
 				# Cleanup (removes all input files).
 				cd $srcdir
