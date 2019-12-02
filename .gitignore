@@ -119,5 +119,5 @@ local.properties
 !/testes/**/*.csv
 !/entradas_autorais/**/*.csv
 *python.csv
-/bin/
-# doc/
+bin/*
+doc/*
