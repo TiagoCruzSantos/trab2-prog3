@@ -1,23 +1,20 @@
-# TP2 - PROG3 - Sistema PPGI
+# TP2 - PROG3 - Sistema PPGI (interface web)
 
 Autores: Atílio Antônio Dadalto e Tiago da Cruz Santos.
 
 ## Estrutura do projeto
 
->`trab2-prog3 (raiz)` Terá as saídas do projeto;  
->`bin/` Contém as classes compiladas Java;  
->`src/` Contém o codigo-fonte;  
->`entradas_autorais` Contém as entradas solicitadas pela especificação do trabalho, nas subpastas `a1` e `a2`.  
+>`online-ppgi/` Contém todo o projeto da interface web; 
+    >> `src` Contém `test`, utilizado pelo Maven e `main`; 
+    >>> `main` Contém `resources`, que contém os arquivos relativos ao front-end, como .html e .css, e `java`;
+    >>>> `java` Contém `sisPPGI`, que contém o projeto original, capaz de processar os arquivos, e o diretório `com`, que contém os arquivos .java relativos à interface web de fato.
+    
+>`testes` Contém as entradas fornecidas pela especificação do trabalho (podem ser utilizadas pela interface web). 
+>`entradas_autorais` Contém as entradas solicitadas pela especificação do trabalho, nas subpastas `a1` e `a2`. 
 
-## Script de testes
+## Build com o Maven e Spring Boot
+Para buildar todo o projeto, basta entrar no diretório `online-ppgi` com o terminal e enviar o comando `mvn package`. Daí, ao finalizar, abra a aplicação Java através de `java -jar /target/onlineppgi-0.0.1-SNAPSHOT.jar`. O Spring Boot irá iniciar a aplicação em instantes e será possível acessar a interface através do http://localhost:8080.
 
-O script de testes (`test.sh`, na raiz do projeto) foi levemente modificado para se adequar à estrutura do projeto. Ele irá rodar testando apenas com a pasta raiz ao projeto.
+## Serviço hospedado no Heroku
 
-## Compilação e execução com o ant
-
->`ant` ou `ant compile` Compila o código;  
->`ant run` Executa o código com as entradas na raiz do projeto;  
->`ant run-read-only` Executa o código em modo somente leitura com as entradas na raíz do projeto;  
->`ant run-write-only` Executa o código em modo somente escrita;  
->`ant document` Gera a documentação do projeto;  
->`ant clean` Limpa os objetos produzidos pelo projeto.
+O projeto também pode ser encontrado hospedado no Heroku, através do link https://online-ppgi.herokuapp.com/
