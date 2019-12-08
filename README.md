@@ -5,9 +5,9 @@ Autores: Atílio Antônio Dadalto e Tiago da Cruz Santos.
 ## Estrutura do projeto
 
 >`online-ppgi/` Contém todo o projeto da interface web; 
-    >> `src` Contém `test`, utilizado pelo Maven e `main`; 
-    >>> `main` Contém `resources`, que contém os arquivos relativos ao front-end, como .html e .css, e `java`;
-    >>>> `java` Contém `sisPPGI`, que contém o projeto original, capaz de processar os arquivos, e o diretório `com`, que contém os arquivos .java relativos à interface web de fato.
+> `src` Contém `test`, utilizado pelo Maven e `main`; 
+> `main` Contém `resources`, que contém os arquivos relativos ao front-end, como .html e .css, e `java`;
+> `java` Contém `sisPPGI`, que contém o projeto original, capaz de processar os arquivos, e o diretório `com`, que contém os arquivos .java relativos à interface web de fato.
     
 >`testes` Contém as entradas fornecidas pela especificação do trabalho (podem ser utilizadas pela interface web). 
 >`entradas_autorais` Contém as entradas solicitadas pela especificação do trabalho, nas subpastas `a1` e `a2`. 
